@@ -50,6 +50,8 @@ class Main {
         println(game.toString());
     }
 
+/* CLI Helper functions */
+
     private static void print(String msg) {
         System.out.print(msg);
     }
