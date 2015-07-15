@@ -30,37 +30,26 @@
 
  */
 
-package net.justinwhite.scoreit;
+package net.justinwhite.scoreit_p10;
 
-import java.util.Scanner;
+import java.util.UUID;
 
-class Main {
+class Game {
+    private final UUID id;
+    private final String name;
+    private final Integer numPlayers;
 
-    public static void main(String[] args) {
-        Scanner stdin = new Scanner(System.in);
-
-        print("Name your game: ");
-        String name = stdin.nextLine();
-
-        print("How many players? ");
-        Integer numPlayers = stdin.nextInt();
-
-        Game game = new Game(name, numPlayers);
-
-        println(game.toString());
+    public Game(String name, Integer numPlayers) {
+        this.id = UUID.randomUUID();
+        this.name = name;
+        this.numPlayers = numPlayers;
     }
 
-/* CLI Helper functions */
-
-    private static void print(String msg) {
-        System.out.print(msg);
-    }
-
-    private static void println(String msg) {
-        System.out.println(msg);
-    }
-
-    private static void println() {
-        System.out.println();
+    public String toString() {
+        return String.format("Game: %s\nUUID: %s\nPlayer count: %d\n",
+                             name,
+                             id.toString(),
+                             numPlayers
+        );
     }
 }
