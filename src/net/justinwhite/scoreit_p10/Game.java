@@ -32,24 +32,104 @@
 
 package net.justinwhite.scoreit_p10;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 class Game {
     private final UUID id;
-    private final String name;
     private final Integer numPlayers;
+    private String g_name = "";
+    private ArrayList<Player> players = new ArrayList<Player>(0);
 
-    public Game(String name, Integer numPlayers) {
+    public Game(Integer numPlayers) {
         this.id = UUID.randomUUID();
-        this.name = name;
         this.numPlayers = numPlayers;
+        players.ensureCapacity(numPlayers);
+        Player newPlayer;
+        for (Integer i = 0; i < numPlayers; i++) {
+            newPlayer = new Player();
+            players.add(i, newPlayer);
+            newPlayer.setName(String.format("Player %d", i + 1));
+        }
     }
 
     public String toString() {
-        return String.format("Game: %s\nUUID: %s\nPlayer count: %d\n",
-                             name,
+
+        return String.format("Game: %s\nUUID: %s\nPlayer count: %d\nPlayers: %s\n",
+                             g_name,
                              id.toString(),
-                             numPlayers
+                             numPlayers,
+                             players.toString()
         );
     }
+
+    public void setName() {
+        g_name = "";
+        for (Player p : players) {
+            g_name += p.getInitials();
+        }
+    }
+
+
+    class Player {
+        private String p_name;
+        private Integer score = 0;
+        private Integer phase = 1;
+
+        public Player() {
+            setName("Player X");
+        }
+
+        public Player(String _name) {
+            setName(_name);
+        }
+
+        public String toString() {
+            return String.format(
+                    "Name: '%s', Score: %d, Phase: %d",
+                    getName(),
+                    getScore(),
+                    getPhase()
+            );
+        }
+
+        public void setName(String _name) {
+            p_name = _name;
+            Game.this.setName();
+        }
+
+        public String getName() {
+            return p_name;
+        }
+
+        public String getInitial() {
+            return p_name.substring(0, 1);
+        }
+
+        public String getInitials() {
+            String names[] = p_name.split(" ");
+            if (names.length > 1) {
+                return String.join("", names[0].substring(0, 1), names[1].substring(0, 1));
+            } else {
+                return getInitial();
+            }
+        }
+
+        public Integer getScore() {
+            return score;
+        }
+
+        public void addScore(Integer _score) {
+            score += _score;
+        }
+
+        public Integer getPhase() {
+            return phase;
+        }
+
+        public void completePhase(Integer _phase) {
+            phase += _phase;
+        }
+    }
+
 }

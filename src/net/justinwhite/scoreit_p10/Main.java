@@ -34,18 +34,19 @@ package net.justinwhite.scoreit_p10;
 
 import java.util.Scanner;
 
+import static net.justinwhite.scoreit_p10.Util.print;
+import static net.justinwhite.scoreit_p10.Util.println;
+
 class Main {
 
     public static void main(String[] args) {
         Scanner stdin = new Scanner(System.in);
 
-        print("Name your game: ");
-        String name = stdin.nextLine();
-
         print("How many players? ");
         Integer numPlayers = stdin.nextInt();
 
-        Game game = new Game(name, numPlayers);
+        Game game = new Game(numPlayers);
 
         println(game.toString());
     }
+}
