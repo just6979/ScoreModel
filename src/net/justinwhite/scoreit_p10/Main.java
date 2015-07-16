@@ -49,18 +49,3 @@ class Main {
 
         println(game.toString());
     }
-
-/* CLI Helper functions */
-
-    private static void print(String msg) {
-        System.out.print(msg);
-    }
-
-    private static void println(String msg) {
-        System.out.println(msg);
-    }
-
-    private static void println() {
-        System.out.println();
-    }
-}
