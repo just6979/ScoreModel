@@ -38,7 +38,7 @@ import java.util.UUID;
 class Game {
     private final UUID id;
     private final Integer numPlayers;
-    private String g_name = "";
+    private String name = "";
     private ArrayList<Player> players = new ArrayList<Player>(0);
 
     public Game(Integer numPlayers) {
@@ -56,23 +56,26 @@ class Game {
     public String toString() {
 
         return String.format("Game: %s\nUUID: %s\nPlayer count: %d\nPlayers: %s\n",
-                             g_name,
+                             name,
                              id.toString(),
                              numPlayers,
                              players.toString()
         );
     }
 
-    public void setName() {
-        g_name = "";
+    public void buildName() {
+        name = "";
         for (Player p : players) {
-            g_name += p.getInitials();
+            name += p.getInitials();
         }
     }
 
+    public String getName() {
+        return name;
+    }
 
     class Player {
-        private String p_name;
+        private String name;
         private Integer score = 0;
         private Integer phase = 1;
 
@@ -94,20 +97,20 @@ class Game {
         }
 
         public void setName(String _name) {
-            p_name = _name;
-            Game.this.setName();
+            name = _name;
+            Game.this.buildName();
         }
 
         public String getName() {
-            return p_name;
+            return name;
         }
 
         public String getInitial() {
-            return p_name.substring(0, 1);
+            return name.substring(0, 1);
         }
 
         public String getInitials() {
-            String names[] = p_name.split(" ");
+            String names[] = name.split(" ");
             if (names.length > 1) {
                 return String.join("", names[0].substring(0, 1), names[1].substring(0, 1));
             } else {
