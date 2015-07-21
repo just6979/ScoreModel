@@ -32,6 +32,14 @@
 
 package net.justinwhite.scoreit_p10;
 
+/*
+This is pretty much a big unit test for the whole Game class.
+
+Eventually this will be turned into a real unit test (junit likely)
+to allow tools to run the tests even from within other projects.
+For now, just build this project to "run the tests".
+*/
+
 import java.util.Scanner;
 
 import static net.justinwhite.scoreit_p10.Util.print;
