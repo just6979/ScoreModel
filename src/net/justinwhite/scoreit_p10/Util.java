@@ -31,7 +31,7 @@
 
 package net.justinwhite.scoreit_p10;
 
-public class Util {
+class Util {
 /* CLI Helper functions */
 
     public static void print(String msg) {
