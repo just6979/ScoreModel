@@ -88,6 +88,13 @@ class Game {
         addPlayer(String.format("Player %d", numPlayers + 1));
     }
 
+    public ArrayList<Player> getPlayerList() {
+        return players;
+    }
+
+    public Player getPlayer(Integer index) {
+        return players.get(index);
+    }
 
     class Player {
         private String name;
