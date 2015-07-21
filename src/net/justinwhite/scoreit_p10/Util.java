@@ -31,9 +31,6 @@
 
 package net.justinwhite.scoreit_p10;
 
-/**
- * Created by justin on 2015-07-16.
- */
 public class Util {
 /* CLI Helper functions */
 
@@ -42,6 +39,11 @@ public class Util {
     }
 
     public static void println(String msg) {
+        System.out.println(msg);
+    }
+
+    public static void printlnln(String msg) {
+        System.out.println();
         System.out.println(msg);
     }
 
