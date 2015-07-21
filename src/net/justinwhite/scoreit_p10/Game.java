@@ -37,30 +37,29 @@ import java.util.UUID;
 
 class Game {
     private final UUID id;
-    private final Integer numPlayers;
+    private Integer numPlayers = 0;
     private String name = "";
     private ArrayList<Player> players = new ArrayList<Player>(0);
 
-    public Game(Integer numPlayers) {
+    public Game(Integer _numPlayers) {
         this.id = UUID.randomUUID();
-        this.numPlayers = numPlayers;
-        players.ensureCapacity(numPlayers);
-        Player newPlayer;
-        for (Integer i = 0; i < numPlayers; i++) {
-            newPlayer = new Player();
-            players.add(i, newPlayer);
-            newPlayer.setName(String.format("Player %d", i + 1));
+        for (Integer i = 0; i < _numPlayers; i++) {
+            addPlayer();
         }
     }
 
     public String toString() {
 
         return String.format("Game: %s\nUUID: %s\nPlayer count: %d\nPlayers: %s\n",
-                             name,
-                             id.toString(),
-                             numPlayers,
-                             players.toString()
+                             getName(),
+                             getID(),
+                             getNumPlayers(),
+                             players
         );
+    }
+
+    public UUID getID() {
+        return id;
     }
 
     public void buildName() {
@@ -73,6 +72,22 @@ class Game {
     public String getName() {
         return name;
     }
+
+    public Integer getNumPlayers() {
+        return numPlayers;
+    }
+
+    public void addPlayer(String _name) {
+        players.ensureCapacity(numPlayers + 1);
+        Player newPlayer = new Player();
+        players.add(numPlayers++, newPlayer);
+        newPlayer.setName(_name);
+    }
+
+    public void addPlayer() {
+        addPlayer(String.format("Player %d", numPlayers + 1));
+    }
+
 
     class Player {
         private String name;
