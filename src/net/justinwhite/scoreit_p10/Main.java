@@ -44,6 +44,7 @@ import java.util.Scanner;
 
 import static net.justinwhite.scoreit_p10.Util.print;
 import static net.justinwhite.scoreit_p10.Util.println;
+import static net.justinwhite.scoreit_p10.Util.printlnln;
 
 class Main {
 
@@ -63,12 +64,18 @@ class Main {
             p = game.getPlayer(i);
             println(p.toString());
         }
-
         println();
 
-        println("Show players via ArrayList:");
+        printlnln("Change player names to example data...");
+        game.getPlayer(0).setName("Justin W");
+        game.getPlayer(1).setName("Lauren K");
+        game.getPlayer(2).setName("Timmay C");
+        game.getPlayer(3).setName("Denise B");
+
+        println("Show players via ArrayList iterator:");
         for (Game.Player p : game.getPlayerList()) {
             println(p.toString());
         }
+        println();
     }
 }
