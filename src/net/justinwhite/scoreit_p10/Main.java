@@ -41,12 +41,26 @@ class Main {
 
     public static void main(String[] args) {
         Scanner stdin = new Scanner(System.in);
-
         print("How many players? ");
         Integer numPlayers = stdin.nextInt();
 
         Game game = new Game(numPlayers);
 
+        println("Show the whole game:");
         println(game.toString());
+
+        println("Show players individually:");
+        for (Integer i = 0; i < game.getNumPlayers(); i++) {
+            Game.Player p;
+            p = game.getPlayer(i);
+            println(p.toString());
+        }
+
+        println();
+
+        println("Show players via ArrayList:");
+        for (Game.Player p : game.getPlayerList()) {
+            println(p.toString());
+        }
     }
 }
