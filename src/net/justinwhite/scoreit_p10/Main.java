@@ -42,9 +42,7 @@ For now, just build this project to "run the tests".
 
 import java.util.Scanner;
 
-import static net.justinwhite.scoreit_p10.Util.print;
-import static net.justinwhite.scoreit_p10.Util.println;
-import static net.justinwhite.scoreit_p10.Util.printlnln;
+import static net.justinwhite.scoreit_p10.Util.*;
 
 class Main {
 
