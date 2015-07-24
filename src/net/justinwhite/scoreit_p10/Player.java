@@ -61,13 +61,13 @@ class Player {
         return index;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setName(String _name) {
         name = _name;
         game.buildName();
-    }
-
-    public String getName() {
-        return name;
     }
 
     public String getInitial() {
@@ -83,12 +83,16 @@ class Player {
         }
     }
 
+    public Integer getScore() {
+        return score;
+    }
+
     public void addScore(Integer _score) {
         score += _score;
     }
 
-    public Integer getScore() {
-        return score;
+    public Integer getPhase() {
+        return phase;
     }
 
     public void nextPhase() {
@@ -96,9 +100,5 @@ class Player {
         if (phase >= 10) {
             game.setWinner(this);
         }
-    }
-
-    public Integer getPhase() {
-        return phase;
     }
 }

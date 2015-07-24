@@ -77,6 +77,14 @@ class Game {
         return numPlayers;
     }
 
+    public ArrayList<Player> getPlayerList() {
+        return players;
+    }
+
+    public Player getPlayer(Integer index) {
+        return players.get(index);
+    }
+
     public void addPlayer(Integer _index, String _name) {
         players.ensureCapacity(numPlayers + 1);
         Player newPlayer = new Player(this, _index);
@@ -86,14 +94,6 @@ class Game {
 
     public void addPlayer(Integer _index) {
         addPlayer(_index, String.format("Player %d", numPlayers + 1));
-    }
-
-    public ArrayList<Player> getPlayerList() {
-        return players;
-    }
-
-    public Player getPlayer(Integer index) {
-        return players.get(index);
     }
 
     public String getScores() {
