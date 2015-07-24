@@ -79,7 +79,7 @@ class Game {
 
     public void addPlayer(Integer _index, String _name) {
         players.ensureCapacity(numPlayers + 1);
-        Player newPlayer = new Player(_index);
+        Player newPlayer = new Player(this, _index);
         players.add(numPlayers++, newPlayer);
         newPlayer.setName(_name);
     }
@@ -119,77 +119,6 @@ class Game {
 
     public void setWinner(Player _winner) {
         winner = _winner;
-    }
-
-    class Player {
-        private Integer index;
-        private String name;
-        private Integer score = 0;
-        private Integer phase = 0;
-
-        public Player(Integer _index) {
-            index = _index;
-            setName("Player X");
-        }
-
-        public Player(Integer _index, String _name) {
-            index = _index;
-            setName(_name);
-        }
-
-        public String toString() {
-            return String.format(
-                    "Name '%s'; Score %s; Phase %d",
-                    getName(),
-                    getScore(),
-                    getPhase()
-            );
-        }
-
-        public Integer getIndex() {
-            return index;
-        }
-
-        public void setName(String _name) {
-            name = _name;
-            Game.this.buildName();
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getInitial() {
-            return name.substring(0, 1);
-        }
-
-        public String getInitials() {
-            String names[] = name.split(" ");
-            if (names.length > 1) {
-                return String.join("", names[0].substring(0, 1), names[1].substring(0, 1));
-            } else {
-                return getInitial();
-            }
-        }
-
-        public void addScore(Integer _score) {
-            score += _score;
-        }
-
-        public Integer getScore() {
-            return score;
-        }
-
-        public void nextPhase() {
-            phase++;
-            if (phase >= 10) {
-                Game.this.setWinner(this);
-            }
-        }
-
-        public Integer getPhase() {
-            return phase;
-        }
     }
 
 }
