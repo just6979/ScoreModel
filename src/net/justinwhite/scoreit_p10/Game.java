@@ -49,7 +49,6 @@ class Game {
     }
 
     public String toString() {
-
         return String.format("Game: %s\nUUID: %s\nPlayer count: %d\nPlayers: %s\n",
                              getName(),
                              getID(),
@@ -96,6 +95,7 @@ class Game {
         return players.get(index);
     }
 
+
     class Player {
         private String name;
         private Integer score = 0;
@@ -140,20 +140,20 @@ class Game {
             }
         }
 
-        public Integer getScore() {
-            return score;
-        }
-
         public void addScore(Integer _score) {
             score += _score;
         }
 
-        public Integer getPhase() {
-            return phase;
+        public Integer getScore() {
+            return score;
         }
 
         public void completePhase(Integer _phase) {
             phase += _phase;
+        }
+
+        public Integer getPhase() {
+            return phase;
         }
     }
 
