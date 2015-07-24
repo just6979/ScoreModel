@@ -34,16 +34,16 @@ package net.justinwhite.scoreit_p10;
 class Util {
 /* CLI Helper functions */
 
-    public static void print(String msg) {
-        System.out.print(msg);
+    public static void print(Object msg) {
+        System.out.print(msg.toString());
     }
 
-    public static void println(String msg) {
-        System.out.println(msg);
+    public static void println(Object msg) {
+        System.out.println(msg.toString());
     }
 
-    public static void printlnln(String msg) {
-        println(msg);
+    public static void printlnln(Object msg) {
+        println(msg.toString());
         println();
     }
 
