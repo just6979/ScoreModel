@@ -65,11 +65,14 @@ class Main {
         }
         println();
 
-        printlnln("Change player names to example data...");
-        game.getPlayer(0).setName("Justin W");
-        game.getPlayer(1).setName("Lauren K");
-        game.getPlayer(2).setName("Timmay C");
-        game.getPlayer(3).setName("Denise B");
+        println("Use example player names...");
+        String example_players[] = {"Justin W", "Lauren K", "Timmay C", "Denise B"};
+        for (Integer i = 0; i < numPlayers; i++) {
+            game.getPlayer(i).setName(example_players[i]);
+        }
+
+        println("New game name:");
+        printlnln(game.getName());
 
         println("Show players via ArrayList iterator:");
         for (Game.Player p : game.getPlayerList()) {
