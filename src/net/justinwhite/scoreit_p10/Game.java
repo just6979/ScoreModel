@@ -40,7 +40,7 @@ class Game {
     private Integer numPlayers = 0;
     private String name = "";
     private ArrayList<Player> players = new ArrayList<Player>(0);
-    private Integer winner;
+    private Player winner;
 
     public Game(Integer _numPlayers) {
         this.id = UUID.randomUUID();
@@ -96,17 +96,36 @@ class Game {
         return players.get(index);
     }
 
-    public void setWinner(Integer _index) {
-        winner = _index;
+    public String getScores() {
+        String out = "";
+        for (Player p : players) {
+            out += String.format("%s: %4d Points", p.getName(), p.getScore());
+            if (p.getPhase() > 0) {
+                out += String.format(", Phase #%d completed\n", p.getPhase());
+            } else {
+                out += "\n";
+            }
+        }
+        return out;
     }
 
+    public Boolean hasWinner() {
+        return winner != null;
+    }
 
+    public Player getWinner() {
+        return (winner != null) ? winner : null;
+    }
+
+    public void setWinner(Player _winner) {
+        winner = _winner;
+    }
 
     class Player {
         private Integer index;
         private String name;
         private Integer score = 0;
-        private Integer phase = 1;
+        private Integer phase = 0;
 
         public Player(Integer _index) {
             index = _index;
@@ -120,7 +139,7 @@ class Game {
 
         public String toString() {
             return String.format(
-                    "Name: '%s', Score: %d, Phase: %d",
+                    "Name '%s'; Score %s; Phase %d",
                     getName(),
                     getScore(),
                     getPhase()
@@ -130,6 +149,7 @@ class Game {
         public Integer getIndex() {
             return index;
         }
+
         public void setName(String _name) {
             name = _name;
             Game.this.buildName();
@@ -162,8 +182,8 @@ class Game {
 
         public void nextPhase() {
             phase++;
-            if (phase == 10) {
-                Game.this.setWinner(this.getIndex());
+            if (phase >= 10) {
+                Game.this.setWinner(this);
             }
         }
 
