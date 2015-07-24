@@ -33,18 +33,16 @@ package net.justinwhite.scoreit_p10;
 
 class Player {
     private Game game;
-    private Integer index;
     private String name;
     private Integer score = 0;
     private Integer phase = 0;
 
-    public Player(Game _game, Integer _index) {
-        this(_game, _index, "Player X");
+    public Player(Game _game) {
+        this(_game, "Player X");
     }
 
-    public Player(Game _game, Integer _index, String _name) {
+    public Player(Game _game, String _name) {
         game = _game;
-        index = _index;
         setName(_name);
     }
 
@@ -55,10 +53,6 @@ class Player {
                 getScore(),
                 getPhase()
         );
-    }
-
-    public Integer getIndex() {
-        return index;
     }
 
     public String getName() {

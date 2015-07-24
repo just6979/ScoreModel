@@ -60,7 +60,7 @@ class Game {
         players = new ArrayList<Player>(_numPlayers);
 
         for (Integer i = 0; i < _numPlayers; i++) {
-            addPlayer(i);
+            addPlayer();
         }
     }
 
@@ -100,15 +100,15 @@ class Game {
         return players.get(index);
     }
 
-    public void addPlayer(Integer _index, String _name) {
+    public void addPlayer(String _name) {
         players.ensureCapacity(numPlayers + 1);
-        Player newPlayer = new Player(this, _index);
+        Player newPlayer = new Player(this);
         players.add(numPlayers++, newPlayer);
         newPlayer.setName(_name);
     }
 
-    public void addPlayer(Integer _index) {
-        addPlayer(_index, String.format("Player %d", numPlayers + 1));
+    public void addPlayer() {
+        addPlayer(String.format("Player %d", numPlayers + 1));
     }
 
     public String getScores() {
