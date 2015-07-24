@@ -33,7 +33,11 @@
 package net.justinwhite.scoreit_p10;
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.UUID;
+
+import static net.justinwhite.scoreit_p10.Util.println;
 
 class Game {
     static Integer MIN_PLAYERS = 2;
@@ -44,6 +48,7 @@ class Game {
     private Integer numPlayers;
     private String name;
     private ArrayList<Player> players;
+    private Map<String, Player> playerMap;
     private Player winner;
 
     public Game(Integer _numPlayers) {
@@ -58,6 +63,7 @@ class Game {
         numPlayers = 0;
         name = "";
         players = new ArrayList<Player>(_numPlayers);
+        playerMap = new TreeMap<String, Player>();
 
         for (Integer i = 0; i < _numPlayers; i++) {
             addPlayer();
@@ -65,11 +71,12 @@ class Game {
     }
 
     public String toString() {
-        return String.format("Game: %s\nUUID: %s\nPlayer count: %d\nPlayers: %s\n",
+        return String.format("Game: %s\nUUID: %s\nPlayer count: %d\nPlayers: %s\nPlayerMap: %s",
                              getName(),
                              getID(),
                              getNumPlayers(),
-                             players
+                             players,
+                             playerMap
         );
     }
 
@@ -100,15 +107,32 @@ class Game {
         return players.get(index);
     }
 
+    public Player getPlayerByName(String _name) {
+        return playerMap.get(_name);
+    }
+
+    public Boolean checkPlayer(String _name) {
+        return playerMap.containsKey(_name);
+    }
+
     public void addPlayer(String _name) {
         players.ensureCapacity(numPlayers + 1);
         Player newPlayer = new Player(this);
         players.add(numPlayers++, newPlayer);
+        playerMap.put(_name, newPlayer);
         newPlayer.setName(_name);
     }
 
     public void addPlayer() {
         addPlayer(String.format("Player %d", numPlayers + 1));
+    }
+
+    public void renamePlayer(String oldName, String newName) {
+        Player p = playerMap.remove(oldName);
+        if (p != null) {
+            p.setName(newName);
+            playerMap.put(newName, p);
+        }
     }
 
     public String getScores() {
