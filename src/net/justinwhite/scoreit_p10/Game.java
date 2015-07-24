@@ -40,11 +40,12 @@ class Game {
     private Integer numPlayers = 0;
     private String name = "";
     private ArrayList<Player> players = new ArrayList<Player>(0);
+    private Integer winner;
 
     public Game(Integer _numPlayers) {
         this.id = UUID.randomUUID();
         for (Integer i = 0; i < _numPlayers; i++) {
-            addPlayer();
+            addPlayer(i);
         }
     }
 
@@ -76,15 +77,15 @@ class Game {
         return numPlayers;
     }
 
-    public void addPlayer(String _name) {
+    public void addPlayer(Integer _index, String _name) {
         players.ensureCapacity(numPlayers + 1);
-        Player newPlayer = new Player();
+        Player newPlayer = new Player(_index);
         players.add(numPlayers++, newPlayer);
         newPlayer.setName(_name);
     }
 
-    public void addPlayer() {
-        addPlayer(String.format("Player %d", numPlayers + 1));
+    public void addPlayer(Integer _index) {
+        addPlayer(_index, String.format("Player %d", numPlayers + 1));
     }
 
     public ArrayList<Player> getPlayerList() {
@@ -95,17 +96,25 @@ class Game {
         return players.get(index);
     }
 
+    public void setWinner(Integer _index) {
+        winner = _index;
+    }
+
+
 
     class Player {
+        private Integer index;
         private String name;
         private Integer score = 0;
         private Integer phase = 1;
 
-        public Player() {
+        public Player(Integer _index) {
+            index = _index;
             setName("Player X");
         }
 
-        public Player(String _name) {
+        public Player(Integer _index, String _name) {
+            index = _index;
             setName(_name);
         }
 
@@ -118,6 +127,9 @@ class Game {
             );
         }
 
+        public Integer getIndex() {
+            return index;
+        }
         public void setName(String _name) {
             name = _name;
             Game.this.buildName();
@@ -148,8 +160,11 @@ class Game {
             return score;
         }
 
-        public void completePhase(Integer _phase) {
-            phase += _phase;
+        public void nextPhase() {
+            phase++;
+            if (phase == 10) {
+                Game.this.setWinner(this.getIndex());
+            }
         }
 
         public Integer getPhase() {
