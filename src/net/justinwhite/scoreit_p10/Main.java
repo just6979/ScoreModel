@@ -47,9 +47,10 @@ import static net.justinwhite.scoreit_p10.Util.*;
 class Main {
 
     public static void main(String[] args) {
-        Scanner stdin = new Scanner(System.in);
-        print("How many players? ");
-        Integer numPlayers = stdin.nextInt();
+//        Scanner stdin = new Scanner(System.in);
+//        print("How many players? ");
+//        Integer numPlayers = stdin.nextInt();
+        Integer numPlayers = 4;
 
         Game game = new Game(numPlayers);
 
