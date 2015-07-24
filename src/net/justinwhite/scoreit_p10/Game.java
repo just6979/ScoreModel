@@ -32,10 +32,7 @@
 
 package net.justinwhite.scoreit_p10;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.UUID;
+import java.util.*;
 
 import static net.justinwhite.scoreit_p10.Util.println;
 
@@ -47,7 +44,7 @@ class Game {
     private final UUID id;
     private Integer numPlayers;
     private String name;
-    private ArrayList<Player> players;
+    private List<Player> players;
     private Map<String, Player> playerMap;
     private Player winner;
 
@@ -99,7 +96,7 @@ class Game {
         return numPlayers;
     }
 
-    public ArrayList<Player> getPlayerList() {
+    public List<Player> getPlayerList() {
         return players;
     }
 
@@ -116,7 +113,6 @@ class Game {
     }
 
     public void addPlayer(String _name) {
-        players.ensureCapacity(numPlayers + 1);
         Player newPlayer = new Player(this);
         players.add(numPlayers++, newPlayer);
         playerMap.put(_name, newPlayer);
