@@ -55,7 +55,7 @@ class Main {
 
         println("Show players individually:");
         for (Integer i = 0; i < game.getNumPlayers(); i++) {
-            Game.Player p;
+            Player p;
             p = game.getPlayer(i);
             println(p.toString());
         }
@@ -71,15 +71,15 @@ class Main {
         printlnln(game.getName());
 
         println("Show players via ArrayList iterator:");
-        for (Game.Player p : game.getPlayerList()) {
+        for (Player p : game.getPlayerList()) {
             println(p.toString());
         }
         println();
 
-        Game.Player JW = game.getPlayer(0);
-        Game.Player LK = game.getPlayer(1);
-        Game.Player TC = game.getPlayer(2);
-        Game.Player DB = game.getPlayer(3);
+        Player JW = game.getPlayer(0);
+        Player LK = game.getPlayer(1);
+        Player TC = game.getPlayer(2);
+        Player DB = game.getPlayer(3);
 
         JW.addScore(100);
         LK.addScore(10);
