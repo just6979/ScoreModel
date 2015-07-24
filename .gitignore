@@ -5,8 +5,10 @@ out/
 *.log
 
 # IntelliJ
-.idea/workspace.xml
+.idea/misc.xml
 .idea/tasks.xml
 .idea/uiDesigner.xml
+.idea/workspace.xml
 .idea/libraries/*.xml
 lib
+
