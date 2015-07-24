@@ -40,16 +40,12 @@ to allow tools to run the tests even from within other projects.
 For now, just build this project to "run the tests".
 */
 
-import java.util.Scanner;
-
-import static net.justinwhite.scoreit_p10.Util.*;
+import static net.justinwhite.scoreit_p10.Util.println;
+import static net.justinwhite.scoreit_p10.Util.printlnln;
 
 class Main {
 
     public static void main(String[] args) {
-//        Scanner stdin = new Scanner(System.in);
-//        print("How many players? ");
-//        Integer numPlayers = stdin.nextInt();
         Integer numPlayers = 4;
 
         Game game = new Game(numPlayers);
@@ -79,5 +75,48 @@ class Main {
             println(p.toString());
         }
         println();
+
+        Game.Player JW = game.getPlayer(0);
+        Game.Player LK = game.getPlayer(1);
+        Game.Player TC = game.getPlayer(2);
+        Game.Player DB = game.getPlayer(3);
+
+        JW.addScore(100);
+        LK.addScore(10);
+        LK.nextPhase();
+        TC.addScore(80);
+        DB.addScore(40);
+
+        println("Round 1");
+        println(game.getScores());
+
+        JW.addScore(100);
+        LK.addScore(0);
+        LK.nextPhase();
+        TC.addScore(60);
+        DB.addScore(50);
+        DB.nextPhase();
+
+        println("Round 2");
+        println(game.getScores());
+
+        LK.nextPhase();
+        LK.nextPhase();
+        LK.nextPhase();
+        LK.nextPhase();
+        LK.nextPhase();
+        LK.nextPhase();
+        LK.nextPhase();
+        LK.nextPhase();
+
+        printlnln("...");
+        println("Round 10");
+        println(game.getScores());
+
+        if (game.hasWinner()) {
+            println("Winner:");
+            println(game.getWinner().getName());
+        }
+
     }
 }
