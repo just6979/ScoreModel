@@ -43,8 +43,8 @@ class Util {
     }
 
     public static void printlnln(String msg) {
-        System.out.println();
-        System.out.println(msg);
+        println(msg);
+        println();
     }
 
     public static void println() {
