@@ -64,7 +64,7 @@ class Main {
         println("Use example player names...");
         String example_players[] = {"Justin W", "Lauren K", "Timmay C", "Denise B"};
         for (Integer i = 0; i < numPlayers; i++) {
-            game.getPlayer(i).setName(example_players[i]);
+            game.renamePlayer(String.format("Player %d", i+1), example_players[i]);
         }
 
         println("New game name:");
@@ -76,10 +76,10 @@ class Main {
         }
         println();
 
-        Player JW = game.getPlayer(0);
-        Player LK = game.getPlayer(1);
-        Player TC = game.getPlayer(2);
-        Player DB = game.getPlayer(3);
+        Player JW = game.getPlayerByName("Justin W");
+        Player LK = game.getPlayerByName("Lauren K");
+        Player TC = game.getPlayerByName("Timmay C");
+        Player DB = game.getPlayerByName("Denise B");
 
         JW.addScore(100);
         LK.addScore(10);
