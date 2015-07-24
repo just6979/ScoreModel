@@ -47,8 +47,16 @@ class Game {
     private Player winner;
 
     public Game(Integer _numPlayers) {
+        if (_numPlayers < MIN_PLAYERS) {
+            numPlayers = MIN_PLAYERS;
+        } else if (_numPlayers > MAX_PLAYERS) {
+            numPlayers = MAX_PLAYERS;
+        } else {
+            numPlayers = _numPlayers;
+        }
+
         this.id = UUID.randomUUID();
-        for (Integer i = 0; i < _numPlayers; i++) {
+        for (Integer i = 0; i < numPlayers; i++) {
             addPlayer(i);
         }
     }
