@@ -40,9 +40,6 @@ class Player {
 
     public Player(Game _game, Integer _index) {
         this(_game, _index, "Player X");
-//        game = _game;
-//        index = _index;
-//        setName("Player X");
     }
 
     public Player(Game _game, Integer _index, String _name) {
