@@ -39,9 +39,10 @@ class Player {
     private Integer phase = 0;
 
     public Player(Game _game, Integer _index) {
-        game = _game;
-        index = _index;
-        setName("Player X");
+        this(_game, _index, "Player X");
+//        game = _game;
+//        index = _index;
+//        setName("Player X");
     }
 
     public Player(Game _game, Integer _index, String _name) {
