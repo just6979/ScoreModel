@@ -41,22 +41,25 @@ class Game {
     static Integer MAX_PHASE = 10;
 
     private final UUID id;
-    private Integer numPlayers = 0;
-    private String name = "";
-    private ArrayList<Player> players = new ArrayList<Player>(0);
+    private Integer numPlayers;
+    private String name;
+    private ArrayList<Player> players;
     private Player winner;
 
     public Game(Integer _numPlayers) {
+        this.id = UUID.randomUUID();
+
         if (_numPlayers < MIN_PLAYERS) {
-            numPlayers = MIN_PLAYERS;
+            _numPlayers = MIN_PLAYERS;
         } else if (_numPlayers > MAX_PLAYERS) {
-            numPlayers = MAX_PLAYERS;
-        } else {
-            numPlayers = _numPlayers;
+            _numPlayers = MAX_PLAYERS;
         }
 
-        this.id = UUID.randomUUID();
-        for (Integer i = 0; i < numPlayers; i++) {
+        numPlayers = 0;
+        name = "";
+        players = new ArrayList<Player>(_numPlayers);
+
+        for (Integer i = 0; i < _numPlayers; i++) {
             addPlayer(i);
         }
     }
