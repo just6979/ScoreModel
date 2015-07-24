@@ -36,9 +36,9 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 class Game {
-    public static Integer MIN_PLAYERS = 2;
-    public static Integer MAX_PLAYERS = 8;
-    public static Integer MAX_PHASE = 10;
+    static Integer MIN_PLAYERS = 2;
+    static Integer MAX_PLAYERS = 8;
+    static Integer MAX_PHASE = 10;
 
     private final UUID id;
     private Integer numPlayers = 0;
