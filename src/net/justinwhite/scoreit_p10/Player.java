@@ -97,7 +97,7 @@ class Player {
 
     public void nextPhase() {
         phase++;
-        if (phase >= 10) {
+        if (phase >= Game.MAX_PHASE) {
             game.setWinner(this);
         }
     }
