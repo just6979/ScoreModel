@@ -68,8 +68,8 @@ class Game {
         playerMap = new TreeMap<String, Player>();
 
         // add default players
-        for (int i = 0; i < _numPlayers; i++) {
-            addPlayer(String.format("Player %d", i + 1));
+        for (int i = 1; i <= _numPlayers; i++) {
+            addPlayer(String.format("Player %d", i));
         }
     }
 
