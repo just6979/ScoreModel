@@ -32,17 +32,17 @@
 package net.justinwhite.scoreit_p10;
 
 class Player {
-    private Game game;
     private String name;
     private Integer score = 0;
     private Integer phase = 0;
 
-    public Player(Game _game) {
-        this(_game, "Player X");
+    static Player winner = null;
+
+    public Player() {
+        this("Player X");
     }
 
-    public Player(Game _game, String _name) {
-        game = _game;
+    public Player(String _name) {
         setName(_name);
     }
 
@@ -61,7 +61,6 @@ class Player {
 
     public void setName(String _name) {
         name = _name;
-        game.buildName();
     }
 
     public String getInitial() {
@@ -92,7 +91,7 @@ class Player {
     public void nextPhase() {
         phase++;
         if (phase >= Game.MAX_PHASE) {
-            game.setWinner(this);
+            Player.winner = this;
         }
     }
 }
