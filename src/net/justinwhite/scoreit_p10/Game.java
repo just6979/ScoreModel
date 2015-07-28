@@ -67,6 +67,8 @@ class Game {
         for (Integer i = 0; i < _numPlayers; i++) {
             addPlayer();
         }
+
+        buildName();
     }
 
     public String toString() {
