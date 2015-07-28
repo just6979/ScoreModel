@@ -157,11 +157,6 @@ class Game {
     }
 
     public Player getWinner() {
-        return (winner != null) ? winner : null;
+        return winner;
     }
-
-    public void setWinner(Player _winner) {
-        winner = _winner;
-    }
-
 }
