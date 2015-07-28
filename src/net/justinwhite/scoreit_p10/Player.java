@@ -92,7 +92,7 @@ class Player {
         phase++;
         if (phase >= Game.MAX_PHASE) {
             Player.winner = this;
-            // TODO: handle multiple players at Phase 10 during same round
+            // TODO: handle multiple winners: tie break on score
         }
     }
 }

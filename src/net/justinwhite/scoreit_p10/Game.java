@@ -51,6 +51,7 @@ class Game {
     public Game(Integer _numPlayers) {
         this.id = UUID.randomUUID();
 
+        // sanity check number of players
         if (_numPlayers < MIN_PLAYERS) {
             _numPlayers = MIN_PLAYERS;
         } else if (_numPlayers > MAX_PLAYERS) {
@@ -62,6 +63,7 @@ class Game {
         players = new ArrayList<Player>(_numPlayers);
         playerMap = new TreeMap<String, Player>();
 
+        // add default players
         for (Integer i = 0; i < _numPlayers; i++) {
             addPlayer();
         }
@@ -72,6 +74,7 @@ class Game {
                              getName(),
                              getID(),
                              getNumPlayers(),
+                             // List<> and Map<> classes handle toString() themselves
                              players,
                              playerMap
         );
@@ -144,6 +147,7 @@ class Game {
         return out;
     }
 
+    // TODO: handle mutiple winners: tie-break on score
     public Boolean hasWinner() {
         return winner != null;
     }
