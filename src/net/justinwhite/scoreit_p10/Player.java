@@ -31,15 +31,23 @@
 
 package net.justinwhite.scoreit_p10;
 
+import static net.justinwhite.scoreit_p10.Game.MAX_PHASE;
+
 class Player {
     private String name;
-    private Integer score = 0;
-    private Integer phase = 0;
+    private Integer score;
+    private Integer phase;
 
-    static Player winner = null;
+    protected static Player winner;
+
+    static {
+        winner = null;
+    }
 
     public Player(String _name) {
         setName(_name);
+        score = 0;
+        phase = 0;
     }
 
     public String toString() {
@@ -86,8 +94,8 @@ class Player {
 
     public void nextPhase() {
         phase++;
-        if (phase >= Game.MAX_PHASE) {
-            Player.winner = this;
+        if (phase >= MAX_PHASE) {
+            winner = this;
             // TODO: handle multiple winners: tie break on score
         }
     }
