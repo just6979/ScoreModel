@@ -3,11 +3,11 @@ A simple Phase 10 scoring system.
 A Game has:
 - 2-8 Players
 - 10-infinity Rounds
-- 5-10 Phases
+- 10 Phases to be completed
 
 A Player has:
 - A Score
-- 0-10 Phases reached
+- 0-10 Phases completed
 
 Some scoring rules:
 - A Player's score accumulates each round, but may increase by 0.
