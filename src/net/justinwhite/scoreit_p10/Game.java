@@ -35,9 +35,9 @@ package net.justinwhite.scoreit_p10;
 import java.util.*;
 
 class Game {
-    static final Integer MAX_PHASE;
-    private static final Integer MIN_PLAYERS;
-    private static final Integer MAX_PLAYERS;
+    static final int MAX_PHASE;
+    private static final int MIN_PLAYERS;
+    private static final int MAX_PLAYERS;
 
     static {
         MAX_PHASE = 10;
@@ -48,11 +48,11 @@ class Game {
     private final UUID id;
     private final List<Player> players;
     private final Map<String, Player> playerMap;
-    private Integer numPlayers;
+    private int numPlayers;
     private String name;
     private Player winner;
 
-    public Game(Integer _numPlayers) {
+    public Game(int _numPlayers) {
         this.id = UUID.randomUUID();
 
         // sanity check number of players
@@ -68,7 +68,7 @@ class Game {
         playerMap = new TreeMap<String, Player>();
 
         // add default players
-        for (Integer i = 0; i < _numPlayers; i++) {
+        for (int i = 0; i < _numPlayers; i++) {
             addPlayer(String.format("Player %d", i + 1));
         }
     }
@@ -99,7 +99,7 @@ class Game {
         return name;
     }
 
-    public Integer getNumPlayers() {
+    public int getNumPlayers() {
         return numPlayers;
     }
 
@@ -107,7 +107,7 @@ class Game {
         return players;
     }
 
-    public Player getPlayer(Integer index) {
+    public Player getPlayer(int index) {
         return players.get(index);
     }
 

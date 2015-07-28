@@ -41,8 +41,8 @@ class Player {
     }
 
     private String name;
-    private Integer score;
-    private Integer phase;
+    private int score;
+    private int phase;
 
     public Player(String _name) {
         setName(_name);
@@ -77,15 +77,15 @@ class Player {
         }
     }
 
-    public Integer getScore() {
+    public int getScore() {
         return score;
     }
 
-    public void addScore(Integer _score) {
+    public void addScore(int _score) {
         score += _score;
     }
 
-    public Integer getPhase() {
+    public int getPhase() {
         return phase;
     }
 

@@ -46,7 +46,7 @@ import static net.justinwhite.scoreit_p10.Util.printlnln;
 class Main {
 
     public static void main(String[] args) {
-        Integer numPlayers = 4;
+        int numPlayers = 4;
 
         Game game = new Game(numPlayers);
 
@@ -54,7 +54,7 @@ class Main {
         println(game.toString());
 
         println("Show players individually:");
-        for (Integer i = 0; i < game.getNumPlayers(); i++) {
+        for (int i = 0; i < game.getNumPlayers(); i++) {
             Player p;
             p = game.getPlayer(i);
             println(p.toString());
@@ -63,7 +63,7 @@ class Main {
 
         println("Use example player names...");
         String example_players[] = {"Justin W", "Lauren K", "Timmay C", "Denise B"};
-        for (Integer i = 0; i < numPlayers; i++) {
+        for (int i = 0; i < numPlayers; i++) {
             game.renamePlayer(String.format("Player %d", i + 1), example_players[i]);
         }
 
