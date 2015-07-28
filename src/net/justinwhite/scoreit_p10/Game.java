@@ -35,9 +35,16 @@ package net.justinwhite.scoreit_p10;
 import java.util.*;
 
 class Game {
-    static final Integer MAX_PHASE = 10;
-    private static final Integer MIN_PLAYERS = 2;
-    private static final Integer MAX_PLAYERS = 8;
+    static final Integer MAX_PHASE;
+    private static final Integer MIN_PLAYERS;
+    private static final Integer MAX_PLAYERS;
+
+    static {
+        MAX_PHASE = 10;
+        MIN_PLAYERS = 2;
+        MAX_PLAYERS = 8;
+    }
+
     private final UUID id;
     private final List<Player> players;
     private final Map<String, Player> playerMap;
