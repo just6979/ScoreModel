@@ -68,6 +68,7 @@ class Player {
     }
 
     public String getInitials() {
+        // assume name is "First" or "First Last", return "F_" or "FL"
         String names[] = name.split(" ");
         if (names.length > 1) {
             return String.join("", names[0].substring(0, 1), names[1].substring(0, 1));
