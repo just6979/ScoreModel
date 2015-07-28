@@ -67,16 +67,12 @@ class Player {
         name = _name;
     }
 
-    public String getInitial() {
-        return name.substring(0, 1);
-    }
-
     public String getInitials() {
         String names[] = name.split(" ");
         if (names.length > 1) {
             return String.join("", names[0].substring(0, 1), names[1].substring(0, 1));
         } else {
-            return getInitial();
+            return String.join("", name.substring(0, 1), "_");
         }
     }
 
