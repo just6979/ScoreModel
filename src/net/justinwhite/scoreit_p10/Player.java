@@ -38,10 +38,6 @@ class Player {
 
     static Player winner = null;
 
-    public Player() {
-        this("Player X");
-    }
-
     public Player(String _name) {
         setName(_name);
     }

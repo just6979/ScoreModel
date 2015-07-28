@@ -65,7 +65,7 @@ class Game {
 
         // add default players
         for (Integer i = 0; i < _numPlayers; i++) {
-            addPlayer();
+            addPlayer(String.format("Player %d", i + 1));
         }
 
         buildName();
@@ -122,10 +122,6 @@ class Game {
         players.add(numPlayers++, newPlayer);
         playerMap.put(_name, newPlayer);
         newPlayer.setName(_name);
-    }
-
-    public void addPlayer() {
-        addPlayer(String.format("Player %d", numPlayers + 1));
     }
 
     public void renamePlayer(String oldName, String newName) {
