@@ -118,10 +118,9 @@ class Game {
     }
 
     public void addPlayer(String _name) {
-        Player newPlayer = new Player();
+        Player newPlayer = new Player(_name);
         players.add(numPlayers++, newPlayer);
         playerMap.put(_name, newPlayer);
-        newPlayer.setName(_name);
     }
 
     public void renamePlayer(String oldName, String newName) {
@@ -147,7 +146,14 @@ class Game {
 
     // TODO: handle mutiple winners: tie-break on score
     public Boolean hasWinner() {
-        return winner != null;
+        for (Player p : players) {
+            if (Player.winner == p) {
+                winner = p;
+                return true;
+            }
+        }
+        return false;
+
     }
 
     public Player getWinner() {
