@@ -113,7 +113,7 @@ class Game {
     }
 
     public void addPlayer(String _name) {
-        Player newPlayer = new Player(this);
+        Player newPlayer = new Player();
         players.add(numPlayers++, newPlayer);
         playerMap.put(_name, newPlayer);
         newPlayer.setName(_name);
