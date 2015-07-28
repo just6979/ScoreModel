@@ -64,8 +64,6 @@ class Game {
         for (Integer i = 0; i < _numPlayers; i++) {
             addPlayer(String.format("Player %d", i + 1));
         }
-
-        buildName();
     }
 
     public String toString() {
@@ -118,6 +116,7 @@ class Game {
         Player newPlayer = new Player(_name);
         players.add(numPlayers++, newPlayer);
         playerMap.put(_name, newPlayer);
+        buildName();
     }
 
     public void renamePlayer(String oldName, String newName) {
@@ -126,6 +125,7 @@ class Game {
             p.setName(newName);
             playerMap.put(newName, p);
         }
+        buildName();
     }
 
     public String getScores() {
