@@ -34,15 +34,15 @@ package net.justinwhite.scoreit_p10;
 import static net.justinwhite.scoreit_p10.Game.MAX_PHASE;
 
 class Player {
-    private String name;
-    private Integer score;
-    private Integer phase;
-
-    protected static Player winner;
+    static Player winner;
 
     static {
         winner = null;
     }
+
+    private String name;
+    private Integer score;
+    private Integer phase;
 
     public Player(String _name) {
         setName(_name);

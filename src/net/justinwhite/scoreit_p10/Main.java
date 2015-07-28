@@ -64,7 +64,7 @@ class Main {
         println("Use example player names...");
         String example_players[] = {"Justin W", "Lauren K", "Timmay C", "Denise B"};
         for (Integer i = 0; i < numPlayers; i++) {
-            game.renamePlayer(String.format("Player %d", i+1), example_players[i]);
+            game.renamePlayer(String.format("Player %d", i + 1), example_players[i]);
         }
 
         println("New game name:");
