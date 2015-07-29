@@ -29,7 +29,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.justinwhite.util;
+package net.justinwhite;
 
 public class Util {
 /* CLI Helper functions */

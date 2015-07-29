@@ -40,8 +40,8 @@ to allow tools to run the tests even from within other projects.
 For now, just build this project to "run the tests".
 */
 
-import static net.justinwhite.util.Util.println;
-import static net.justinwhite.util.Util.printlnln;
+import static net.justinwhite.Util.println;
+import static net.justinwhite.Util.printlnln;
 
 class Main {
 
