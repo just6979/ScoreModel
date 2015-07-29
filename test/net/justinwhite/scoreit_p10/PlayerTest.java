@@ -37,11 +37,11 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class PlayerTest {
-    private Player testPlayer;
     private final String testName = "Test Player";
     private final String testInitials = "TP";
     private final int testScore = 11;
     private final int testPhase = 1;
+    private Player testPlayer;
 
     @Before
     public void setUp() {

@@ -148,7 +148,7 @@ class Game {
         return out;
     }
 
-    // TODO: handle mutiple winners: tie-break on score
+    // TODO: handle multiple winners: tie-break on score
     public Boolean hasWinner() {
         for (Player p : players) {
             if (Player.winner == p) {
