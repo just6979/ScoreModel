@@ -36,14 +36,13 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by justin on 2015-07-28.
- */
 public class PlayerTest {
+    Player p;
 
     @Before
     public void setUp() throws Exception {
-
+        p = new Player("Test Player");
+        assertEquals(p.getInitials(), "TP");
     }
 
     @Test
