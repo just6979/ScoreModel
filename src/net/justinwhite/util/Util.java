@@ -29,9 +29,9 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.justinwhite.scoreit_p10;
+package net.justinwhite.util;
 
-class Util {
+public class Util {
 /* CLI Helper functions */
 
     public static void print(Object msg) {
