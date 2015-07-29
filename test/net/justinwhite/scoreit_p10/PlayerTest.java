@@ -34,54 +34,70 @@ package net.justinwhite.scoreit_p10;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class PlayerTest {
-    Player p;
+    private Player testPlayer;
+    private final String testName = "Test Player";
+    private final String testInitials = "TP";
+    private final int testScore = 11;
+    private final int testPhase = 1;
 
     @Before
-    public void setUp() throws Exception {
-        p = new Player("Test Player");
-        assertEquals(p.getInitials(), "TP");
+    public void setUp() {
+        testPlayer = new Player(testName);
+        testPlayer.addScore(testScore);
+        testPlayer.nextPhase();
     }
 
     @Test
     public void testToString() throws Exception {
-
+        assertEquals(String.format(
+                             "Name '%s'; Score %s; Phase %d",
+                             testName,
+                             testScore,
+                             testPhase
+                     ), testPlayer.toString()
+        );
     }
 
     @Test
     public void testGetName() throws Exception {
-
+        assertEquals(testName, testPlayer.getName());
     }
 
     @Test
     public void testSetName() throws Exception {
-
+        String newName = "Player Test";
+        testPlayer.setName(newName);
+        assertEquals(newName, testPlayer.getName());
+        testPlayer.setName(testName);
     }
 
     @Test
     public void testGetInitials() throws Exception {
-
+        assertEquals(testInitials, testPlayer.getInitials());
     }
 
     @Test
     public void testGetScore() throws Exception {
-
+        assertEquals(testScore, testPlayer.getScore());
     }
 
     @Test
     public void testAddScore() throws Exception {
-
+        testPlayer.addScore(testScore);
+        assertEquals(testScore * 2, testPlayer.getScore());
     }
 
     @Test
     public void testGetPhase() throws Exception {
-
+        assertEquals(testPhase, testPlayer.getPhase());
     }
 
     @Test
     public void testNextPhase() throws Exception {
-
+        testPlayer.nextPhase();
+        assertEquals(testPhase + 1, testPlayer.getPhase());
     }
 }
