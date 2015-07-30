@@ -30,7 +30,7 @@
 
  */
 
-package net.justinwhite.scoreit_p10;
+package net.justinwhite.score_model;
 
 import java.util.*;
 

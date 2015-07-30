@@ -29,97 +29,75 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.justinwhite.scoreit_p10;
+package net.justinwhite.score_model;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-public class GameTest {
-    private final int testNumPlayers;
-    private final String testInitialName;
-    private final String[] testPlayerNames;
-    private final String testName;
-    private final Player[] testPlayersArray;
-    private Game testGame;
-
-    {
-        testNumPlayers = 4;
-        testInitialName = "P1P2P3P4";
-        testPlayerNames = new String[] {"Justin W", "Lauren K", "Timmay C", "Denise B"};
-        testName = "JWLKTCDB";
-        testPlayersArray = new Player[testNumPlayers];
-    }
+public class PlayerTest {
+    private final String testName = "Test Player";
+    private final String testInitials = "TP";
+    private final int testScore = 11;
+    private final int testPhase = 1;
+    private Player testPlayer;
 
     @Before
     public void setUp() {
-        testGame = new Game(testNumPlayers);
-        assertEquals(testInitialName, testGame.getName());
-        for (int i = 0; i < testNumPlayers; i++) {
-            testPlayersArray[i] = testGame.getPlayer(i);
-            testGame.renamePlayer(String.format("Player %d", i + 1), testPlayerNames[i]);
-        }
+        testPlayer = new Player(testName);
+        testPlayer.addScore(testScore);
+        testPlayer.nextPhase();
     }
 
     @Test
     public void testToString() throws Exception {
-
+        assertEquals(String.format(
+                             "Name '%s'; Score %s; Phase %d",
+                             testName,
+                             testScore,
+                             testPhase
+                     ), testPlayer.toString()
+        );
     }
 
     @Test
     public void testGetName() throws Exception {
-        assertEquals(testName, testGame.getName());
+        assertEquals(testName, testPlayer.getName());
     }
 
     @Test
-    public void testGetNumPlayers() throws Exception {
-        assertEquals(testNumPlayers, testGame.getNumPlayers());
+    public void testSetName() throws Exception {
+        String newName = "Player Test";
+        testPlayer.setName(newName);
+        assertEquals(newName, testPlayer.getName());
+        testPlayer.setName(testName);
     }
 
     @Test
-    public void testGetPlayerList() throws Exception {
-
+    public void testGetInitials() throws Exception {
+        assertEquals(testInitials, testPlayer.getInitials());
     }
 
     @Test
-    public void testGetPlayer() throws Exception {
-        assertEquals(testPlayersArray[0], testGame.getPlayer(0));
+    public void testGetScore() throws Exception {
+        assertEquals(testScore, testPlayer.getScore());
     }
 
     @Test
-    public void testGetPlayerByName() throws Exception {
-        assertEquals(testPlayersArray[0], testGame.getPlayerByName("Justin W"));
+    public void testAddScore() throws Exception {
+        testPlayer.addScore(testScore);
+        assertEquals(testScore * 2, testPlayer.getScore());
     }
 
     @Test
-    public void testCheckPlayer() throws Exception {
-        assertTrue(testGame.checkPlayer("Justin W"));
-        assertFalse(testGame.checkPlayer("Carl Sagan"));
+    public void testGetPhase() throws Exception {
+        assertEquals(testPhase, testPlayer.getPhase());
     }
 
     @Test
-    public void testAddPlayer() throws Exception {
-
-    }
-
-    @Test
-    public void testRenamePlayer() throws Exception {
-
-    }
-
-    @Test
-    public void testGetScores() throws Exception {
-
-    }
-
-    @Test
-    public void testHasWinner() throws Exception {
-
-    }
-
-    @Test
-    public void testGetWinner() throws Exception {
-
+    public void testNextPhase() throws Exception {
+        testPlayer.nextPhase();
+        assertEquals(testPhase + 1, testPlayer.getPhase());
     }
 }

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ScoreIt_P10.iml" filepath="$PROJECT_DIR$/ScoreIt_P10.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ScoreModel.iml" filepath="$PROJECT_DIR$/ScoreModel.iml" />
     </modules>
   </component>
 </project>

@@ -29,9 +29,9 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.justinwhite.scoreit_p10;
+package net.justinwhite.score_model;
 
-import static net.justinwhite.scoreit_p10.Game.MAX_PHASE;
+import static net.justinwhite.score_model.Game.MAX_PHASE;
 
 class Player {
     static Player winner;
