@@ -31,69 +31,45 @@
 
 package net.justinwhite.score_model;
 
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import static net.justinwhite.score_model.Phase10Game.MAX_PHASE;
 
-public abstract class Game {
-    private final UUID id;
-    private int numPlayers;
-    private String name;
+class Phase10Player extends Player {
+    static Phase10Player winner;
 
-    public Game() {
-        id = UUID.randomUUID();
-        name = id.toString();
-        numPlayers = 0;
+    static {
+        winner = null;
     }
 
+    private int phase;
+
+    public Phase10Player(String _name) {
+        super(_name);
+        phase = 0;
+    }
+
+    @Override
     public String toString() {
-        return String.format("Game: %s\nUUID: %s\nPlayer count: %d",
-                             getName(),
-                             getID(),
-                             getNumPlayers()
+        return String.format(
+                "Name '%s'; Score %s; Phase %d",
+                getName(),
+                getScore(),
+                getPhase()
         );
     }
 
-    public UUID getID() {
-        return id;
+    public void addScore(int _score) {
+        setScore(getScore() + _score);
     }
 
-    public String getName() {
-        return name;
+    public int getPhase() {
+        return phase;
     }
 
-    public void setName(String _name) {
-        name = _name;
+    public void nextPhase() {
+        phase++;
+        if (phase >= MAX_PHASE) {
+            winner = this;
+            // TODO: handle multiple winners: tie break on score
+        }
     }
-
-    public int getNumPlayers() {
-        return numPlayers;
-    }
-
-    public void setNumPlayers(int _numPlayers) {
-        numPlayers = _numPlayers;
-    }
-
-    public void incrementNumPlayers() {
-        numPlayers++;
-    }
-    public abstract List<?> getPlayerList();
-
-    public abstract Map<String, ?> getPlayerMap();
-
-    public abstract Player getPlayer(int index);
-
-    public abstract Player getPlayerByName(String _name);
-
-    public abstract Boolean checkPlayer(String _name);
-
-    public abstract void addPlayer(int _index, String _name);
-
-    public abstract void renamePlayer(String oldName, String newName);
-
-    public abstract String getScores();
-
-    public abstract Boolean hasWinner();
-
-    public abstract Player getWinner();
 }

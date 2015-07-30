@@ -36,18 +36,18 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class PlayerTest {
-    private final String testName = "Test Player";
+public class Phase10PlayerTest {
+    private final String testName = "Test Phase10Player";
     private final String testInitials = "TP";
     private final int testScore = 11;
     private final int testPhase = 1;
-    private Player testPlayer;
+    private Phase10Player testPhase10Player;
 
     @Before
     public void setUp() {
-        testPlayer = new Player(testName);
-        testPlayer.addScore(testScore);
-        testPlayer.nextPhase();
+        testPhase10Player = new Phase10Player(testName);
+        testPhase10Player.addScore(testScore);
+        testPhase10Player.nextPhase();
     }
 
     @Test
@@ -57,47 +57,47 @@ public class PlayerTest {
                              testName,
                              testScore,
                              testPhase
-                     ), testPlayer.toString()
+                     ), testPhase10Player.toString()
         );
     }
 
     @Test
     public void testGetName() throws Exception {
-        assertEquals(testName, testPlayer.getName());
+        assertEquals(testName, testPhase10Player.getName());
     }
 
     @Test
     public void testSetName() throws Exception {
-        String newName = "Player Test";
-        testPlayer.setName(newName);
-        assertEquals(newName, testPlayer.getName());
-        testPlayer.setName(testName);
+        String newName = "Phase10Player Test";
+        testPhase10Player.setName(newName);
+        assertEquals(newName, testPhase10Player.getName());
+        testPhase10Player.setName(testName);
     }
 
     @Test
     public void testGetInitials() throws Exception {
-        assertEquals(testInitials, testPlayer.getInitials());
+        assertEquals(testInitials, testPhase10Player.getInitials());
     }
 
     @Test
     public void testGetScore() throws Exception {
-        assertEquals(testScore, testPlayer.getScore());
+        assertEquals(testScore, testPhase10Player.getScore());
     }
 
     @Test
     public void testAddScore() throws Exception {
-        testPlayer.addScore(testScore);
-        assertEquals(testScore * 2, testPlayer.getScore());
+        testPhase10Player.addScore(testScore);
+        assertEquals(testScore * 2, testPhase10Player.getScore());
     }
 
     @Test
     public void testGetPhase() throws Exception {
-        assertEquals(testPhase, testPlayer.getPhase());
+        assertEquals(testPhase, testPhase10Player.getPhase());
     }
 
     @Test
     public void testNextPhase() throws Exception {
-        testPlayer.nextPhase();
-        assertEquals(testPhase + 1, testPlayer.getPhase());
+        testPhase10Player.nextPhase();
+        assertEquals(testPhase + 1, testPhase10Player.getPhase());
     }
 }

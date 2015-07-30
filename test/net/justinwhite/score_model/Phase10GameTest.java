@@ -36,29 +36,29 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class GameTest {
+public class Phase10GameTest {
     private final int testNumPlayers;
     private final String testInitialName;
     private final String[] testPlayerNames;
     private final String testName;
-    private final Player[] testPlayersArray;
-    private Game testGame;
+    private final Phase10Player[] testPlayersArray;
+    private Phase10Game testPhase10Game;
 
     {
         testNumPlayers = 4;
         testInitialName = "P1P2P3P4";
         testPlayerNames = new String[] {"Justin W", "Lauren K", "Timmay C", "Denise B"};
         testName = "JWLKTCDB";
-        testPlayersArray = new Player[testNumPlayers];
+        testPlayersArray = new Phase10Player[testNumPlayers];
     }
 
     @Before
     public void setUp() {
-        testGame = new Game(testNumPlayers);
-        assertEquals(testInitialName, testGame.getName());
+        testPhase10Game = new Phase10Game(testNumPlayers);
+        assertEquals(testInitialName, testPhase10Game.getName());
         for (int i = 0; i < testNumPlayers; i++) {
-            testPlayersArray[i] = testGame.getPlayer(i);
-            testGame.renamePlayer(String.format("Player %d", i + 1), testPlayerNames[i]);
+            testPlayersArray[i] = testPhase10Game.getPlayer(i);
+            testPhase10Game.renamePlayer(String.format("Player %d", i + 1), testPlayerNames[i]);
         }
     }
 
@@ -69,12 +69,12 @@ public class GameTest {
 
     @Test
     public void testGetName() throws Exception {
-        assertEquals(testName, testGame.getName());
+        assertEquals(testName, testPhase10Game.getName());
     }
 
     @Test
     public void testGetNumPlayers() throws Exception {
-        assertEquals(testNumPlayers, testGame.getNumPlayers());
+        assertEquals(testNumPlayers, testPhase10Game.getNumPlayers());
     }
 
     @Test
@@ -84,18 +84,18 @@ public class GameTest {
 
     @Test
     public void testGetPlayer() throws Exception {
-        assertEquals(testPlayersArray[0], testGame.getPlayer(0));
+        assertEquals(testPlayersArray[0], testPhase10Game.getPlayer(0));
     }
 
     @Test
     public void testGetPlayerByName() throws Exception {
-        assertEquals(testPlayersArray[0], testGame.getPlayerByName("Justin W"));
+        assertEquals(testPlayersArray[0], testPhase10Game.getPlayerByName("Justin W"));
     }
 
     @Test
     public void testCheckPlayer() throws Exception {
-        assertTrue(testGame.checkPlayer("Justin W"));
-        assertFalse(testGame.checkPlayer("Carl Sagan"));
+        assertTrue(testPhase10Game.checkPlayer("Justin W"));
+        assertFalse(testPhase10Game.checkPlayer("Carl Sagan"));
     }
 
     @Test

@@ -33,7 +33,7 @@
 package net.justinwhite.score_model;
 
 /*
-This is pretty much a big unit test for the whole Game class.
+This is pretty much a big unit test for the whole Phase10Game class.
 
 Eventually this will be turned into a real unit test (junit likely)
 to allow tools to run the tests even from within other projects.
@@ -48,14 +48,14 @@ class Main {
     public static void main(String[] args) {
         int numPlayers = 4;
 
-        Game game = new Game(numPlayers);
+        Phase10Game game = new Phase10Game(numPlayers);
 
         println("Show the whole game:");
         println(game.toString());
 
         println("Show players individually:");
         for (int i = 0; i < game.getNumPlayers(); i++) {
-            Player p;
+            Phase10Player p;
             p = game.getPlayer(i);
             println(p.toString());
         }
@@ -71,15 +71,15 @@ class Main {
         printlnln(game.getName());
 
         println("Show players via ArrayList iterator:");
-        for (Player p : game.getPlayerList()) {
+        for (Phase10Player p : game.getPlayerList()) {
             println(p.toString());
         }
         println();
 
-        Player JW = game.getPlayerByName("Justin W");
-        Player LK = game.getPlayerByName("Lauren K");
-        Player TC = game.getPlayerByName("Timmay C");
-        Player DB = game.getPlayerByName("Denise B");
+        Phase10Player JW = game.getPlayerByName("Justin W");
+        Phase10Player LK = game.getPlayerByName("Lauren K");
+        Phase10Player TC = game.getPlayerByName("Timmay C");
+        Phase10Player DB = game.getPlayerByName("Denise B");
 
         JW.addScore(100);
         LK.addScore(10);
