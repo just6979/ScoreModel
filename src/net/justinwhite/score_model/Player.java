@@ -31,7 +31,7 @@
 
 package net.justinwhite.score_model;
 
-public abstract class Player {
+public class Player {
     private String name;
     private int score;
 

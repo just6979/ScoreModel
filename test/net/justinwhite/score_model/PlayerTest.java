@@ -42,16 +42,9 @@ public class PlayerTest {
     private String testInitials = "P1";
     private int testScore = 111;
 
-    // implement the abstract class for testing
-    private class SimplePlayer extends Player {
-        public SimplePlayer(String _name) {
-            super(_name);
-        }
-    }
-
     @Before
     public void setUp() throws Exception {
-        testPlayer = new SimplePlayer(testName);
+        testPlayer = new Player(testName);
     }
 
     @Test
