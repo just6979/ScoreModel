@@ -47,7 +47,7 @@ public class Phase10GameTest {
     {
         testNumPlayers = 4;
         testInitialName = "P1P2P3P4";
-        testPlayerNames = new String[] {"Justin W", "Lauren K", "Timmay C", "Denise B"};
+        testPlayerNames = new String[]{"Justin W", "Lauren K", "Timmay C", "Denise B"};
         testName = "JWLKTCDB";
         testPlayersArray = new Phase10Player[testNumPlayers];
     }
@@ -64,6 +64,14 @@ public class Phase10GameTest {
 
     @Test
     public void testToString() throws Exception {
+        assertEquals(String.format("Game: %s\nUUID: %s\nPlayer count: %d\nPlayers: %s\nPlayerMap: %s",
+                        testPhase10Game.getName(),
+                        testPhase10Game.getID(),
+                        testPhase10Game.getNumPlayers(),
+                        testPhase10Game.getPlayerList(),
+                        testPhase10Game.getPlayerMap()
+                ), testPhase10Game.toString()
+        );
 
     }
 
@@ -78,7 +86,17 @@ public class Phase10GameTest {
     }
 
     @Test
+    public void testBuildName() throws Exception {
+
+    }
+
+    @Test
     public void testGetPlayerList() throws Exception {
+
+    }
+
+    @Test
+    public void testGetPlayerMap() throws Exception {
 
     }
 
@@ -122,4 +140,5 @@ public class Phase10GameTest {
     public void testGetWinner() throws Exception {
 
     }
+
 }
