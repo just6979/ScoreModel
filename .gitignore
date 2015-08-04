@@ -5,10 +5,10 @@ out/
 *.log
 
 # IntelliJ
+.idea/inspectionProfiles/*
+.idea/libraries/*.xml
 .idea/misc.xml
 .idea/tasks.xml
 .idea/uiDesigner.xml
 .idea/workspace.xml
-.idea/libraries/*.xml
 lib
-
