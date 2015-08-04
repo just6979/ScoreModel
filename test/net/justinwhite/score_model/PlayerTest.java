@@ -36,10 +36,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class PlayerTest {
     private Player testPlayer;
-    private String testName = "Player 1";
-    private String testInitials = "P1";
+    private final String testName = "Player 1";
+    private final String testInitials = "P1";
 
     @Before
     public void setUp() throws Exception {

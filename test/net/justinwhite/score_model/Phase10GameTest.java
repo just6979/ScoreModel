@@ -36,6 +36,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class Phase10GameTest {
     private final int testNumPlayers;
     private final String testInitialName;

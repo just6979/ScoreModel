@@ -36,6 +36,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class Phase10PlayerTest {
     private final String testName = "Test Phase10Player";
     private final String testInitials = "TP";

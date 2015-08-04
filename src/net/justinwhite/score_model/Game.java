@@ -33,7 +33,7 @@ package net.justinwhite.score_model;
 
 import java.util.*;
 
-public class Game<T extends Player> {
+class Game<T extends Player> {
     public static final int MIN_PLAYERS;
     public static final int MAX_PLAYERS;
 
@@ -42,13 +42,13 @@ public class Game<T extends Player> {
         MAX_PLAYERS = 8;
     }
 
-    protected final UUID id;
+    private final UUID id;
     protected int numPlayers;
     protected String name;
-    protected List<T> players;
-    protected Map<String, T> playerMap;
+    protected final List<T> players;
+    protected final Map<String, T> playerMap;
     protected T winner = null;
-    private Class<T> curClass;
+    private final Class<T> curClass;
 
     public Game(Class<T> _class) {
         this(_class, 0);
@@ -144,13 +144,13 @@ public class Game<T extends Player> {
         T newPlayer = null;
         try {
             newPlayer = curClass.newInstance();
+            newPlayer.setName(_name);
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
 
-        newPlayer.setName(_name);
         ((ArrayList) players).ensureCapacity(getNumPlayers());
         players.add(_index, newPlayer);
 
