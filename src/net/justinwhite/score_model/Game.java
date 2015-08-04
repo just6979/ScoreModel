@@ -46,17 +46,17 @@ public abstract class Game<T extends Player> {
 
     protected final UUID id;
     protected int numPlayers;
-    private String name;
+    protected String name;
 
     protected List<T> players;
     protected Map<String, T> playerMap;
-    protected T winner;
+    protected T winner = null;
 
 
     public Game() {
         id = UUID.randomUUID();
-        name = id.toString();
-        numPlayers = 0;
+        setName(id.toString());
+        setNumPlayers(0);
     }
 
     public String toString() {
@@ -99,23 +99,53 @@ public abstract class Game<T extends Player> {
         numPlayers++;
     }
 
-    public abstract List<T> getPlayerList();
+    public List<T> getPlayerList() {
+        return players;
+    }
 
-    public abstract Map<String, T> getPlayerMap();
+    public Map<String, T> getPlayerMap() {
+        return playerMap;
+    }
 
-    public abstract T getPlayer(int index);
+    public T getPlayer(int index) {
+        return players.get(index);
+    }
 
-    public abstract T getPlayerByName(String _name);
+    public T getPlayerByName(String _name) {
+        return playerMap.get(_name);
+    }
 
-    public abstract Boolean checkPlayer(String _name);
+    public Boolean checkPlayer(String _name) {
+        return playerMap.containsKey(_name);
+    }
+
 
     public abstract void addPlayer(int _index, String _name);
 
     public abstract void renamePlayer(String oldName, String newName);
 
-    public abstract String getScores();
+    public String getScores() {
+        String out = "";
+        for (T p : players) {
+            out += String.format("%s: %4d Points; ", p.getName(), p.getScore());
+        }
+        return out;
+    }
 
-    public abstract Boolean hasWinner();
+    public Boolean hasWinner() {
+        int highScore = 0;
+        int curScore;
+        for (T p: players) {
+            curScore = p.getScore();
+            if (curScore > highScore && curScore > 0) {
+                highScore = curScore;
+                winner = p;
+            }
+        }
+        return winner != null;
+    }
 
-    public abstract T getWinner();
+    public T getWinner() {
+        return winner;
+    }
 }

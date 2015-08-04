@@ -65,38 +65,13 @@ class Phase10Game extends Game<Phase10Player> {
     @Override
     public String toString() {
         return String.format("Game: %s\nUUID: %s\nPlayer count: %d\nPlayers: %s\nPlayerMap: %s",
-                             getName(),
-                             getID(),
-                             getNumPlayers(),
-                             // List<> and Map<> classes handle toString() themselves
-                             players,
-                             playerMap
+                getName(),
+                getID(),
+                getNumPlayers(),
+                // List<> and Map<> classes handle toString() themselves
+                players,
+                playerMap
         );
-    }
-
-    @Override
-    public List<Phase10Player> getPlayerList() {
-        return players;
-    }
-
-    @Override
-    public Map<String, Phase10Player> getPlayerMap() {
-        return playerMap;
-    }
-
-    @Override
-    public Phase10Player getPlayer(int index) {
-        return players.get(index);
-    }
-
-    @Override
-    public Phase10Player getPlayerByName(String _name) {
-        return playerMap.get(_name);
-    }
-
-    @Override
-    public Boolean checkPlayer(String _name) {
-        return playerMap.containsKey(_name);
     }
 
     @Override
@@ -147,10 +122,5 @@ class Phase10Game extends Game<Phase10Player> {
         }
         return false;
 
-    }
-
-    @Override
-    public Phase10Player getWinner() {
-        return winner;
     }
 }
