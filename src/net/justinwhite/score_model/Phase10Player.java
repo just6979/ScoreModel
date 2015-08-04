@@ -42,6 +42,9 @@ class Phase10Player extends Player {
 
     private int phase;
 
+    public Phase10Player() {
+        this("Player X");
+    }
     public Phase10Player(String _name) {
         super(_name);
         phase = 0;

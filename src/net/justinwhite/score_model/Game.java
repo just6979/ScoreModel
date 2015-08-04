@@ -31,11 +31,9 @@
 
 package net.justinwhite.score_model;
 
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
-public abstract class Game<T extends Player> {
+public class Game<T extends Player> {
     public static final int MIN_PLAYERS;
     public static final int MAX_PLAYERS;
 
@@ -43,6 +41,8 @@ public abstract class Game<T extends Player> {
         MIN_PLAYERS = 2;
         MAX_PLAYERS = 8;
     }
+
+    private Class<T> curClass;
 
     protected final UUID id;
     protected int numPlayers;
@@ -52,18 +52,41 @@ public abstract class Game<T extends Player> {
     protected Map<String, T> playerMap;
     protected T winner = null;
 
+    public Game(Class<T> _class) {
+        this(_class, 0);
+    }
 
-    public Game() {
+    public Game(Class<T> _class, int _numPlayers) {
+        this.curClass = _class;
+
+        // sanity check number of players
+        if (_numPlayers < MIN_PLAYERS) {
+            _numPlayers = MIN_PLAYERS;
+        } else if (_numPlayers > MAX_PLAYERS) {
+            _numPlayers = MAX_PLAYERS;
+        }
+
         id = UUID.randomUUID();
         setName(id.toString());
         setNumPlayers(0);
+
+        players = new ArrayList<T>();
+        playerMap = new TreeMap<String, T>();
+
+        // add default players
+        for (int i = 0; i < _numPlayers; i++) {
+            addPlayer(i, String.format("Player %d", i + 1));
+        }
     }
 
     public String toString() {
-        return String.format("Game: %s\nUUID: %s\nPlayer count: %d",
+        return String.format("Game: %s\nUUID: %s\nPlayer count: %d\nPlayers: %s\nPlayerMap: %s",
                 getName(),
                 getID(),
-                getNumPlayers()
+                getNumPlayers(),
+                // List<> and Map<> classes handle toString() themselves
+                players,
+                playerMap
         );
     }
 
@@ -95,7 +118,7 @@ public abstract class Game<T extends Player> {
         numPlayers = _numPlayers;
     }
 
-    public void incrementNumPlayers() {
+    private void incrementNumPlayers() {
         numPlayers++;
     }
 
@@ -119,11 +142,37 @@ public abstract class Game<T extends Player> {
         return playerMap.containsKey(_name);
     }
 
-    // TODO: implement for Player
-    public abstract void addPlayer(int _index, String _name);
+    public void addPlayer(int _index, String _name) {
+        T newPlayer = null;
+        try {
+            newPlayer = curClass.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        newPlayer.setName(_name);
+        ((ArrayList) players).ensureCapacity(getNumPlayers());
+        players.add(_index, newPlayer);
+
+        playerMap.put(_name, newPlayer);
+
+        if (players.size() > numPlayers) {
+            incrementNumPlayers();
+        }
+        buildName();
+    }
 
     // TODO: implement for Player
-    public abstract void renamePlayer(String oldName, String newName);
+    public void renamePlayer(String oldName, String newName) {
+        T p = playerMap.remove(oldName);
+        if (p != null) {
+            p.setName(newName);
+            playerMap.put(newName, p);
+        }
+        buildName();
+    }
 
     public String getScores() {
         String out = "";
@@ -136,7 +185,7 @@ public abstract class Game<T extends Player> {
     public void findWinner() {
         int highScore = 0;
         int curScore;
-        for (T p: players) {
+        for (T p : players) {
             curScore = p.getScore();
             if (curScore > highScore && curScore > 0) {
                 highScore = curScore;
@@ -146,6 +195,9 @@ public abstract class Game<T extends Player> {
     }
 
     public Boolean hasWinner() {
+        if (winner == null) {
+            findWinner();
+        }
         return winner != null;
     }
 

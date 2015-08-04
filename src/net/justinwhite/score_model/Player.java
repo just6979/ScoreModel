@@ -35,6 +35,10 @@ public class Player {
     private String name;
     private int score;
 
+    public Player() {
+        this("Player X");
+    }
+
     public Player(String _name) {
         name = _name;
         score = 0;

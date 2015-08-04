@@ -32,11 +32,6 @@
 
 package net.justinwhite.score_model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
 class Phase10Game extends Game<Phase10Player> {
     public static final int MAX_PHASE;
 
@@ -44,57 +39,12 @@ class Phase10Game extends Game<Phase10Player> {
         MAX_PHASE = 10;
     }
 
+    public Phase10Game() {
+        this(0);
+    }
+
     public Phase10Game(int _numPlayers) {
-        int numPlayers = _numPlayers;
-        // sanity check number of players
-        if (numPlayers < MIN_PLAYERS) {
-            numPlayers = MIN_PLAYERS;
-        } else if (numPlayers > MAX_PLAYERS) {
-            numPlayers = MAX_PLAYERS;
-        }
-
-        players = new ArrayList<Phase10Player>(numPlayers);
-        playerMap = new TreeMap<String, Phase10Player>();
-
-        // add default players
-        for (int i = 0; i < numPlayers; i++) {
-            addPlayer(i, String.format("Player %d", i + 1));
-        }
-    }
-
-    @Override
-    public String toString() {
-        return String.format("Game: %s\nUUID: %s\nPlayer count: %d\nPlayers: %s\nPlayerMap: %s",
-                getName(),
-                getID(),
-                getNumPlayers(),
-                // List<> and Map<> classes handle toString() themselves
-                players,
-                playerMap
-        );
-    }
-
-    @Override
-    public void addPlayer(int _index, String _name) {
-        Phase10Player newPlayer = new Phase10Player(_name);
-
-        ((ArrayList) players).ensureCapacity(getNumPlayers());
-        players.add(_index, newPlayer);
-
-        playerMap.put(_name, newPlayer);
-
-        incrementNumPlayers();
-        buildName();
-    }
-
-    @Override
-    public void renamePlayer(String oldName, String newName) {
-        Phase10Player p = playerMap.remove(oldName);
-        if (p != null) {
-            p.setName(newName);
-            playerMap.put(newName, p);
-        }
-        buildName();
+        super(Phase10Player.class, _numPlayers);
     }
 
     @Override
@@ -120,4 +70,5 @@ class Phase10Game extends Game<Phase10Player> {
             }
         }
     }
+
 }
