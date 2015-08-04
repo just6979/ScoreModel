@@ -40,7 +40,6 @@ public class PlayerTest {
     private Player testPlayer;
     private String testName = "Player 1";
     private String testInitials = "P1";
-    private int testScore = 111;
 
     @Before
     public void setUp() throws Exception {
@@ -58,31 +57,8 @@ public class PlayerTest {
     }
 
     @Test
-    public void testGetName() throws Exception {
-        assertEquals(testName, testPlayer.getName());
-    }
-
-    @Test
-    public void testSetName() throws Exception {
-        String name = "Foo Bar";
-        testPlayer.setName(name);
-        assertEquals(name, testPlayer.getName());
-        testPlayer.setName(testName);
-    }
-
-    @Test
     public void testGetInitials() throws Exception {
         assertEquals(testInitials, testPlayer.getInitials());
     }
 
-    @Test
-    public void testGetScore() throws Exception {
-        assertEquals(0, testPlayer.getScore());
-    }
-
-    @Test
-    public void testSetScore() throws Exception {
-        testPlayer.setScore(testScore);
-        assertEquals(testScore, testPlayer.getScore());
-    }
 }
