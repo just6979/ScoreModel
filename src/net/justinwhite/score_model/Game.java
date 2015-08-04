@@ -133,7 +133,7 @@ public abstract class Game<T extends Player> {
         return out;
     }
 
-    public Boolean hasWinner() {
+    public void findWinner() {
         int highScore = 0;
         int curScore;
         for (T p: players) {
@@ -143,6 +143,9 @@ public abstract class Game<T extends Player> {
                 winner = p;
             }
         }
+    }
+
+    public Boolean hasWinner() {
         return winner != null;
     }
 

@@ -113,14 +113,11 @@ class Phase10Game extends Game<Phase10Player> {
 
     // TODO: handle multiple winners: tie-break on score
     @Override
-    public Boolean hasWinner() {
+    public void findWinner() {
         for (Phase10Player p : players) {
             if (Phase10Player.winner == p) {
                 winner = p;
-                return true;
             }
         }
-        return false;
-
     }
 }
