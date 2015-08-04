@@ -77,4 +77,5 @@ public class Player {
     public void setScore(int _score) {
         score = _score;
     }
+
 }

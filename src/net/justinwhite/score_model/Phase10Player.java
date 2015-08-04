@@ -45,6 +45,7 @@ class Phase10Player extends Player {
     public Phase10Player() {
         this("Player X");
     }
+
     public Phase10Player(String _name) {
         super(_name);
         phase = 0;
@@ -75,4 +76,5 @@ class Phase10Player extends Player {
             // TODO: handle multiple winners: tie break on score
         }
     }
+
 }

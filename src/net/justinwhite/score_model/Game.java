@@ -42,15 +42,13 @@ public class Game<T extends Player> {
         MAX_PLAYERS = 8;
     }
 
-    private Class<T> curClass;
-
     protected final UUID id;
     protected int numPlayers;
     protected String name;
-
     protected List<T> players;
     protected Map<String, T> playerMap;
     protected T winner = null;
+    private Class<T> curClass;
 
     public Game(Class<T> _class) {
         this(_class, 0);
@@ -204,4 +202,5 @@ public class Game<T extends Player> {
     public T getWinner() {
         return winner;
     }
+
 }

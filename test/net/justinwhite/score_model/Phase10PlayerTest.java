@@ -53,11 +53,11 @@ public class Phase10PlayerTest {
     @Test
     public void testToString() throws Exception {
         assertEquals(String.format(
-                             "Name '%s'; Score %s; Phase %d",
-                             testName,
-                             testScore,
-                             testPhase
-                     ), testPhase10Player.toString()
+                        "Name '%s'; Score %s; Phase %d",
+                        testName,
+                        testScore,
+                        testPhase
+                ), testPhase10Player.toString()
         );
     }
 
@@ -72,4 +72,5 @@ public class Phase10PlayerTest {
         testPhase10Player.nextPhase();
         assertEquals(testPhase + 1, testPhase10Player.getPhase());
     }
+
 }
