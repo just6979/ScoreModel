@@ -119,9 +119,10 @@ public abstract class Game<T extends Player> {
         return playerMap.containsKey(_name);
     }
 
-
+    // TODO: implement for Player
     public abstract void addPlayer(int _index, String _name);
 
+    // TODO: implement for Player
     public abstract void renamePlayer(String oldName, String newName);
 
     public String getScores() {
