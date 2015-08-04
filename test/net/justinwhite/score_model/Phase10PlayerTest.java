@@ -62,37 +62,9 @@ public class Phase10PlayerTest {
     }
 
     @Test
-    public void testGetName() throws Exception {
-        assertEquals(testName, testPhase10Player.getName());
-    }
-
-    @Test
-    public void testSetName() throws Exception {
-        String newName = "Phase10Player Test";
-        testPhase10Player.setName(newName);
-        assertEquals(newName, testPhase10Player.getName());
-        testPhase10Player.setName(testName);
-    }
-
-    @Test
-    public void testGetInitials() throws Exception {
-        assertEquals(testInitials, testPhase10Player.getInitials());
-    }
-
-    @Test
-    public void testGetScore() throws Exception {
-        assertEquals(testScore, testPhase10Player.getScore());
-    }
-
-    @Test
     public void testAddScore() throws Exception {
         testPhase10Player.addScore(testScore);
         assertEquals(testScore * 2, testPhase10Player.getScore());
-    }
-
-    @Test
-    public void testGetPhase() throws Exception {
-        assertEquals(testPhase, testPhase10Player.getPhase());
     }
 
     @Test
