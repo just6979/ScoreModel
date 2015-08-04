@@ -35,10 +35,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public abstract class Game {
-    private final UUID id;
-    private int numPlayers;
+public abstract class Game<T extends Player> {
+    public static final int MIN_PLAYERS;
+    public static final int MAX_PLAYERS;
+
+    static {
+        MIN_PLAYERS = 2;
+        MAX_PLAYERS = 8;
+    }
+
+    protected final UUID id;
+    protected int numPlayers;
     private String name;
+
+    protected List<T> players;
+    protected Map<String, T> playerMap;
+    protected T winner;
+
 
     public Game() {
         id = UUID.randomUUID();
@@ -48,9 +61,9 @@ public abstract class Game {
 
     public String toString() {
         return String.format("Game: %s\nUUID: %s\nPlayer count: %d",
-                             getName(),
-                             getID(),
-                             getNumPlayers()
+                getName(),
+                getID(),
+                getNumPlayers()
         );
     }
 
@@ -66,6 +79,14 @@ public abstract class Game {
         name = _name;
     }
 
+    public void buildName() {
+        String _name = "";
+        for (T p : players) {
+            _name += p.getInitials();
+        }
+        setName(_name);
+    }
+
     public int getNumPlayers() {
         return numPlayers;
     }
@@ -77,13 +98,14 @@ public abstract class Game {
     public void incrementNumPlayers() {
         numPlayers++;
     }
-    public abstract List<?> getPlayerList();
 
-    public abstract Map<String, ?> getPlayerMap();
+    public abstract List<T> getPlayerList();
 
-    public abstract Player getPlayer(int index);
+    public abstract Map<String, T> getPlayerMap();
 
-    public abstract Player getPlayerByName(String _name);
+    public abstract T getPlayer(int index);
+
+    public abstract T getPlayerByName(String _name);
 
     public abstract Boolean checkPlayer(String _name);
 
@@ -95,5 +117,5 @@ public abstract class Game {
 
     public abstract Boolean hasWinner();
 
-    public abstract Player getWinner();
+    public abstract T getWinner();
 }

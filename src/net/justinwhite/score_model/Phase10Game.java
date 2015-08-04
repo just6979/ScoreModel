@@ -37,20 +37,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-class Phase10Game extends Game {
+class Phase10Game extends Game<Phase10Player> {
     public static final int MAX_PHASE;
-    public static final int MIN_PLAYERS;
-    public static final int MAX_PLAYERS;
 
     static {
         MAX_PHASE = 10;
-        MIN_PLAYERS = 2;
-        MAX_PLAYERS = 8;
     }
-
-    private List<Phase10Player> players;
-    private Map<String, Phase10Player> playerMap;
-    private Phase10Player winner;
 
     public Phase10Game(int _numPlayers) {
         int numPlayers = _numPlayers;
@@ -80,14 +72,6 @@ class Phase10Game extends Game {
                              players,
                              playerMap
         );
-    }
-
-    public void buildName() {
-        String _name = "";
-        for (Phase10Player p : players) {
-            _name += p.getInitials();
-        }
-        setName(_name);
     }
 
     @Override
