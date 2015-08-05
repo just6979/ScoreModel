@@ -65,16 +65,11 @@ class GameModel<T extends PlayerModel> {
         }
 
         id = UUID.randomUUID();
-        setName(id.toString());
-        setNumPlayers(0);
 
         players = new ArrayList<T>();
         playerMap = new TreeMap<String, T>();
 
-        // add default players
-        for (int i = 0; i < _numPlayers; i++) {
-            addPlayer();
-        }
+        setNumPlayers(_numPlayers);
     }
 
     public String toString() {
