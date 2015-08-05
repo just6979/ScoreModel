@@ -39,17 +39,20 @@ import static org.junit.Assert.*;
 @SuppressWarnings("FieldCanBeLocal")
 public class GameModelTest {
     private final int testNumPlayers;
-    private final String testInitialName;
     private final String[] testPlayerNames;
-    private final String testName;
+    private final String testGameName;
     private final PlayerModel[] testPlayersArray;
+    private final String testNewPlayerName;
+    private String testNewPlayerInitials;
     private GameModel<PlayerModel> testGame;
 
     {
         testNumPlayers = 4;
-        testInitialName = "P1P2P3P4";
         testPlayerNames = new String[]{"Justin W", "Lauren K", "Timmay C", "Denise B"};
-        testName = "JWLKTCDB";
+        testGameName = "JWLKTCDB";
+        testNewPlayerName = "Foo Bar";
+        testNewPlayerInitials = "FB";
+
         testPlayersArray = new PlayerModel[testNumPlayers];
     }
 
@@ -58,6 +61,8 @@ public class GameModelTest {
         testGame = new GameModel<PlayerModel>(PlayerModel.class, testNumPlayers);
         for (int i = 0; i < testNumPlayers; i++) {
             testPlayersArray[i] = testGame.getPlayer(i);
+            testGame.renamePlayer(String.format("Player %d", i + 1), testPlayerNames[i]);
+
         }
     }
 
@@ -74,44 +79,57 @@ public class GameModelTest {
 
     }
 
-    // TODO
     @Test
     public void testBuildName() throws Exception {
-
+        testGame.addPlayer(testNewPlayerName);
+        testGame.buildName();
+        assertEquals(testGameName + testNewPlayerInitials, testGame.getName());
     }
 
-    // TODO
     @Test
     public void testSetNumPlayers() throws Exception {
-
+        testGame.setNumPlayers(testNumPlayers + 1);
+        assertEquals(testGameName + "P" + (testNumPlayers + 1), testGame.getName());
     }
 
     @Test
-    public void testGetPlayer() throws Exception {
-        assertEquals(testPlayersArray[0], testGame.getPlayer(0));
+    public void testGetPlayerByIndex() throws Exception {
+        assertSame(testPlayersArray[0], testGame.getPlayer(0));
     }
 
     @Test
     public void testGetPlayerByName() throws Exception {
-        assertEquals(testPlayersArray[0], testGame.getPlayerByName("Player 1"));
+        assertSame(testPlayersArray[0], testGame.getPlayerByName(testPlayerNames[0]));
     }
 
     @Test
     public void testCheckPlayer() throws Exception {
-        assertTrue(testGame.checkPlayer("Player 1"));
+        assertTrue(testGame.checkPlayer(testPlayerNames[0]));
         assertFalse(testGame.checkPlayer("Some Player"));
     }
 
-    // TODO
     @Test
     public void testAddPlayer() throws Exception {
-
+        testGame.addPlayer();
+        assertEquals(testGameName + "P" + (testNumPlayers + 1), testGame.getName());
     }
 
-    // TODO
     @Test
-    public void testRenamePlayer() throws Exception {
+    public void testAddPlayerWithName() throws Exception {
+        testGame.addPlayer(testNewPlayerName);
+        assertEquals(testGameName + testNewPlayerInitials, testGame.getName());
+    }
 
+    @Test
+    public void testRenamePlayerByIndex() throws Exception {
+        testGame.renamePlayer(0, testNewPlayerName);
+        assertEquals(testNewPlayerName, testGame.getPlayer(0).getName());
+    }
+
+    @Test
+    public void testRenamePlayerByName() throws Exception {
+        testGame.renamePlayer(testPlayerNames[0], testNewPlayerName);
+        assertEquals(testNewPlayerName, testGame.getPlayerByName(testNewPlayerName).getName());
     }
 
     // TODO
