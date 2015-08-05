@@ -45,7 +45,7 @@ class GameModel<T extends PlayerModel> {
     private final UUID id;
     protected int numPlayers;
     protected String name;
-    protected final List<T> players;
+    protected final List<T> playerList;
     protected final Map<String, T> playerMap;
     protected T winner = null;
     private final Class<T> curClass;
@@ -66,7 +66,7 @@ class GameModel<T extends PlayerModel> {
 
         id = UUID.randomUUID();
 
-        players = new ArrayList<T>();
+        playerList = new ArrayList<T>();
         playerMap = new TreeMap<String, T>();
 
         setNumPlayers(_numPlayers);
@@ -100,7 +100,7 @@ class GameModel<T extends PlayerModel> {
     */
     public void buildName() {
         String _name = "";
-        for (T p : players) {
+        for (T p : playerList) {
             _name += p.getInitials();
         }
         setName(_name);
@@ -124,12 +124,12 @@ class GameModel<T extends PlayerModel> {
                 removePlayer();
             }
         }
-        numPlayers = players.size();
+        numPlayers = playerList.size();
 
     }
 
     public List<T> getPlayerList() {
-        return players;
+        return playerList;
     }
 
     public Map<String, T> getPlayerMap() {
@@ -138,7 +138,7 @@ class GameModel<T extends PlayerModel> {
 
     public T getPlayer(int index) {
         if (0 <= index && index < numPlayers) {
-            return players.get(index);
+            return playerList.get(index);
         } else {
             return null;
         }
@@ -173,10 +173,10 @@ class GameModel<T extends PlayerModel> {
         if (numPlayers < MAX_PLAYERS) {
             T newPlayer = makePlayer(_name);
 
-            players.add(newPlayer);
+            playerList.add(newPlayer);
             playerMap.put(_name, newPlayer);
 
-            numPlayers = players.size();
+            numPlayers = playerList.size();
             buildName();
 
             return newPlayer;
@@ -191,11 +191,11 @@ class GameModel<T extends PlayerModel> {
 
     public T removePlayer(int index) {
         if (numPlayers > MIN_PLAYERS) {
-            T oldPlayer = players.remove(index);
+            T oldPlayer = playerList.remove(index);
 
             playerMap.remove(oldPlayer.getName());
 
-            numPlayers = players.size();
+            numPlayers = playerList.size();
             buildName();
 
             return oldPlayer;
@@ -205,7 +205,7 @@ class GameModel<T extends PlayerModel> {
     }
 
     public void renamePlayer(int index, String newName) {
-        T p = players.get(index);
+        T p = playerList.get(index);
         if (p != null) {
             p.setName(newName);
             buildName();
@@ -223,7 +223,7 @@ class GameModel<T extends PlayerModel> {
 
     public String getScores() {
         String out = "";
-        for (T p : players) {
+        for (T p : playerList) {
             out += String.format("%s: %d Points; ", p.getName(), p.getScore());
         }
         return out;
@@ -232,7 +232,7 @@ class GameModel<T extends PlayerModel> {
     public void findWinner() {
         int highScore = 0;
         int curScore;
-        for (T p : players) {
+        for (T p : playerList) {
             curScore = p.getScore();
             if (curScore > highScore && curScore > 0) {
                 highScore = curScore;
