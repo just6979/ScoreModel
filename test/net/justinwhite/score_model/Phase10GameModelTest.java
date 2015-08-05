@@ -38,28 +38,28 @@ import static org.junit.Assert.*;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class Phase10GameModelTest {
-    private final int testNumPlayers;
-    private final String testInitialName;
-    private final String[] testPlayerNames;
-    private final String testName;
-    private final Phase10PlayerModel[] testPlayersArray;
-    private Phase10GameModel testPhase10Game;
+    private final int numPlayers;
+    private final String initialName;
+    private final String[] playerNames;
+    private final String gameName;
+    private final Phase10PlayerModel[] playersArray;
+    private Phase10GameModel game;
 
     {
-        testNumPlayers = 4;
-        testInitialName = "P1P2P3P4";
-        testPlayerNames = new String[]{"Justin W", "Lauren K", "Timmay C", "Denise B"};
-        testName = "JWLKTCDB";
-        testPlayersArray = new Phase10PlayerModel[testNumPlayers];
+        numPlayers = 4;
+        initialName = "P1P2P3P4";
+        playerNames = new String[]{"Justin W", "Lauren K", "Timmay C", "Denise B"};
+        gameName = "JWLKTCDB";
+        playersArray = new Phase10PlayerModel[numPlayers];
     }
 
     @Before
     public void setUp() {
-        testPhase10Game = new Phase10GameModel(testNumPlayers);
-        assertEquals(testInitialName, testPhase10Game.getName());
-        for (int i = 0; i < testNumPlayers; i++) {
-            testPlayersArray[i] = testPhase10Game.getPlayer(i);
-            testPhase10Game.renamePlayer(String.format("Player %d", i + 1), testPlayerNames[i]);
+        game = new Phase10GameModel(numPlayers);
+        assertEquals(initialName, game.getName());
+        for (int i = 0; i < numPlayers; i++) {
+            playersArray[i] = game.getPlayer(i);
+            game.renamePlayer(String.format("Player %d", i + 1), playerNames[i]);
         }
     }
 

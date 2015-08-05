@@ -38,28 +38,28 @@ import static org.junit.Assert.assertEquals;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class PlayerModelTest {
-    private PlayerModel testPlayer;
-    private final String testName = "Player 1";
-    private final String testInitials = "P1";
+    private PlayerModel player;
+    private final String name = "Player 1";
+    private final String initials = "P1";
 
     @Before
     public void setUp() throws Exception {
-        testPlayer = new PlayerModel(testName);
+        player = new PlayerModel(name);
     }
 
     @Test
     public void testToString() throws Exception {
         assertEquals(String.format(
                         "Name '%s'; Score %s",
-                        testName,
+                        name,
                         0
-                ), testPlayer.toString()
+                ), player.toString()
         );
     }
 
     @Test
     public void testGetInitials() throws Exception {
-        assertEquals(testInitials, testPlayer.getInitials());
+        assertEquals(initials, player.getInitials());
     }
 
 }

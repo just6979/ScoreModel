@@ -38,40 +38,40 @@ import static org.junit.Assert.assertEquals;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class Phase10PlayerModelTest {
-    private final String testName = "Test Phase10Player";
-    private final String testInitials = "TP";
-    private final int testScore = 11;
-    private final int testPhase = 1;
-    private Phase10PlayerModel testPhase10Player;
+    private final String name = "Test Phase10Player";
+    private final String initials = "TP";
+    private final int score = 11;
+    private final int phase = 1;
+    private Phase10PlayerModel player;
 
     @Before
     public void setUp() {
-        testPhase10Player = new Phase10PlayerModel(testName);
-        testPhase10Player.addScore(testScore);
-        testPhase10Player.nextPhase();
+        player = new Phase10PlayerModel(name);
+        player.addScore(score);
+        player.nextPhase();
     }
 
     @Test
     public void testToString() throws Exception {
         assertEquals(String.format(
                         "Name '%s'; Score %s; Phase %d",
-                        testName,
-                        testScore,
-                        testPhase
-                ), testPhase10Player.toString()
+                        name,
+                        score,
+                        phase
+                ), player.toString()
         );
     }
 
     @Test
     public void testAddScore() throws Exception {
-        testPhase10Player.addScore(testScore);
-        assertEquals(testScore * 2, testPhase10Player.getScore());
+        player.addScore(score);
+        assertEquals(score * 2, player.getScore());
     }
 
     @Test
     public void testNextPhase() throws Exception {
-        testPhase10Player.nextPhase();
-        assertEquals(testPhase + 1, testPhase10Player.getPhase());
+        player.nextPhase();
+        assertEquals(phase + 1, player.getPhase());
     }
 
 }
