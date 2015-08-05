@@ -31,35 +31,51 @@
 
 package net.justinwhite.score_model;
 
-import org.junit.Before;
-import org.junit.Test;
+class PlayerModel {
+    private String name;
+    private int score;
 
-import static org.junit.Assert.assertEquals;
-
-@SuppressWarnings("FieldCanBeLocal")
-public class PlayerTest {
-    private Player testPlayer;
-    private final String testName = "Player 1";
-    private final String testInitials = "P1";
-
-    @Before
-    public void setUp() throws Exception {
-        testPlayer = new Player(testName);
+    public PlayerModel() {
+        this("Player X");
     }
 
-    @Test
-    public void testToString() throws Exception {
-        assertEquals(String.format(
-                        "Name '%s'; Score %s",
-                        testName,
-                        0
-                ), testPlayer.toString()
+    public PlayerModel(String _name) {
+        name = _name;
+        score = 0;
+    }
+
+    public String toString() {
+        return String.format(
+                "Name '%s'; Score %s",
+                getName(),
+                getScore()
         );
     }
 
-    @Test
-    public void testGetInitials() throws Exception {
-        assertEquals(testInitials, testPlayer.getInitials());
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String _name) {
+        name = _name;
+    }
+
+    public String getInitials() {
+        // assume name is "First" or "First Last", return "F_" or "FL"
+        String names[] = name.split(" ");
+        if (names.length > 1) {
+            return names[0].substring(0, 1) + names[1].substring(0, 1);
+        } else {
+            return name.substring(0, 1) + "_";
+        }
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int _score) {
+        score = _score;
     }
 
 }

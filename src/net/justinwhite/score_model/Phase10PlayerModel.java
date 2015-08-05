@@ -31,47 +31,50 @@
 
 package net.justinwhite.score_model;
 
-import org.junit.Before;
-import org.junit.Test;
+import static net.justinwhite.score_model.Phase10GameModel.MAX_PHASE;
 
-import static org.junit.Assert.assertEquals;
+class Phase10PlayerModel extends PlayerModel {
+    static Phase10PlayerModel winner;
 
-@SuppressWarnings("FieldCanBeLocal")
-public class Phase10PlayerTest {
-    private final String testName = "Test Phase10Player";
-    private final String testInitials = "TP";
-    private final int testScore = 11;
-    private final int testPhase = 1;
-    private Phase10Player testPhase10Player;
-
-    @Before
-    public void setUp() {
-        testPhase10Player = new Phase10Player(testName);
-        testPhase10Player.addScore(testScore);
-        testPhase10Player.nextPhase();
+    static {
+        winner = null;
     }
 
-    @Test
-    public void testToString() throws Exception {
-        assertEquals(String.format(
-                        "Name '%s'; Score %s; Phase %d",
-                        testName,
-                        testScore,
-                        testPhase
-                ), testPhase10Player.toString()
+    private int phase;
+
+    public Phase10PlayerModel() {
+        this("Player X");
+    }
+
+    public Phase10PlayerModel(String _name) {
+        super(_name);
+        phase = 0;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "Name '%s'; Score %s; Phase %d",
+                getName(),
+                getScore(),
+                getPhase()
         );
     }
 
-    @Test
-    public void testAddScore() throws Exception {
-        testPhase10Player.addScore(testScore);
-        assertEquals(testScore * 2, testPhase10Player.getScore());
+    public void addScore(int _score) {
+        setScore(getScore() + _score);
     }
 
-    @Test
-    public void testNextPhase() throws Exception {
-        testPhase10Player.nextPhase();
-        assertEquals(testPhase + 1, testPhase10Player.getPhase());
+    public int getPhase() {
+        return phase;
+    }
+
+    public void nextPhase() {
+        phase++;
+        if (phase >= MAX_PHASE) {
+            winner = this;
+            // TODO: handle multiple winners: tie break on score
+        }
     }
 
 }

@@ -33,7 +33,7 @@
 package net.justinwhite.score_model;
 
 /*
-This is pretty much a big unit test for the whole Phase10Game class.
+This is pretty much a big unit test for the whole Phase10GameModel class.
 
 Eventually this will be turned into a real unit test (junit likely)
 to allow tools to run the tests even from within other projects.
@@ -48,14 +48,14 @@ class Main {
     public static void main(String[] args) {
         int numPlayers = 4;
 
-        Phase10Game game = new Phase10Game(numPlayers);
+        Phase10GameModel game = new Phase10GameModel(numPlayers);
 
         println("Show the whole game:");
         println(game.toString());
 
         println("Show players individually:");
         for (int i = 0; i < game.getNumPlayers(); i++) {
-            Phase10Player p;
+            Phase10PlayerModel p;
             p = game.getPlayer(i);
             println(p.toString());
         }
@@ -64,22 +64,22 @@ class Main {
         println("Use example player names...");
         String example_players[] = {"Justin W", "Lauren K", "Timmay C", "Denise B"};
         for (int i = 0; i < numPlayers; i++) {
-            game.renamePlayer(String.format("Player %d", i + 1), example_players[i]);
+            game.renamePlayer(String.format("PlayerModel %d", i + 1), example_players[i]);
         }
 
         println("New game name:");
         printlnln(game.getName());
 
         println("Show players via ArrayList iterator:");
-        for (Phase10Player p : game.getPlayerList()) {
+        for (Phase10PlayerModel p : game.getPlayerList()) {
             println(p.toString());
         }
         println();
 
-        Phase10Player JW = game.getPlayerByName("Justin W");
-        Phase10Player LK = game.getPlayerByName("Lauren K");
-        Phase10Player TC = game.getPlayerByName("Timmay C");
-        Phase10Player DB = game.getPlayerByName("Denise B");
+        Phase10PlayerModel JW = game.getPlayerByName("Justin W");
+        Phase10PlayerModel LK = game.getPlayerByName("Lauren K");
+        Phase10PlayerModel TC = game.getPlayerByName("Timmay C");
+        Phase10PlayerModel DB = game.getPlayerByName("Denise B");
 
         JW.addScore(100);
         LK.addScore(10);

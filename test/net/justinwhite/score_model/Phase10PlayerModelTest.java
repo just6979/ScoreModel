@@ -34,51 +34,44 @@ package net.justinwhite.score_model;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @SuppressWarnings("FieldCanBeLocal")
-public class Phase10GameTest {
-    private final int testNumPlayers;
-    private final String testInitialName;
-    private final String[] testPlayerNames;
-    private final String testName;
-    private final Phase10Player[] testPlayersArray;
-    private Phase10Game testPhase10Game;
-
-    {
-        testNumPlayers = 4;
-        testInitialName = "P1P2P3P4";
-        testPlayerNames = new String[]{"Justin W", "Lauren K", "Timmay C", "Denise B"};
-        testName = "JWLKTCDB";
-        testPlayersArray = new Phase10Player[testNumPlayers];
-    }
+public class Phase10PlayerModelTest {
+    private final String testName = "Test Phase10Player";
+    private final String testInitials = "TP";
+    private final int testScore = 11;
+    private final int testPhase = 1;
+    private Phase10PlayerModel testPhase10Player;
 
     @Before
     public void setUp() {
-        testPhase10Game = new Phase10Game(testNumPlayers);
-        assertEquals(testInitialName, testPhase10Game.getName());
-        for (int i = 0; i < testNumPlayers; i++) {
-            testPlayersArray[i] = testPhase10Game.getPlayer(i);
-            testPhase10Game.renamePlayer(String.format("Player %d", i + 1), testPlayerNames[i]);
-        }
+        testPhase10Player = new Phase10PlayerModel(testName);
+        testPhase10Player.addScore(testScore);
+        testPhase10Player.nextPhase();
     }
 
-    // TODO
     @Test
-    public void testGetScores() throws Exception {
-
+    public void testToString() throws Exception {
+        assertEquals(String.format(
+                        "Name '%s'; Score %s; Phase %d",
+                        testName,
+                        testScore,
+                        testPhase
+                ), testPhase10Player.toString()
+        );
     }
 
-    // TODO
     @Test
-    public void testFindWinner() throws Exception {
-
+    public void testAddScore() throws Exception {
+        testPhase10Player.addScore(testScore);
+        assertEquals(testScore * 2, testPhase10Player.getScore());
     }
 
-    // TODO
     @Test
-    public void testHasWinner() throws Exception {
-
+    public void testNextPhase() throws Exception {
+        testPhase10Player.nextPhase();
+        assertEquals(testPhase + 1, testPhase10Player.getPhase());
     }
 
 }

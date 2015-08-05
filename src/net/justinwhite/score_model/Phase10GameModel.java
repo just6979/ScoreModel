@@ -32,25 +32,25 @@
 
 package net.justinwhite.score_model;
 
-class Phase10Game extends Game<Phase10Player> {
+class Phase10GameModel extends GameModel<Phase10PlayerModel> {
     public static final int MAX_PHASE;
 
     static {
         MAX_PHASE = 10;
     }
 
-    public Phase10Game() {
+    public Phase10GameModel() {
         this(0);
     }
 
-    public Phase10Game(int _numPlayers) {
-        super(Phase10Player.class, _numPlayers);
+    public Phase10GameModel(int _numPlayers) {
+        super(Phase10PlayerModel.class, _numPlayers);
     }
 
     @Override
     public String getScores() {
         String out = "";
-        for (Phase10Player p : players) {
+        for (Phase10PlayerModel p : players) {
             out += String.format("%s: %4d Points", p.getName(), p.getScore());
             if (p.getPhase() > 0) {
                 out += String.format(", Phase #%d completed\n", p.getPhase());
@@ -64,8 +64,8 @@ class Phase10Game extends Game<Phase10Player> {
     // TODO: handle multiple winners: tie-break on score
     @Override
     public void findWinner() {
-        for (Phase10Player p : players) {
-            if (Phase10Player.winner == p) {
+        for (Phase10PlayerModel p : players) {
+            if (Phase10PlayerModel.winner == p) {
                 winner = p;
             }
         }

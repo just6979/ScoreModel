@@ -33,7 +33,7 @@ package net.justinwhite.score_model;
 
 import java.util.*;
 
-class Game<T extends Player> {
+class GameModel<T extends PlayerModel> {
     public static final int MIN_PLAYERS;
     public static final int MAX_PLAYERS;
 
@@ -50,11 +50,11 @@ class Game<T extends Player> {
     protected T winner = null;
     private final Class<T> curClass;
 
-    public Game(Class<T> _class) {
+    public GameModel(Class<T> _class) {
         this(_class, 0);
     }
 
-    public Game(Class<T> _class, int _numPlayers) {
+    public GameModel(Class<T> _class, int _numPlayers) {
         this.curClass = _class;
 
         // sanity check number of players
@@ -162,7 +162,7 @@ class Game<T extends Player> {
         buildName();
     }
 
-    // TODO: implement for Player
+    // TODO: implement for PlayerModel
     public void renamePlayer(String oldName, String newName) {
         T p = playerMap.remove(oldName);
         if (p != null) {
