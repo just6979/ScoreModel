@@ -100,6 +100,9 @@ class GameModel<T extends PlayerModel> {
         name = _name;
     }
 
+    /*
+        Create a game name based on the players' initials
+    */
     public void buildName() {
         String _name = "";
         for (T p : players) {
@@ -112,6 +115,10 @@ class GameModel<T extends PlayerModel> {
         return numPlayers;
     }
 
+    /*
+         If increasing, create a blank player
+         If decreasing, delete last player added
+    */
     public void setNumPlayers(int _numPlayers) {
         if (_numPlayers > numPlayers) {
             for (int i = numPlayers; i < _numPlayers; i++) {
