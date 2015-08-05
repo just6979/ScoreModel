@@ -41,7 +41,6 @@ public class Phase10GameModelTest {
     private final int numPlayers;
     private final String initialName;
     private final String[] playerNames;
-    private final String gameName;
     private final Phase10PlayerModel[] playersArray;
     private Phase10GameModel game;
 
@@ -49,7 +48,6 @@ public class Phase10GameModelTest {
         numPlayers = 4;
         initialName = "P1P2P3P4";
         playerNames = new String[]{"Justin W", "Lauren K", "Timmay C", "Denise B"};
-        gameName = "JWLKTCDB";
         playersArray = new Phase10PlayerModel[numPlayers];
     }
 
