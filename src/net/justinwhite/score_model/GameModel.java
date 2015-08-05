@@ -55,9 +55,9 @@ class GameModel<T extends PlayerModel> {
     }
 
     public GameModel(Class<T> _class, int _numPlayers) {
-        this.curClass = _class;
+        curClass = _class;
 
-        // sanity check number of players
+        // bounds check number of players
         if (_numPlayers < MIN_PLAYERS) {
             _numPlayers = MIN_PLAYERS;
         } else if (_numPlayers > MAX_PLAYERS) {
@@ -78,8 +78,8 @@ class GameModel<T extends PlayerModel> {
                 getID(),
                 getNumPlayers(),
                 // List<> and Map<> classes handle toString() themselves
-                players,
-                playerMap
+                getPlayerList(),
+                getPlayerMap()
         );
     }
 
@@ -124,7 +124,7 @@ class GameModel<T extends PlayerModel> {
                 removePlayer();
             }
         }
-        numPlayers = _numPlayers;
+        numPlayers = players.size();
 
     }
 
@@ -176,7 +176,7 @@ class GameModel<T extends PlayerModel> {
             players.add(newPlayer);
             playerMap.put(_name, newPlayer);
 
-            numPlayers++;
+            numPlayers = players.size();
             buildName();
 
             return newPlayer;
@@ -192,8 +192,12 @@ class GameModel<T extends PlayerModel> {
     public T removePlayer(int index) {
         if (numPlayers > MIN_PLAYERS) {
             T oldPlayer = players.remove(index);
+
             playerMap.remove(oldPlayer.getName());
+
+            numPlayers = players.size();
             buildName();
+
             return oldPlayer;
         } else {
             return null;
