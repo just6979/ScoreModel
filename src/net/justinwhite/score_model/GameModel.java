@@ -133,7 +133,11 @@ class GameModel<T extends PlayerModel> {
     }
 
     public T getPlayer(int index) {
-        return players.get(index);
+        if (0 <= index && index < numPlayers) {
+            return players.get(index);
+        } else {
+            return null;
+        }
     }
 
     public T getPlayerByName(String _name) {
