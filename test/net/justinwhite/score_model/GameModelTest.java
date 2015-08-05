@@ -85,12 +85,23 @@ public class GameModelTest {
     }
 
     @Test
-    public void testSetNumPlayers() throws Exception {
+    public void testSetNumPlayersUp() throws Exception {
         int newNumPlayers = numPlayers + 1;
         game.setNumPlayers(newNumPlayers);
         assertEquals(newNumPlayers, game.getNumPlayers());
         assertEquals(gameName + "P" + newNumPlayers, game.getName());
-        assertEquals("Player " + newNumPlayers, game.getPlayer(newNumPlayers - 1).getName());
+        // check last player's name
+        assertEquals("Player " + newNumPlayers, game.getPlayer(game.getNumPlayers() - 1).getName());
+    }
+
+    @Test
+    public void testSetNumPlayersDown() throws Exception {
+        int newNumPlayers = numPlayers - 1;
+        game.setNumPlayers(newNumPlayers);
+        assertEquals(newNumPlayers, game.getNumPlayers());
+        assertEquals(gameName.substring(0, gameName.length()-2), game.getName());
+        // check last player's name
+        assertEquals("Player " + newNumPlayers, game.getPlayer(game.getNumPlayers() - 1).getName());
     }
 
     @Test

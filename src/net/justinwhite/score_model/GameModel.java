@@ -112,16 +112,20 @@ class GameModel<T extends PlayerModel> {
         return numPlayers;
     }
 
+    // if increasing, create a blank player
+    // if decreasing, delete last player added
     public void setNumPlayers(int _numPlayers) {
-        for (int i = 0; i < _numPlayers - numPlayers; i++) {
-            addPlayer();
+        if (_numPlayers > numPlayers) {
+            for (int i = 0; i < _numPlayers - numPlayers; i++) {
+                addPlayer();
+            }
+        } else if (_numPlayers < numPlayers) {
+            for (int i = 0; i < numPlayers - _numPlayers; i++) {
+                removePlayer();
+            }
         }
         numPlayers = _numPlayers;
 
-    }
-
-    private void incrementNumPlayers() {
-        numPlayers++;
     }
 
     public List<T> getPlayerList() {
@@ -173,6 +177,17 @@ class GameModel<T extends PlayerModel> {
 
         numPlayers = players.size();
         buildName();
+    }
+
+    public T removePlayer() {
+        return removePlayer(numPlayers - 1);
+    }
+
+    public T removePlayer(int index) {
+        T oldPlayer = players.remove(index);
+        playerMap.remove(oldPlayer.getName());
+        buildName();
+        return oldPlayer;
     }
 
     public void renamePlayer(int index, String newName) {
