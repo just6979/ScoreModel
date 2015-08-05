@@ -175,7 +175,7 @@ class GameModel<T extends PlayerModel> {
     public String getScores() {
         String out = "";
         for (T p : players) {
-            out += String.format("%s: %4d Points; ", p.getName(), p.getScore());
+            out += String.format("%s: %d Points; ", p.getName(), p.getScore());
         }
         return out;
     }
