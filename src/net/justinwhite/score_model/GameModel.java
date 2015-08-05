@@ -112,15 +112,13 @@ class GameModel<T extends PlayerModel> {
         return numPlayers;
     }
 
-    // if increasing, create a blank player
-    // if decreasing, delete last player added
     public void setNumPlayers(int _numPlayers) {
         if (_numPlayers > numPlayers) {
-            for (int i = 0; i < _numPlayers - numPlayers; i++) {
+            for (int i = numPlayers; i < _numPlayers; i++) {
                 addPlayer();
             }
         } else if (_numPlayers < numPlayers) {
-            for (int i = 0; i < numPlayers - _numPlayers; i++) {
+            for (int i = _numPlayers; i < numPlayers; i++) {
                 removePlayer();
             }
         }
@@ -165,18 +163,24 @@ class GameModel<T extends PlayerModel> {
         return newPlayer;
     }
 
-    public void addPlayer() {
-        this.addPlayer("Player " + (players.size() + 1));
+    public T addPlayer() {
+        return addPlayer("Player " + (numPlayers + 1));
     }
 
-    public void addPlayer(String _name) {
-        T newPlayer = makePlayer(_name);
+    public T addPlayer(String _name) {
+        if (numPlayers < MAX_PLAYERS) {
+            T newPlayer = makePlayer(_name);
 
-        players.add(newPlayer);
-        playerMap.put(_name, newPlayer);
+            players.add(newPlayer);
+            playerMap.put(_name, newPlayer);
 
-        numPlayers = players.size();
-        buildName();
+            numPlayers++;
+            buildName();
+
+            return newPlayer;
+        } else {
+            return null;
+        }
     }
 
     public T removePlayer() {
@@ -184,10 +188,14 @@ class GameModel<T extends PlayerModel> {
     }
 
     public T removePlayer(int index) {
-        T oldPlayer = players.remove(index);
-        playerMap.remove(oldPlayer.getName());
-        buildName();
-        return oldPlayer;
+        if (numPlayers > MIN_PLAYERS) {
+            T oldPlayer = players.remove(index);
+            playerMap.remove(oldPlayer.getName());
+            buildName();
+            return oldPlayer;
+        } else {
+            return null;
+        }
     }
 
     public void renamePlayer(int index, String newName) {
