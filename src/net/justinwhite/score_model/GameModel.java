@@ -51,7 +51,7 @@ class GameModel<T extends PlayerModel> {
     private final Class<T> curClass;
 
     public GameModel(Class<T> _class) {
-        this(_class, 0);
+        this(_class, MIN_PLAYERS);
     }
 
     public GameModel(Class<T> _class, int _numPlayers) {
@@ -73,7 +73,7 @@ class GameModel<T extends PlayerModel> {
 
         // add default players
         for (int i = 0; i < _numPlayers; i++) {
-            addPlayer(i, String.format("Player %d", i + 1));
+            addPlayer();
         }
     }
 
@@ -113,7 +113,11 @@ class GameModel<T extends PlayerModel> {
     }
 
     public void setNumPlayers(int _numPlayers) {
+        for (int i = 0; i < _numPlayers - numPlayers; i++) {
+            addPlayer();
+        }
         numPlayers = _numPlayers;
+
     }
 
     private void incrementNumPlayers() {
@@ -140,7 +144,7 @@ class GameModel<T extends PlayerModel> {
         return playerMap.containsKey(_name);
     }
 
-    public void addPlayer(int _index, String _name) {
+    protected T makePlayer(String _name) {
         T newPlayer = null;
         try {
             newPlayer = curClass.newInstance();
@@ -150,19 +154,31 @@ class GameModel<T extends PlayerModel> {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+        return newPlayer;
+    }
 
-        ((ArrayList) players).ensureCapacity(getNumPlayers());
-        players.add(_index, newPlayer);
+    public void addPlayer() {
+        this.addPlayer("Player " + (players.size() + 1));
+    }
 
+    public void addPlayer(String _name) {
+        T newPlayer = makePlayer(_name);
+
+        players.add(newPlayer);
         playerMap.put(_name, newPlayer);
 
-        if (players.size() > numPlayers) {
-            incrementNumPlayers();
-        }
+        numPlayers = players.size();
         buildName();
     }
 
-    // TODO: implement for PlayerModel
+    public void renamePlayer(int index, String newName) {
+        T p = players.get(index);
+        if (p != null) {
+            p.setName(newName);
+            buildName();
+        }
+    }
+
     public void renamePlayer(String oldName, String newName) {
         T p = playerMap.remove(oldName);
         if (p != null) {
