@@ -89,7 +89,7 @@ public class GameModelTest {
     @Test
     public void testSetNumPlayers() throws Exception {
         game.setNumPlayers(numPlayers + 1);
-        assertEquals(gameName + "P" + (numPlayers+ 1), game.getName());
+        assertEquals(gameName + "P" + (numPlayers + 1), game.getName());
     }
 
     @Test
@@ -111,7 +111,7 @@ public class GameModelTest {
     @Test
     public void testAddPlayer() throws Exception {
         game.addPlayer();
-        assertEquals(gameName + "P" + (numPlayers+ 1), game.getName());
+        assertEquals(gameName + "P" + (numPlayers + 1), game.getName());
     }
 
     @Test

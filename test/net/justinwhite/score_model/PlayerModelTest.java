@@ -38,9 +38,9 @@ import static org.junit.Assert.assertEquals;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class PlayerModelTest {
-    private PlayerModel player;
     private final String name = "Player 1";
     private final String initials = "P1";
+    private PlayerModel player;
 
     @Before
     public void setUp() throws Exception {
