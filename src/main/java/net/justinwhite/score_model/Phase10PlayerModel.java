@@ -33,7 +33,7 @@ package net.justinwhite.score_model;
 
 import static net.justinwhite.score_model.Phase10GameModel.MAX_PHASE;
 
-class Phase10PlayerModel extends PlayerModel {
+public class Phase10PlayerModel extends PlayerModel {
     static Phase10PlayerModel winner;
 
     static {

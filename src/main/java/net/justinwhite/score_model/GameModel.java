@@ -33,7 +33,7 @@ package net.justinwhite.score_model;
 
 import java.util.*;
 
-class GameModel<T extends PlayerModel> {
+public class GameModel<T extends PlayerModel> {
     public static final int MIN_PLAYERS;
     public static final int MAX_PLAYERS;
 
