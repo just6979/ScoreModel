@@ -1,5 +1,10 @@
 # Generated files
-out/
+build/
+
+# gradle stuff
+.gradle
+gradle
+/gradlew*
 
 # Log Files
 *.log
