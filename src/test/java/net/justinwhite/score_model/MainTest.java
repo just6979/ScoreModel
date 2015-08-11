@@ -43,7 +43,7 @@ For now, just build this project to "run the tests".
 import static net.justinwhite.Util.println;
 import static net.justinwhite.Util.printlnln;
 
-class Main {
+class MainTest {
 
     public static void main(String[] args) {
         int numPlayers = 4;
