@@ -29,9 +29,11 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.justinwhite.score_model;
+package net.justinwhite.score_model.phase_10;
 
-import static net.justinwhite.score_model.Phase10GameModel.MAX_PHASE;
+import net.justinwhite.score_model.PlayerModel;
+
+import static net.justinwhite.score_model.phase_10.Phase10GameModel.MAX_PHASE;
 
 public class Phase10PlayerModel extends PlayerModel {
     static Phase10PlayerModel winner;

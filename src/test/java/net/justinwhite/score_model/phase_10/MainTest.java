@@ -30,7 +30,7 @@
 
  */
 
-package net.justinwhite.score_model;
+package net.justinwhite.score_model.phase_10;
 
 /*
 This is pretty much a big unit test for the whole Phase10GameModel class.
@@ -39,6 +39,9 @@ Eventually this will be turned into a real unit test (junit likely)
 to allow tools to run the tests even from within other projects.
 For now, just build this project to "run the tests".
 */
+
+import net.justinwhite.score_model.phase_10.Phase10GameModel;
+import net.justinwhite.score_model.phase_10.Phase10PlayerModel;
 
 import static net.justinwhite.Util.println;
 import static net.justinwhite.Util.printlnln;

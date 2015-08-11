@@ -30,7 +30,9 @@
 
  */
 
-package net.justinwhite.score_model;
+package net.justinwhite.score_model.phase_10;
+
+import net.justinwhite.score_model.GameModel;
 
 public class Phase10GameModel extends GameModel<Phase10PlayerModel> {
     public static final int MAX_PHASE;
