@@ -29,53 +29,54 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.justinwhite.score_model;
+package net.justinwhite.score_model.phase_10;
 
-public class PlayerModel {
-    private String name;
-    private int score;
+import org.junit.Before;
+import org.junit.Test;
 
-    public PlayerModel() {
-        this("Player X");
+import static org.junit.Assert.assertEquals;
+
+@SuppressWarnings("FieldCanBeLocal")
+public class Phase10GameTest {
+    private final int numPlayers;
+    private final String initialName;
+    private final String[] playerNames;
+    private final Phase10Player[] playersArray;
+    private Phase10Game game;
+
+    {
+        numPlayers = 4;
+        initialName = "P1P2P3P4";
+        playerNames = new String[]{"Justin W", "Lauren K", "Timmay C", "Denise B"};
+        playersArray = new Phase10Player[numPlayers];
     }
 
-    public PlayerModel(String _name) {
-        name = _name;
-        score = 0;
-    }
-
-    public String toString() {
-        return String.format(
-                "Name '%s'; Score %s",
-                getName(),
-                getScore()
-        );
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String _name) {
-        name = _name;
-    }
-
-    public String getInitials() {
-        // assume name is "First" or "First Last", return "F_" or "FL"
-        String names[] = name.split(" ");
-        if (names.length > 1) {
-            return names[0].substring(0, 1) + names[1].substring(0, 1);
-        } else {
-            return name.substring(0, 1) + "_";
+    @Before
+    public void setUp() {
+        game = new Phase10Game(numPlayers);
+        assertEquals(initialName, game.getName());
+        for (int i = 0; i < numPlayers; i++) {
+            playersArray[i] = game.getPlayer(i);
+            game.renamePlayer(String.format("Player %d", i + 1), playerNames[i]);
         }
     }
 
-    public int getScore() {
-        return score;
+    // TODO
+    @Test
+    public void testGetScores() throws Exception {
+
     }
 
-    public void setScore(int _score) {
-        score = _score;
+    // TODO
+    @Test
+    public void testFindWinner() throws Exception {
+
+    }
+
+    // TODO
+    @Test
+    public void testHasWinner() throws Exception {
+
     }
 
 }

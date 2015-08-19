@@ -33,15 +33,12 @@
 package net.justinwhite.score_model.phase_10;
 
 /*
-This is pretty much a big unit test for the whole Phase10GameModel class.
+This is pretty much a big unit test for the whole Phase10Game class.
 
 Eventually this will be turned into a real unit test (junit likely)
 to allow tools to run the tests even from within other projects.
 For now, just build this project to "run the tests".
 */
-
-import net.justinwhite.score_model.phase_10.Phase10GameModel;
-import net.justinwhite.score_model.phase_10.Phase10PlayerModel;
 
 import static net.justinwhite.Util.println;
 import static net.justinwhite.Util.printlnln;
@@ -51,14 +48,14 @@ class MainTest {
     public static void main(String[] args) {
         int numPlayers = 4;
 
-        Phase10GameModel game = new Phase10GameModel(numPlayers);
+        Phase10Game game = new Phase10Game(numPlayers);
 
         println("Show the whole game:");
         println(game.toString());
 
         println("Show players individually:");
         for (int i = 0; i < game.getNumPlayers(); i++) {
-            Phase10PlayerModel p;
+            Phase10Player p;
             p = game.getPlayer(i);
             println(p.toString());
         }
@@ -74,15 +71,15 @@ class MainTest {
         printlnln(game.getName());
 
         println("Show players via ArrayList iterator:");
-        for (Phase10PlayerModel p : game.getPlayerList()) {
+        for (Phase10Player p : game.getPlayerList()) {
             println(p.toString());
         }
         println();
 
-        Phase10PlayerModel JW = game.getPlayerByName("Justin W");
-        Phase10PlayerModel LK = game.getPlayerByName("Lauren K");
-        Phase10PlayerModel TC = game.getPlayerByName("Timmay C");
-        Phase10PlayerModel DB = game.getPlayerByName("Denise B");
+        Phase10Player JW = game.getPlayerByName("Justin W");
+        Phase10Player LK = game.getPlayerByName("Lauren K");
+        Phase10Player TC = game.getPlayerByName("Timmay C");
+        Phase10Player DB = game.getPlayerByName("Denise B");
 
         JW.addScore(100);
         LK.addScore(10);

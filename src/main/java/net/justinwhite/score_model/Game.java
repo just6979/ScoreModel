@@ -33,7 +33,7 @@ package net.justinwhite.score_model;
 
 import java.util.*;
 
-public class GameModel<T extends PlayerModel> {
+public class Game<T extends Player> {
     public static final int MIN_PLAYERS;
     public static final int MAX_PLAYERS;
 
@@ -50,11 +50,11 @@ public class GameModel<T extends PlayerModel> {
     protected T winner = null;
     private final Class<T> curClass;
 
-    public GameModel(Class<T> _class) {
+    public Game(Class<T> _class) {
         this(_class, MIN_PLAYERS);
     }
 
-    public GameModel(Class<T> _class, int _numPlayers) {
+    public Game(Class<T> _class, int _numPlayers) {
         curClass = _class;
 
         // bounds check number of players

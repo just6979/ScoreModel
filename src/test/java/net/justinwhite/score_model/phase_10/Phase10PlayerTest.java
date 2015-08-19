@@ -29,7 +29,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.justinwhite.score_model;
+package net.justinwhite.score_model.phase_10;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,29 +37,40 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 @SuppressWarnings("FieldCanBeLocal")
-public class PlayerModelTest {
-    private final String name = "Player 1";
-    private final String initials = "P1";
-    private PlayerModel player;
+public class Phase10PlayerTest {
+    private final String name = "Test Phase10Player";
+    private final int score = 11;
+    private final int phase = 1;
+    private Phase10Player player;
 
     @Before
-    public void setUp() throws Exception {
-        player = new PlayerModel(name);
+    public void setUp() {
+        player = new Phase10Player(name);
+        player.addScore(score);
+        player.nextPhase();
     }
 
     @Test
     public void testToString() throws Exception {
         assertEquals(String.format(
-                        "Name '%s'; Score %s",
+                        "Name '%s'; Score %s; Phase %d",
                         name,
-                        0
+                        score,
+                        phase
                 ), player.toString()
         );
     }
 
     @Test
-    public void testGetInitials() throws Exception {
-        assertEquals(initials, player.getInitials());
+    public void testAddScore() throws Exception {
+        player.addScore(score);
+        assertEquals(score * 2, player.getScore());
+    }
+
+    @Test
+    public void testNextPhase() throws Exception {
+        player.nextPhase();
+        assertEquals(phase + 1, player.getPhase());
     }
 
 }

@@ -31,54 +31,52 @@
 
 package net.justinwhite.score_model.phase_10;
 
-import net.justinwhite.score_model.phase_10.Phase10GameModel;
-import net.justinwhite.score_model.phase_10.Phase10PlayerModel;
-import org.junit.Before;
-import org.junit.Test;
+import net.justinwhite.score_model.Player;
 
-import static org.junit.Assert.assertEquals;
+import static net.justinwhite.score_model.phase_10.Phase10Game.MAX_PHASE;
 
-@SuppressWarnings("FieldCanBeLocal")
-public class Phase10GameModelTest {
-    private final int numPlayers;
-    private final String initialName;
-    private final String[] playerNames;
-    private final Phase10PlayerModel[] playersArray;
-    private Phase10GameModel game;
+public class Phase10Player extends Player {
+    static Phase10Player winner;
 
-    {
-        numPlayers = 4;
-        initialName = "P1P2P3P4";
-        playerNames = new String[]{"Justin W", "Lauren K", "Timmay C", "Denise B"};
-        playersArray = new Phase10PlayerModel[numPlayers];
+    static {
+        winner = null;
     }
 
-    @Before
-    public void setUp() {
-        game = new Phase10GameModel(numPlayers);
-        assertEquals(initialName, game.getName());
-        for (int i = 0; i < numPlayers; i++) {
-            playersArray[i] = game.getPlayer(i);
-            game.renamePlayer(String.format("Player %d", i + 1), playerNames[i]);
+    private int phase;
+
+    public Phase10Player() {
+        this("Player X");
+    }
+
+    public Phase10Player(String _name) {
+        super(_name);
+        phase = 0;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "Name '%s'; Score %s; Phase %d",
+                getName(),
+                getScore(),
+                getPhase()
+        );
+    }
+
+    public void addScore(int _score) {
+        setScore(getScore() + _score);
+    }
+
+    public int getPhase() {
+        return phase;
+    }
+
+    public void nextPhase() {
+        phase++;
+        if (phase >= MAX_PHASE) {
+            winner = this;
+            // TODO: handle multiple winners: tie break on score
         }
-    }
-
-    // TODO
-    @Test
-    public void testGetScores() throws Exception {
-
-    }
-
-    // TODO
-    @Test
-    public void testFindWinner() throws Exception {
-
-    }
-
-    // TODO
-    @Test
-    public void testHasWinner() throws Exception {
-
     }
 
 }

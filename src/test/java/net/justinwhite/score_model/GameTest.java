@@ -37,13 +37,13 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 @SuppressWarnings("FieldCanBeLocal")
-public class GameModelTest {
+public class GameTest {
     private final int numPlayers;
     private final String gameName;
-    private final PlayerModel[] playersArray;
+    private final Player[] playersArray;
     private final String newPlayerName;
     private String newPlayerInitials;
-    private GameModel<PlayerModel> game;
+    private Game<Player> game;
 
     {
         numPlayers = 4;
@@ -51,12 +51,12 @@ public class GameModelTest {
         newPlayerName = "Foo Bar";
         newPlayerInitials = "FB";
 
-        playersArray = new PlayerModel[numPlayers];
+        playersArray = new Player[numPlayers];
     }
 
     @Before
     public void setUp() {
-        game = new GameModel<PlayerModel>(PlayerModel.class, numPlayers);
+        game = new Game<Player>(Player.class, numPlayers);
         for (int i = 0; i < numPlayers; i++) {
             // populate array for comparisons later.
             playersArray[i] = game.getPlayer(i);

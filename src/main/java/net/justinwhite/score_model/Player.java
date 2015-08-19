@@ -29,54 +29,53 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.justinwhite.score_model.phase_10;
+package net.justinwhite.score_model;
 
-import net.justinwhite.score_model.PlayerModel;
+public class Player {
+    private String name;
+    private int score;
 
-import static net.justinwhite.score_model.phase_10.Phase10GameModel.MAX_PHASE;
-
-public class Phase10PlayerModel extends PlayerModel {
-    static Phase10PlayerModel winner;
-
-    static {
-        winner = null;
-    }
-
-    private int phase;
-
-    public Phase10PlayerModel() {
+    public Player() {
         this("Player X");
     }
 
-    public Phase10PlayerModel(String _name) {
-        super(_name);
-        phase = 0;
+    public Player(String _name) {
+        name = _name;
+        score = 0;
     }
 
-    @Override
     public String toString() {
         return String.format(
-                "Name '%s'; Score %s; Phase %d",
+                "Name '%s'; Score %s",
                 getName(),
-                getScore(),
-                getPhase()
+                getScore()
         );
     }
 
-    public void addScore(int _score) {
-        setScore(getScore() + _score);
+    public String getName() {
+        return name;
     }
 
-    public int getPhase() {
-        return phase;
+    public void setName(String _name) {
+        name = _name;
     }
 
-    public void nextPhase() {
-        phase++;
-        if (phase >= MAX_PHASE) {
-            winner = this;
-            // TODO: handle multiple winners: tie break on score
+    public String getInitials() {
+        // assume name is "First" or "First Last", return "F_" or "FL"
+        String names[] = name.split(" ");
+        if (names.length > 1) {
+            return names[0].substring(0, 1) + names[1].substring(0, 1);
+        } else {
+            return name.substring(0, 1) + "_";
         }
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int _score) {
+        score = _score;
     }
 
 }
