@@ -2,6 +2,7 @@ version '0.9-SNAPSHOT'
 
 apply plugin: 'java'
 
+//noinspection GroovyUnusedAssignment
 sourceCompatibility = 1.7
 
 repositories {

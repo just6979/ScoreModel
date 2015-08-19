@@ -56,7 +56,7 @@ public class GameTest {
 
     @Before
     public void setUp() {
-        game = new Game<Player>(Player.class, numPlayers);
+        game = new Game<>(Player.class, numPlayers);
         for (int i = 0; i < numPlayers; i++) {
             // populate array for comparisons later.
             playersArray[i] = game.getPlayer(i);

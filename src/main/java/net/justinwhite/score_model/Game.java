@@ -66,8 +66,8 @@ public class Game<T extends Player> {
 
         id = UUID.randomUUID();
 
-        playerList = new ArrayList<T>();
-        playerMap = new TreeMap<String, T>();
+        playerList = new ArrayList<>();
+        playerMap = new TreeMap<>();
 
         setNumPlayers(_numPlayers);
     }
@@ -157,9 +157,7 @@ public class Game<T extends Player> {
         try {
             newPlayer = curClass.newInstance();
             newPlayer.setName(_name);
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
         return newPlayer;
