@@ -43,11 +43,11 @@ public class Game<T extends Player> {
     }
 
     private final UUID id;
-    protected int numPlayers;
-    protected String name;
-    protected final List<T> playerList;
-    protected final Map<String, T> playerMap;
-    protected T winner = null;
+    private int numPlayers;
+    private String name;
+    private final List<T> playerList;
+    private final Map<String, T> playerMap;
+    private T winner;
     private final Class<T> curClass;
 
     public Game(Class<T> _class) {
@@ -68,6 +68,7 @@ public class Game<T extends Player> {
 
         playerList = new ArrayList<>();
         playerMap = new TreeMap<>();
+        winner = null;
 
         setNumPlayers(_numPlayers);
     }
@@ -152,7 +153,7 @@ public class Game<T extends Player> {
         return playerMap.containsKey(_name);
     }
 
-    protected T makePlayer(String _name) {
+    private T makePlayer(String _name) {
         T newPlayer = null;
         try {
             newPlayer = curClass.newInstance();
@@ -250,4 +251,8 @@ public class Game<T extends Player> {
         return winner;
     }
 
+    public T setWinner(T _winner) {
+        winner = _winner;
+        return winner;
+    }
 }

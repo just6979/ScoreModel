@@ -52,7 +52,7 @@ public class Phase10Game extends Game<Phase10Player> {
     @Override
     public String getScores() {
         String out = "";
-        for (Phase10Player p : playerList) {
+        for (Phase10Player p : getPlayerList()) {
             out += String.format("%s: %4d Points", p.getName(), p.getScore());
             if (p.getPhase() > 0) {
                 out += String.format(", Phase #%d completed\n", p.getPhase());
@@ -66,9 +66,9 @@ public class Phase10Game extends Game<Phase10Player> {
     // TODO: handle multiple winners: tie-break on score
     @Override
     public void findWinner() {
-        for (Phase10Player p : playerList) {
+        for (Phase10Player p : getPlayerList()) {
             if (Phase10Player.winner == p) {
-                winner = p;
+                setWinner(p);
             }
         }
     }
