@@ -8,6 +8,8 @@ version = "$major.$minor-r$commits"
 
 //noinspection GroovyUnusedAssignment
 sourceCompatibility = 1.7
+//noinspection GroovyUnusedAssignment
+targetCompatibility = 1.7
 
 repositories {
     mavenCentral()
