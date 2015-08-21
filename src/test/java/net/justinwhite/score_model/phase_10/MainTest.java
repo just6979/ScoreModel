@@ -83,35 +83,35 @@ class MainTest {
 
         JW.addScore(100);
         LK.addScore(10);
-        LK.nextPhase();
+        LK.completePhase();
         TC.addScore(80);
         DB.addScore(40);
 
         println("Round 1");
-        println(game.getScores());
+        println(game.getScoresPhasesText());
 
         JW.addScore(100);
         LK.addScore(0);
-        LK.nextPhase();
+        LK.completePhase();
         TC.addScore(60);
         DB.addScore(50);
-        DB.nextPhase();
+        DB.completePhase();
 
         println("Round 2");
-        println(game.getScores());
+        println(game.getScoresPhasesText());
 
-        LK.nextPhase();
-        LK.nextPhase();
-        LK.nextPhase();
-        LK.nextPhase();
-        LK.nextPhase();
-        LK.nextPhase();
-        LK.nextPhase();
-        LK.nextPhase();
+        LK.completePhase();
+        LK.completePhase();
+        LK.completePhase();
+        LK.completePhase();
+        LK.completePhase();
+        LK.completePhase();
+        LK.completePhase();
+        LK.completePhase();
 
         printlnln("...");
         println("Round 10");
-        println(game.getScores());
+        println(game.getScoresPhasesText());
 
         if (game.hasWinner()) {
             println("Winner:");

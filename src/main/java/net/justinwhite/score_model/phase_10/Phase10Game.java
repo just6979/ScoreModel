@@ -41,16 +41,41 @@ public class Phase10Game extends Game<Phase10Player> {
         MAX_PHASE = 10;
     }
 
+    static boolean[] makeDefaultPhases() {
+        boolean[] defaultPhases = new boolean[MAX_PHASE + 1];
+        for (int i = 1; i <= MAX_PHASE; i++) { defaultPhases[i] = true; }
+        return defaultPhases;
+    }
+
+    private final boolean[] activePhases;
+
     public Phase10Game() {
         this(0);
     }
 
     public Phase10Game(int _numPlayers) {
-        super(Phase10Player.class, _numPlayers);
+        this(_numPlayers, makeDefaultPhases());
     }
 
-    @Override
-    public String getScores() {
+    public Phase10Game(int _numPlayers, boolean[] _phases) {
+        super(Phase10Player.class, _numPlayers);
+        activePhases = _phases;
+    }
+
+    public boolean[] getActivePhases() {
+        return activePhases;
+    }
+
+    public int[] getPhases() {
+        int[] phases = new int[getNumPlayers()];
+        int count = 0;
+        for (Phase10Player p : getPlayerList()) {
+            phases[count++] = p.getPhase();
+        }
+        return phases;
+    }
+
+    public String getScoresPhasesText() {
         String out = "";
         for (Phase10Player p : getPlayerList()) {
             out += String.format("%s: %4d Points", p.getName(), p.getScore());
@@ -63,12 +88,17 @@ public class Phase10Game extends Game<Phase10Player> {
         return out;
     }
 
-    // TODO: handle multiple winners: tie-break on score
     @Override
     public void findWinner() {
+        // TODO: scores _might_ be the same sometimes. What is the 2nd tie-breaker?
+        int lowScore = Integer.MAX_VALUE;
         for (Phase10Player p : getPlayerList()) {
-            if (Phase10Player.winner == p) {
-                setWinner(p);
+            if (p.getPhase() == MAX_PHASE) {
+                int curScore = p.getScore();
+                if (curScore < lowScore) {
+                    lowScore = p.getScore();
+                    setWinner(p);
+                }
             }
         }
     }

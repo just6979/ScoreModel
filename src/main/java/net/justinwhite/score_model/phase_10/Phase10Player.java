@@ -35,22 +35,24 @@ import net.justinwhite.score_model.Player;
 
 import static net.justinwhite.score_model.phase_10.Phase10Game.MAX_PHASE;
 
+@SuppressWarnings("WeakerAccess")
 public class Phase10Player extends Player {
-    static Phase10Player winner;
-
-    static {
-        winner = null;
-    }
-
+    private Phase10Game game;
     private int phase;
 
     public Phase10Player() {
-        this("Player X");
+        this(null, "Player X");
     }
 
-    public Phase10Player(String _name) {
-        super(_name);
+    public Phase10Player(Phase10Game _game, String _name) {
+        super(_game, _name);
+        game = _game;
         phase = 0;
+    }
+
+    public Phase10Player(Phase10Game _game) {
+        this(_game, "Player X");
+        game = _game;
     }
 
     @Override
@@ -63,20 +65,33 @@ public class Phase10Player extends Player {
         );
     }
 
-    public void addScore(int _score) {
-        setScore(getScore() + _score);
+    @Override
+    public boolean getReady() {
+        if (game != null) {
+            phase = -1;
+            completePhase();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void completePhase() {
+        phase++;
+        while (!game.getActivePhases()[phase]) {
+            phase++;
+        }
+        if (phase > MAX_PHASE) {
+            phase = MAX_PHASE;
+        }
     }
 
     public int getPhase() {
         return phase;
     }
 
-    public void nextPhase() {
-        phase++;
-        if (phase >= MAX_PHASE) {
-            winner = this;
-            // TODO: handle multiple winners: tie break on score
-        }
+    public void addScore(int _score) {
+        setScore(getScore() + _score);
     }
 
 }

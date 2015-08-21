@@ -41,13 +41,15 @@ public class Phase10PlayerTest {
     private final String name = "Test Phase10Player";
     private final int score = 11;
     private final int phase = 1;
+    private Phase10Game game;
     private Phase10Player player;
 
     @Before
     public void setUp() {
-        player = new Phase10Player(name);
+        game = new Phase10Game();
+        player = new Phase10Player(game, name);
         player.addScore(score);
-        player.nextPhase();
+        player.completePhase();
     }
 
     @Test
@@ -69,7 +71,7 @@ public class Phase10PlayerTest {
 
     @Test
     public void testNextPhase() throws Exception {
-        player.nextPhase();
+        player.completePhase();
         assertEquals(phase + 1, player.getPhase());
     }
 
