@@ -1,19 +1,10 @@
 apply plugin: 'java'
 
-def gitSha = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
+def major = 0
+def minor = 5
+def commits = Integer.parseInt('git rev-list master --count'.execute([], project.rootDir).text.trim())
 
-// Auto-incrementing commit count based on counting commits to master
-def commitCount = Integer.parseInt('git rev-list master --count'.execute([], project.rootDir).text.trim())
-
-// use git tags as version names (1.2.2)
-def gitCurrentTag = 'git describe --tags --abbrev=0'.execute([], project.rootDir).text.trim()
-
-def getDate() {
-    return new Date().format('yyyyMMdd-HHmmss')
-}
-
-version 'v' + commitCount
-//version 'v' + commitCount + '-' + getDate()
+version = "$major.$minor-r$commits"
 
 //noinspection GroovyUnusedAssignment
 sourceCompatibility = 1.7
