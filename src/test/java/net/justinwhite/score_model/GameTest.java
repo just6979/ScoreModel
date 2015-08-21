@@ -99,7 +99,7 @@ public class GameTest {
         int newNumPlayers = numPlayers - 1;
         game.setNumPlayers(newNumPlayers);
         assertEquals(newNumPlayers, game.getNumPlayers());
-        assertEquals(gameName.substring(0, gameName.length()-2), game.getName());
+        assertEquals(gameName.substring(0, gameName.length() - 2), game.getName());
         // check last player's name
         assertEquals("Player " + newNumPlayers, game.getPlayer(game.getNumPlayers() - 1).getName());
     }
@@ -144,24 +144,6 @@ public class GameTest {
     public void testRenamePlayerByName() throws Exception {
         game.renamePlayer("Player 1", newPlayerName);
         assertEquals(newPlayerName, game.getPlayerByName(newPlayerName).getName());
-    }
-
-    // TODO
-    @Test
-    public void testGetScores() throws Exception {
-
-    }
-
-    // TODO
-    @Test
-    public void testFindWinner() throws Exception {
-
-    }
-
-    // TODO
-    @Test
-    public void testHasWinner() throws Exception {
-
     }
 
 }

@@ -35,7 +35,6 @@ import net.justinwhite.score_model.Player;
 
 import static net.justinwhite.score_model.phase_10.Phase10Game.MAX_PHASE;
 
-@SuppressWarnings("WeakerAccess")
 public class Phase10Player extends Player {
     private Phase10Game game;
     private int phase;

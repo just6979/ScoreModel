@@ -31,7 +31,6 @@
 
 package net.justinwhite.score_model;
 
-@SuppressWarnings("WeakerAccess")
 public class Player {
     private Game<?> game;
     private String name;

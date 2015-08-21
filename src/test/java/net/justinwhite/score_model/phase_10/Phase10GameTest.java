@@ -61,22 +61,4 @@ public class Phase10GameTest {
         }
     }
 
-    // TODO
-    @Test
-    public void testGetScores() throws Exception {
-
-    }
-
-    // TODO
-    @Test
-    public void testFindWinner() throws Exception {
-
-    }
-
-    // TODO
-    @Test
-    public void testHasWinner() throws Exception {
-
-    }
-
 }
