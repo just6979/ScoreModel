@@ -35,16 +35,20 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class PlayerTest {
     private final String name = "Player 1";
     private final String initials = "P1";
+    private Game<Player> game;
     private Player player;
 
     @Before
     public void setUp() throws Exception {
-        player = new Player(name);
+        game = new Game<>(Player.class);
+        player = new Player(game, name);
+        assertTrue(player.getReady());
     }
 
     @Test

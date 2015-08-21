@@ -33,6 +33,7 @@ package net.justinwhite.score_model;
 
 import java.util.*;
 
+@SuppressWarnings("WeakerAccess")
 public class Game<T extends Player> {
     public static final int MIN_PLAYERS;
     public static final int MAX_PLAYERS;
@@ -157,6 +158,7 @@ public class Game<T extends Player> {
         T newPlayer = null;
         try {
             newPlayer = curClass.newInstance();
+            newPlayer.setGame(this);
             newPlayer.setName(_name);
         } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
@@ -184,6 +186,7 @@ public class Game<T extends Player> {
         }
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public T removePlayer() {
         return removePlayer(numPlayers - 1);
     }
@@ -220,7 +223,17 @@ public class Game<T extends Player> {
         buildName();
     }
 
-    public String getScores() {
+    public int[] getScores() {
+        int count = playerList.size();
+        int[] scores = new int[count];
+        int i = 0;
+        for (Player p : playerList) {
+            scores[i++] = p.getScore();
+        }
+        return scores;
+    }
+
+    public String getScoresText() {
         String out = "";
         for (T p : playerList) {
             out += String.format("%s: %d Points; ", p.getName(), p.getScore());
@@ -251,6 +264,7 @@ public class Game<T extends Player> {
         return winner;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public T setWinner(T _winner) {
         winner = _winner;
         return winner;

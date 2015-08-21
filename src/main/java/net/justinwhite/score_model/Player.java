@@ -31,15 +31,22 @@
 
 package net.justinwhite.score_model;
 
+@SuppressWarnings("WeakerAccess")
 public class Player {
+    private Game<?> game;
     private String name;
     private int score;
 
     public Player() {
-        this("Player X");
+        this(null);
     }
 
-    public Player(String _name) {
+    public Player(Game<?> _game) {
+        this(_game, "Player X");
+    }
+
+    public Player(Game<?> _game, String _name) {
+        game = _game;
         name = _name;
         score = 0;
     }
@@ -50,6 +57,18 @@ public class Player {
                 getName(),
                 getScore()
         );
+    }
+
+    public boolean getReady() {
+        return game != null;
+    }
+
+    public Game<?> getGame() {
+        return game;
+    }
+
+    public void setGame(Game<?> _game) {
+        game = _game;
     }
 
     public String getName() {
