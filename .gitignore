@@ -3,7 +3,6 @@ build/
 
 # gradle stuff
 .gradle
-gradle
 /gradlew*
 
 # Log Files
