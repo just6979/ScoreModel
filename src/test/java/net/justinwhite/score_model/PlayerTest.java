@@ -34,9 +34,7 @@ package net.justinwhite.score_model;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class PlayerTest {
@@ -51,10 +49,20 @@ public class PlayerTest {
     @Before
     public void setUp() throws Exception {
         game = new Game<>(Player.class);
-        player = new Player();
-        player.setGame(game);
-        player.setName(name);
+        player = new Player(game, name);
         player.setScore(score);
+    }
+
+    // test all the remaining constructors
+    @Test
+    public void testPlayer() throws Exception {
+        player = new Player();
+        assertNull(player.getGame());
+        assertEquals("Player X", player.getName());
+        game = new Game<>(Player.class);
+        player = new Player(game);
+        assertSame(game, player.getGame());
+        assertEquals("Player X", player.getName());
     }
 
     @Test
