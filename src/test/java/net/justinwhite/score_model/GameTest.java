@@ -65,6 +65,16 @@ public class GameTest {
     }
 
     @Test
+    public void testGame() throws Exception {
+        game = new Game<Player>(Player.class);
+        assertEquals(Game.MIN_PLAYERS, game.getNumPlayers());
+        game = new Game<Player>(Player.class, Integer.MIN_VALUE);
+        assertEquals(Game.MIN_PLAYERS, game.getNumPlayers());
+        game = new Game<Player>(Player.class, Integer.MAX_VALUE);
+        assertEquals(Game.MAX_PLAYERS, game.getNumPlayers());
+    }
+
+    @Test
     public void testToString() throws Exception {
         assertEquals(String.format("Game: %s\nUUID: %s\nPlayer count: %d\nPlayers: %s\nPlayerMap: %s",
                         game.getName(),
@@ -86,21 +96,32 @@ public class GameTest {
 
     @Test
     public void testSetNumPlayersUp() throws Exception {
+        // fail if too many players
+        assertFalse(game.setNumPlayers(Integer.MAX_VALUE));
+        // increase player count by 1
         int newNumPlayers = numPlayers + 1;
-        game.setNumPlayers(newNumPlayers);
+        // check decrease was successful
+        assertTrue(game.setNumPlayers(newNumPlayers));
+        // and player count matches
         assertEquals(newNumPlayers, game.getNumPlayers());
+        // check if the last player's initials were added to the game name
         assertEquals(gameName + "P" + newNumPlayers, game.getName());
-        // check last player's name
+        // check last player's name to see if it matches the player count
         assertEquals("Player " + newNumPlayers, game.getPlayer(game.getNumPlayers() - 1).getName());
     }
 
     @Test
     public void testSetNumPlayersDown() throws Exception {
+        // fail if too few players
+        assertFalse(game.setNumPlayers(0));
+        //decrease player count by 1
         int newNumPlayers = numPlayers - 1;
-        game.setNumPlayers(newNumPlayers);
+        // check increase was successful and player count matches
+        assertTrue(game.setNumPlayers(newNumPlayers));
         assertEquals(newNumPlayers, game.getNumPlayers());
-        assertEquals(gameName.substring(0, gameName.length() - 2), game.getName());
-        // check last player's name
+        // check if the last player's initial were removed from the game name
+        assertEquals(gameName.substring(0, newNumPlayers * 2), game.getName());
+        // check last player's name to see if it matches the player count
         assertEquals("Player " + newNumPlayers, game.getPlayer(game.getNumPlayers() - 1).getName());
     }
 
@@ -124,14 +145,52 @@ public class GameTest {
 
     @Test
     public void testAddPlayer() throws Exception {
-        game.addPlayer();
+        // add 1 Player
+        Player newPlayer = game.addPlayer();
+        assertSame(newPlayer, game.getPlayer(game.getNumPlayers() - 1));
+        // check it's initials are on the game name
         assertEquals(gameName + "P" + (numPlayers + 1), game.getName());
+        // add Players to the max
+        for (int i = game.getNumPlayers(); i < Game.MAX_PLAYERS; i++) {
+            assertNotNull(game.addPlayer());
+        }
+        // try to add one more and fail
+        assertNull(game.addPlayer());
     }
 
     @Test
     public void testAddPlayerWithName() throws Exception {
         game.addPlayer(newPlayerName);
         assertEquals(gameName + newPlayerInitials, game.getName());
+    }
+
+    @Test
+    public void testRemovePlayer() throws Exception {
+        // save the last player for reference
+        Player lastPlayer = game.getPlayer(game.getNumPlayers() - 1);
+        // remove 1 Player
+        Player oldPlayer = game.removePlayer();
+        // check it's the same as the former last player
+        assertSame(lastPlayer, oldPlayer);
+        // check it's not the same as the new last player
+        assertNotSame(oldPlayer, game.getPlayer(game.getNumPlayers() - 1));
+        // check if the last player's initial were removed from the game name
+        assertEquals(
+                gameName.substring(0, game.getNumPlayers() * 2),
+                game.getName()
+        );
+        // check last player's name to see if it matches the player count
+        assertEquals(
+                "Player " + game.getNumPlayers(),
+                game.getPlayer(game.getNumPlayers() - 1).getName()
+        );
+        // remove Players to the minimum
+        for (int i = game.getNumPlayers(); i > Game.MIN_PLAYERS; i--) {
+            assertNotNull(game.removePlayer());
+        }
+        // try to remove one more and fail
+        assertNull(game.removePlayer());
+
     }
 
     @Test
