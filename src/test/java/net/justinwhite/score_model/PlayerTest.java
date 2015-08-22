@@ -35,20 +35,27 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class PlayerTest {
-    private final String name = "Player 1";
-    private final String initials = "P1";
+    private final String name = "First Last";
+    private final String initials = "FL";
+    private int score = 88;
     private Game<Player> game;
     private Player player;
+    private String newName = "OnlyFirst";
+    private String newInitials = "O_";
 
     @Before
     public void setUp() throws Exception {
         game = new Game<>(Player.class);
-        player = new Player(game, name);
+        player = new Player();
+        player.setGame(game);
+        player.setName(name);
         assertTrue(player.getReady());
+        player.setScore(score);
     }
 
     @Test
@@ -56,14 +63,23 @@ public class PlayerTest {
         assertEquals(String.format(
                         "Name '%s'; Score %s",
                         name,
-                        0
+                        score
                 ), player.toString()
         );
     }
 
     @Test
+    public void testGetGame() throws Exception {
+        if (player.getReady()) {
+            assertSame(game, player.getGame());
+        }
+    }
+
+    @Test
     public void testGetInitials() throws Exception {
         assertEquals(initials, player.getInitials());
+        player.setName(newName);
+        assertEquals(newInitials, player.getInitials());
     }
 
 }
