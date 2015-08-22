@@ -60,9 +60,14 @@ public class Phase10Player extends Player {
         );
     }
 
+    @Override
+    public Phase10Game getGame() {
+        return (Phase10Game) super.getGame();
+    }
+
     public void completePhase() {
         phase++;
-        while (!((Phase10Game) getGame()).getActivePhases()[phase]) {
+        while (!getGame().getActivePhases()[phase]) {
             phase++;
         }
         if (phase > MAX_PHASE) {
