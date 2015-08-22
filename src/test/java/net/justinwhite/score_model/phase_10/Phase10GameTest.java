@@ -57,7 +57,7 @@ public class Phase10GameTest {
     @Before
     public void setUp() throws Exception {
         game = new Phase10Game(numPlayers);
-        assertEquals(initialName, game.getName());
+        assertEquals(name, game.getName());
         for (int i = 0; i < numPlayers; i++) {
             playersArray[i] = game.getPlayer(i);
             game.renamePlayer(String.format("Player %d", i + 1), playerNames[i]);
