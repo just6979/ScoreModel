@@ -61,17 +61,6 @@ public class Phase10Player extends Player {
         );
     }
 
-    @Override
-    public boolean getReady() {
-        if (getGame() != null) {
-            phase = -1;
-            completePhase();
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public void completePhase() {
         phase++;
         while (!((Phase10Game) getGame()).getActivePhases()[phase]) {

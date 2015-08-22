@@ -58,10 +58,6 @@ public class Player {
         );
     }
 
-    public boolean getReady() {
-        return game != null;
-    }
-
     public Game<?> getGame() {
         return game;
     }

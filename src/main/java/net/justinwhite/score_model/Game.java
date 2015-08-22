@@ -169,7 +169,6 @@ public class Game<T extends Player> {
         // successful instantiation, continue setting up the Player [or subclass]
         newPlayer.setGame(this);
         newPlayer.setName(_name);
-        newPlayer.getReady();
         return newPlayer;
     }
 

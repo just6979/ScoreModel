@@ -54,7 +54,6 @@ public class PlayerTest {
         player = new Player();
         player.setGame(game);
         player.setName(name);
-        assertTrue(player.getReady());
         player.setScore(score);
     }
 
@@ -70,9 +69,7 @@ public class PlayerTest {
 
     @Test
     public void testGetGame() throws Exception {
-        if (player.getReady()) {
-            assertSame(game, player.getGame());
-        }
+        assertSame(game, player.getGame());
     }
 
     @Test
