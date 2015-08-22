@@ -34,21 +34,16 @@ package net.justinwhite.score_model;
 import java.util.*;
 
 public class Game<T extends Player> {
-    public static final int MIN_PLAYERS;
-    public static final int MAX_PLAYERS;
-
-    static {
-        MIN_PLAYERS = 2;
-        MAX_PLAYERS = 8;
-    }
+    public static final int MIN_PLAYERS = 2;
+    public static final int MAX_PLAYERS = 8;
 
     private final UUID id;
+    private final Class<T> playerClass;
     private int numPlayers;
     private String name;
     private final List<T> playerList;
     private final Map<String, T> playerMap;
     private T winner;
-    private final Class<T> playerClass;
 
     public Game(Class<T> _class) {
         this(_class, MIN_PLAYERS);
@@ -117,7 +112,7 @@ public class Game<T extends Player> {
     */
     public boolean setNumPlayers(int newNumPlayers) {
         // make sure requested count is within limits
-        if (newNumPlayers < MIN_PLAYERS || newNumPlayers > MAX_PLAYERS ){
+        if (newNumPlayers < MIN_PLAYERS || newNumPlayers > MAX_PLAYERS) {
             return false;
         }
         // increasing count, add players

@@ -35,11 +35,7 @@ package net.justinwhite.score_model.phase_10;
 import net.justinwhite.score_model.Game;
 
 public class Phase10Game extends Game<Phase10Player> {
-    public static final int MAX_PHASE;
-
-    static {
-        MAX_PHASE = 10;
-    }
+    public static final int MAX_PHASE = 10;
 
     static boolean[] makeDefaultPhases() {
         boolean[] defaultPhases = new boolean[MAX_PHASE + 1];
