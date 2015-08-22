@@ -53,6 +53,11 @@ public class Phase10PlayerTest {
     }
 
     @Test
+    public void testPhase10Player() throws Exception {
+
+    }
+
+    @Test
     public void testToString() throws Exception {
         assertEquals(String.format(
                         "Name '%s'; Score %s; Phase %d",
@@ -64,13 +69,7 @@ public class Phase10PlayerTest {
     }
 
     @Test
-    public void testAddScore() throws Exception {
-        player.addScore(score);
-        assertEquals(score * 2, player.getScore());
-    }
-
-    @Test
-    public void testNextPhase() throws Exception {
+    public void testCompletePhase() throws Exception {
         player.completePhase();
         assertEquals(phase + 1, player.getPhase());
     }

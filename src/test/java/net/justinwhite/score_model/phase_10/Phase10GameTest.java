@@ -39,22 +39,23 @@ import static org.junit.Assert.assertEquals;
 @SuppressWarnings("FieldCanBeLocal")
 public class Phase10GameTest {
     private final int numPlayers;
-    private final String initialName;
+    private final String name;
     private final String[] playerNames;
     private final Phase10Player[] playersArray;
+
     private Phase10Game game;
 
     {
         numPlayers = 4;
-        initialName = "P1P2P3P4";
-        playerNames = new String[]{"Justin W", "Lauren K", "Timmay C", "Denise B"};
+        name = "LKJWTCDB";
+        playerNames = new String[]{"Lauren K", "Justin W", "Tim C", "Denise B"};
         playersArray = new Phase10Player[numPlayers];
     }
 
     @Before
     public void setUp() {
         game = new Phase10Game(numPlayers);
-        assertEquals(initialName, game.getName());
+        assertEquals(name, game.getName());
         for (int i = 0; i < numPlayers; i++) {
             playersArray[i] = game.getPlayer(i);
             game.renamePlayer(String.format("Player %d", i + 1), playerNames[i]);
@@ -63,6 +64,36 @@ public class Phase10GameTest {
 
     @Test
     public void testMakeDefaultPhases() throws Exception {
+
+    }
+
+    @Test
+    public void testPhase10Game() throws Exception {
+
+    }
+
+    @Test
+    public void testToString() throws Exception {
+
+    }
+
+    @Test
+    public void testGetActivePhases() throws Exception {
+
+    }
+
+    @Test
+    public void testGetPhases() throws Exception {
+
+    }
+
+    @Test
+    public void testGetScoresPhasesText() throws Exception {
+
+    }
+
+    @Test
+    public void testFindWinner() throws Exception {
 
     }
 }
