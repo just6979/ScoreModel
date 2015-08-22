@@ -115,18 +115,26 @@ public class Game<T extends Player> {
          If increasing, create a blank player
          If decreasing, delete last player added
     */
-    public void setNumPlayers(int _numPlayers) {
-        if (_numPlayers > numPlayers) {
-            for (int i = numPlayers; i < _numPlayers; i++) {
+    public boolean setNumPlayers(int newNumPlayers) {
+        // make sure requested count is within limits
+        if (newNumPlayers < MIN_PLAYERS || newNumPlayers > MAX_PLAYERS ){
+            return false;
+        }
+        // increasing count, add players
+        if (newNumPlayers > numPlayers) {
+            for (int i = numPlayers; i < newNumPlayers; i++) {
                 addPlayer();
             }
-        } else if (_numPlayers < numPlayers) {
-            for (int i = _numPlayers; i < numPlayers; i++) {
+        }
+        // decreasing count, remove players
+        if (numPlayers > newNumPlayers) {
+            for (int i = numPlayers; i > newNumPlayers; i--) {
                 removePlayer();
             }
         }
+        // record new count
         numPlayers = playerList.size();
-
+        return true;
     }
 
     public List<T> getPlayerList() {
@@ -138,7 +146,7 @@ public class Game<T extends Player> {
     }
 
     public T getPlayer(int index) {
-        if (0 <= index && index < numPlayers) {
+        if (0 <= index && index < playerList.size()) {
             return playerList.get(index);
         } else {
             return null;
@@ -154,14 +162,19 @@ public class Game<T extends Player> {
     }
 
     private T makePlayer(String _name) {
-        T newPlayer = null;
+        T newPlayer;
+        // to make a new Player [or subclass], use the class's instance factory
         try {
             newPlayer = curClass.newInstance();
-            newPlayer.setGame(this);
-            newPlayer.setName(_name);
         } catch (InstantiationException | IllegalAccessException e) {
+            // if the factory can't make a new object, something major is wrong
             e.printStackTrace();
+            return null;
         }
+        // successful instantiation, continue setting up the Player [or subclass]
+        newPlayer.setGame(this);
+        newPlayer.setName(_name);
+        newPlayer.getReady();
         return newPlayer;
     }
 
@@ -204,21 +217,21 @@ public class Game<T extends Player> {
         }
     }
 
-    public void renamePlayer(int index, String newName) {
-        T p = playerList.get(index);
-        if (p != null) {
-            p.setName(newName);
-            buildName();
-        }
+    public String renamePlayer(int index, String newName) {
+        T p = getPlayer(index);
+        // call rename by name so PlayerMap key is updated
+        return renamePlayer(p.getName(), newName);
     }
 
-    public void renamePlayer(String oldName, String newName) {
+    public String renamePlayer(String oldName, String newName) {
         T p = playerMap.remove(oldName);
         if (p != null) {
             p.setName(newName);
             playerMap.put(newName, p);
+            buildName();
+            return newName;
         }
-        buildName();
+        return null;
     }
 
     public int[] getScores() {
