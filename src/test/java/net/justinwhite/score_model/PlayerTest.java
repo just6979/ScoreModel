@@ -40,11 +40,11 @@ import static org.junit.Assert.*;
 public class PlayerTest {
     private final String name = "First Last";
     private final String initials = "FL";
-    private int score = 88;
+    private final int score = 88;
+    private final String newName = "OnlyFirst";
+    private final String newInitials = "O_";
     private Game<Player> game;
     private Player player;
-    private String newName = "OnlyFirst";
-    private String newInitials = "O_";
 
     @Before
     public void setUp() throws Exception {
@@ -56,10 +56,14 @@ public class PlayerTest {
     // test all the remaining constructors
     @Test
     public void testPlayer() throws Exception {
+        player = null;
         player = new Player();
-        assertNull(player.getGame());
-        assertEquals("Player X", player.getName());
         game = new Game<>(Player.class);
+        assertNull(player.getGame());
+        player.setGame(game);
+        assertSame(game, player.getGame());
+        assertEquals("Player X", player.getName());
+        player = null;
         player = new Player(game);
         assertSame(game, player.getGame());
         assertEquals("Player X", player.getName());

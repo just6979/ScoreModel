@@ -42,7 +42,7 @@ public class GameTest {
     private final String gameName;
     private final Player[] playersArray;
     private final String newPlayerName;
-    private String newPlayerInitials;
+    private final String newPlayerInitials;
     private Game<Player> game;
 
     {
@@ -66,11 +66,11 @@ public class GameTest {
 
     @Test
     public void testGame() throws Exception {
-        game = new Game<Player>(Player.class);
+        game = new Game<>(Player.class);
         assertEquals(Game.MIN_PLAYERS, game.getNumPlayers());
-        game = new Game<Player>(Player.class, Integer.MIN_VALUE);
+        game = new Game<>(Player.class, Integer.MIN_VALUE);
         assertEquals(Game.MIN_PLAYERS, game.getNumPlayers());
-        game = new Game<Player>(Player.class, Integer.MAX_VALUE);
+        game = new Game<>(Player.class, Integer.MAX_VALUE);
         assertEquals(Game.MAX_PLAYERS, game.getNumPlayers());
     }
 
