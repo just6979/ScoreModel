@@ -42,13 +42,13 @@ public class Phase10Player extends Player {
         this(null, "Player X");
     }
 
+    public Phase10Player(Phase10Game _game) {
+        this(_game, "Player X");
+    }
+
     public Phase10Player(Phase10Game _game, String _name) {
         super(_game, _name);
         phase = 0;
-    }
-
-    public Phase10Player(Phase10Game _game) {
-        this(_game, "Player X");
     }
 
     @Override
