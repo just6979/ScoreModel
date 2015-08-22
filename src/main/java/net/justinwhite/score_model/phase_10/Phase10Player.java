@@ -54,9 +54,8 @@ public class Phase10Player extends Player {
     @Override
     public String toString() {
         return String.format(
-                "Name '%s'; Score %s; Phase %d",
-                getName(),
-                getScore(),
+                "%s; Phase %d",
+                super.toString(),
                 getPhase()
         );
     }
