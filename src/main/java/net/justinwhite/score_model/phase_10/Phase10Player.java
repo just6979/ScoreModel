@@ -36,7 +36,6 @@ import net.justinwhite.score_model.Player;
 import static net.justinwhite.score_model.phase_10.Phase10Game.MAX_PHASE;
 
 public class Phase10Player extends Player {
-    private Phase10Game game;
     private int phase;
 
     public Phase10Player() {
@@ -45,13 +44,11 @@ public class Phase10Player extends Player {
 
     public Phase10Player(Phase10Game _game, String _name) {
         super(_game, _name);
-        game = _game;
         phase = 0;
     }
 
     public Phase10Player(Phase10Game _game) {
         this(_game, "Player X");
-        game = _game;
     }
 
     @Override
@@ -66,7 +63,7 @@ public class Phase10Player extends Player {
 
     @Override
     public boolean getReady() {
-        if (game != null) {
+        if (getGame() != null) {
             phase = -1;
             completePhase();
             return true;
@@ -77,7 +74,7 @@ public class Phase10Player extends Player {
 
     public void completePhase() {
         phase++;
-        while (!game.getActivePhases()[phase]) {
+        while (!((Phase10Game) getGame()).getActivePhases()[phase]) {
             phase++;
         }
         if (phase > MAX_PHASE) {
