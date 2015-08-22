@@ -61,4 +61,8 @@ public class Phase10GameTest {
         }
     }
 
+    @Test
+    public void testMakeDefaultPhases() throws Exception {
+
+    }
 }

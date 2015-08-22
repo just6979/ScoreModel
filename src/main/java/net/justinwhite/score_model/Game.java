@@ -48,14 +48,14 @@ public class Game<T extends Player> {
     private final List<T> playerList;
     private final Map<String, T> playerMap;
     private T winner;
-    private final Class<T> curClass;
+    private final Class<T> playerClass;
 
     public Game(Class<T> _class) {
         this(_class, MIN_PLAYERS);
     }
 
     public Game(Class<T> _class, int _numPlayers) {
-        curClass = _class;
+        playerClass = _class;
 
         // bounds check number of players
         if (_numPlayers < MIN_PLAYERS) {
@@ -165,7 +165,7 @@ public class Game<T extends Player> {
         T newPlayer;
         // to make a new Player [or subclass], use the class's instance factory
         try {
-            newPlayer = curClass.newInstance();
+            newPlayer = playerClass.newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
             // if the factory can't make a new object, something major is wrong
             e.printStackTrace();
