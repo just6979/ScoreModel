@@ -2,9 +2,9 @@ apply plugin: 'java'
 
 def major = 0
 def minor = 5
-def commits = Integer.parseInt('git rev-list master --count'.execute([], project.rootDir).text.trim())
+def revision = 0
 
-version = "$major.$minor-r$commits"
+version = "$major.$minor.$revision"
 
 //noinspection GroovyUnusedAssignment
 sourceCompatibility = 1.7
