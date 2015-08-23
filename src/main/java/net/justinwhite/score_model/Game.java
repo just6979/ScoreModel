@@ -148,8 +148,12 @@ public class Game<T extends Player> {
         }
     }
 
-    public T getPlayerByName(String _name) {
+    public T getPlayer(String _name) {
         return playerMap.get(_name);
+    }
+
+    public Boolean checkPlayer(int index) {
+        return playerList.get(index) != null;
     }
 
     public Boolean checkPlayer(String _name) {

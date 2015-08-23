@@ -133,8 +133,8 @@ public class GameTest {
 
     @Test
     public void testGetPlayerByName() throws Exception {
-        assertSame(playersArray[0], game.getPlayerByName("Player 1"));
-        assertNull(game.getPlayerByName("Player X"));
+        assertSame(playersArray[0], game.getPlayer("Player 1"));
+        assertNull(game.getPlayer("Player X"));
     }
 
     @Test
@@ -202,7 +202,7 @@ public class GameTest {
     @Test
     public void testRenamePlayerByName() throws Exception {
         game.renamePlayer("Player 1", newPlayerName);
-        assertEquals(newPlayerName, game.getPlayerByName(newPlayerName).getName());
+        assertEquals(newPlayerName, game.getPlayer(newPlayerName).getName());
     }
 
 }
