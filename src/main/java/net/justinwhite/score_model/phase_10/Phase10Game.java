@@ -37,29 +37,89 @@ import net.justinwhite.score_model.Game;
 public class Phase10Game extends Game<Phase10Player> {
     public static final int MAX_PHASE = 10;
 
-    static boolean[] makeDefaultPhases() {
-        boolean[] defaultPhases = new boolean[MAX_PHASE + 1];
-        for (int i = 1; i <= MAX_PHASE; i++) { defaultPhases[i] = true; }
+    public static final int PHASES_ALL = 0;
+    public static final int PHASES_EVEN = 1;
+    public static final int PHASES_ODD = 2;
+    public static final int PHASES_FIRST_5 = 3;
+    public static final int PHASES_LAST_5 = 4;
+
+    static boolean[] makePhasePreset() {
+        return makePhasePreset(PHASES_ALL);
+    }
+
+    static boolean[] makePhasePreset(int phasePreset) {
+        boolean[] defaultPhases;
+
+        switch (phasePreset) {
+            case PHASES_EVEN:
+                defaultPhases = new boolean[]{false,
+                        false, true,
+                        false, true,
+                        false, true,
+                        false, true,
+                        false, true
+                };
+                break;
+            case PHASES_ODD:
+                defaultPhases = new boolean[]{false,
+                        true, false,
+                        true, false,
+                        true, false,
+                        true, false,
+                        true, false
+                };
+                break;
+            case PHASES_FIRST_5:
+                defaultPhases = new boolean[]{false,
+                        true, true, true, true, true,
+                        false, false, false, false, false
+                };
+                break;
+            case PHASES_LAST_5:
+                defaultPhases = new boolean[]{false,
+                        false, false, false, false, false,
+                        true, true, true, true, true
+                };
+                break;
+            case PHASES_ALL:
+            default:
+                defaultPhases = new boolean[]{false,
+                        true, true, true, true, true,
+                        true, true, true, true, true};
+                break;
+        }
         return defaultPhases;
     }
 
-    private final boolean[] activePhases;
+    private boolean[] activePhases;
 
     public Phase10Game() {
-        this(0);
+        this(0, PHASES_ALL);
     }
 
     public Phase10Game(int _numPlayers) {
-        this(_numPlayers, makeDefaultPhases());
+        this(_numPlayers, PHASES_ALL);
     }
 
-    public Phase10Game(int _numPlayers, boolean[] _phases) {
+    public Phase10Game(int _numPlayers, int _phasePreset) {
         super(Phase10Player.class, _numPlayers);
-        activePhases = _phases;
+        activePhases = makePhasePreset(_phasePreset);
     }
 
     public boolean[] getActivePhases() {
         return activePhases;
+    }
+
+    public void setActivePhases(int _phasePreset) {
+        makePhasePreset(_phasePreset);
+    }
+
+    public void setActivePhases(boolean[] _activePhases) {
+        activePhases = _activePhases;
+    }
+
+    public boolean isPhaseActive(int _phase) {
+        return _phase > 0 && _phase <= MAX_PHASE && activePhases[_phase];
     }
 
     public int[] getPhases() {
