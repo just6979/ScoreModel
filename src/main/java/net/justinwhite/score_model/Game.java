@@ -44,12 +44,17 @@ public class Game<T extends Player> {
     private int numPlayers;
     private String name;
     private T winner;
+    private boolean hasName = false;
 
     public Game(Class<T> _class) {
-        this(_class, MIN_PLAYERS);
+        this(_class, MIN_PLAYERS, null);
     }
 
     public Game(Class<T> _class, int _numPlayers) {
+        this(_class, _numPlayers, null);
+    }
+
+    public Game(Class<T> _class, int _numPlayers, String _name) {
         playerClass = _class;
 
         // bounds check number of players
@@ -60,12 +65,12 @@ public class Game<T extends Player> {
         }
 
         id = UUID.randomUUID();
-
         playerList = new ArrayList<>();
         playerMap = new TreeMap<>();
         winner = null;
 
         setNumPlayers(_numPlayers);
+        setName(_name);
     }
 
     public String toString() {
@@ -84,7 +89,13 @@ public class Game<T extends Player> {
     }
 
     public void setName(String _name) {
-        name = _name;
+        if (_name != null && _name != "") {
+            name = _name;
+            hasName = true;
+        } else {
+            hasName = false;
+            buildName();
+        }
     }
 
     public UUID getID() {
@@ -230,11 +241,13 @@ public class Game<T extends Player> {
         Create a game name based on the players' initials
     */
     public void buildName() {
-        String _name = "";
-        for (T p : playerList) {
-            _name += p.getInitials();
+        if (!hasName) {
+            String newName = "";
+            for (T p : playerList) {
+                newName += p.getInitials();
+            }
+            name = newName;
         }
-        setName(_name);
     }
 
     public int[] getScores() {
