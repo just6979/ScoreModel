@@ -58,20 +58,28 @@ public class Player {
         );
     }
 
-    public Game<?> getGame() {
-        return game;
-    }
-
-    public void setGame(Game<?> _game) {
-        game = _game;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String _name) {
         name = _name;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int _score) {
+        score = _score;
+    }
+
+    public Game<?> getGame() {
+        return game;
+    }
+
+    public void setGame(Game<?> _game) {
+        game = _game;
     }
 
     public String getInitials() {
@@ -82,14 +90,6 @@ public class Player {
         } else {
             return name.substring(0, 1) + "_";
         }
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int _score) {
-        score = _score;
     }
 
 }
