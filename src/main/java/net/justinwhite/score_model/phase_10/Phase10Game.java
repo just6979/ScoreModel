@@ -106,12 +106,12 @@ public class Phase10Game extends Game<Phase10Player> {
         return activePhases;
     }
 
-    public void setActivePhases(boolean[] _activePhases) {
-        activePhases = _activePhases;
-    }
-
     public void setActivePhases(int _phasePreset) {
         makePhasePreset(_phasePreset);
+    }
+
+    public void setActivePhases(boolean[] _activePhases) {
+        activePhases = _activePhases;
     }
 
     public boolean isPhaseActive(int _phase) {
@@ -141,7 +141,7 @@ public class Phase10Game extends Game<Phase10Player> {
     }
 
     @Override
-    public void findWinner() {
+    public boolean checkWinner() {
         // TODO: scores _might_ be the same sometimes. What is the 2nd tie-breaker?
         int lowScore = Integer.MAX_VALUE;
         for (Phase10Player p : getPlayerList()) {
@@ -153,6 +153,7 @@ public class Phase10Game extends Game<Phase10Player> {
                 }
             }
         }
+        return getWinner() != null;
     }
 
 }
