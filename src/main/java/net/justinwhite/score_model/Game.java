@@ -89,12 +89,12 @@ public class Game<T extends Player> {
     }
 
     public void setName(String _name) {
-        if (_name != null && _name != "") {
-            name = _name;
-            hasName = true;
-        } else {
+        if (_name == null || _name.equals("")) {
             hasName = false;
             buildName();
+        } else {
+            name = _name;
+            hasName = true;
         }
     }
 
