@@ -47,6 +47,7 @@ public class GameTest {
     private final String name;
     private Game<Player> game;
     private int[] scores = new int[]{0, 0, 0, 0};
+    private String newName = "Foo Game";
 
     {
         numPlayers = 4;
@@ -106,8 +107,17 @@ public class GameTest {
     }
 
     @Test
-    public void testBuildName() throws Exception {
+    public void testName() throws Exception {
+        game.setName(newName);
+        assertEquals(newName, game.getName());
+        // don't build name since we set it manually
+         game.buildName();
+        assertEquals(newName, game.getName());
+        // still don't build a name
         game.addPlayer(newPlayerName);
+        assertEquals(newName, game.getName());
+        // start building a name again
+        game.setName("");
         game.buildName();
         assertEquals(name + newPlayerInitials, game.getName());
     }
