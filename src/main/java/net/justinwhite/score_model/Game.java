@@ -134,7 +134,11 @@ public class Game<T extends Player> {
     }
 
     public Boolean checkPlayer(int index) {
-        return index > 0 && index <= numPlayers && playerList.get(index) != null;
+        if (index > 0 && index <= numPlayers) {
+            return playerList.get(index) != null;
+        } else {
+            return false;
+        }
     }
 
     public Boolean checkPlayer(String _name) {
@@ -197,9 +201,14 @@ public class Game<T extends Player> {
     }
 
     public String renamePlayer(int index, String newName) {
-        T p = getPlayer(index);
-        // call rename by name so PlayerMap key is updated
-        return renamePlayer(p.getName(), newName);
+        T p;
+        if (index >= 0 && index < numPlayers) {
+            p = getPlayer(index);
+            // call rename by name so PlayerMap key is updated
+            return renamePlayer(p.getName(), newName);
+        } else {
+            return null;
+        }
     }
 
     public T getPlayer(int index) {
@@ -233,8 +242,7 @@ public class Game<T extends Player> {
     }
 
     public int[] getScores() {
-        int count = playerList.size();
-        int[] scores = new int[count];
+        int[] scores = new int[playerList.size()];
         int i = 0;
         for (Player p : playerList) {
             scores[i++] = p.getScore();
@@ -250,23 +258,19 @@ public class Game<T extends Player> {
         return out;
     }
 
-    public Boolean hasWinner() {
-        if (winner == null) {
-            findWinner();
-        }
-        return winner != null;
-    }
-
-    public void findWinner() {
+    // TODO: handle tie scores
+    public boolean checkWinner() {
+        winner = null;
         int highScore = 0;
         int curScore;
-        for (T p : playerList) {
-            curScore = p.getScore();
-            if (curScore > highScore && curScore > 0) {
+        for (T curPlayer : playerList) {
+            curScore = curPlayer.getScore();
+            if (curScore > highScore) {
                 highScore = curScore;
-                winner = p;
+                winner = curPlayer;
             }
         }
+        return winner != null;
     }
 
     public T getWinner() {
