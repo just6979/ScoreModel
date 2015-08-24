@@ -39,29 +39,47 @@ import static org.junit.Assert.*;
 @SuppressWarnings("FieldCanBeLocal")
 public class GameTest {
     private final int numPlayers;
-    private final String gameName;
+    private final String initialName;
     private final Player[] playersArray;
     private final String newPlayerName;
     private final String newPlayerInitials;
+    private final String[] playerNames;
+    private final String name;
     private Game<Player> game;
+    private int[] scores = new int[]{0, 0, 0, 0};
 
     {
         numPlayers = 4;
-        gameName = "P1P2P3P4";
+        initialName = "P1P2P3P4";
+        name = "LKJWTCDB";
+        playerNames = new String[]{"Lauren K", "Justin W", "Tim C", "Denise B"};
+        playersArray = new Player[numPlayers];
         newPlayerName = "Foo Bar";
         newPlayerInitials = "FB";
-
-        playersArray = new Player[numPlayers];
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         game = new Game<>(Player.class, numPlayers);
+        assertEquals(numPlayers, game.getNumPlayers());
+        assertEquals(initialName, game.getName());
         for (int i = 0; i < numPlayers; i++) {
-            // populate array for comparisons later.
+            // populate array for comparisons later
             playersArray[i] = game.getPlayer(i);
-
+            // rename players for comparisons later
+            game.renamePlayer(i, playerNames[i]);
         }
+        // check that name is properly rebuilt
+        assertEquals(name, game.getName());
+        // check that scores start at 0
+        assertArrayEquals(scores, game.getScores());
+        // set scores for later tests
+        scores = new int[]{50, 100, 200, 150};
+        for (int i = 0; i < scores.length; i++) {
+            game.getPlayer(i).setScore(scores[i]);
+        }
+        // check the scores were set correctly
+        assertArrayEquals(scores, game.getScores());
     }
 
     @Test
@@ -91,7 +109,7 @@ public class GameTest {
     public void testBuildName() throws Exception {
         game.addPlayer(newPlayerName);
         game.buildName();
-        assertEquals(gameName + newPlayerInitials, game.getName());
+        assertEquals(name + newPlayerInitials, game.getName());
     }
 
     @Test
@@ -105,7 +123,7 @@ public class GameTest {
         // and player count matches
         assertEquals(newNumPlayers, game.getNumPlayers());
         // check if the last player's initials were added to the game name
-        assertEquals(gameName + "P" + newNumPlayers, game.getName());
+        assertEquals(name + "P" + newNumPlayers, game.getName());
         // check last player's name to see if it matches the player count
         assertEquals("Player " + newNumPlayers, game.getPlayer(game.getNumPlayers() - 1).getName());
     }
@@ -120,48 +138,47 @@ public class GameTest {
         assertTrue(game.setNumPlayers(newNumPlayers));
         assertEquals(newNumPlayers, game.getNumPlayers());
         // check if the last player's initial were removed from the game name
-        assertEquals(gameName.substring(0, newNumPlayers * 2), game.getName());
-        // check last player's name to see if it matches the player count
-        assertEquals("Player " + newNumPlayers, game.getPlayer(game.getNumPlayers() - 1).getName());
+        assertEquals(name.substring(0, newNumPlayers * 2), game.getName());
+        // check last player to see if it matches
+        assertSame(playersArray[newNumPlayers - 1], game.getPlayer(game.getNumPlayers() - 1));
     }
 
-    @Test
-    public void testGetPlayerByIndex() throws Exception {
-        assertSame(playersArray[0], game.getPlayer(0));
-        assertNull(game.getPlayer(100));
-    }
-
-    @Test
-    public void testGetPlayerByName() throws Exception {
-        assertSame(playersArray[0], game.getPlayer("Player 1"));
-        assertNull(game.getPlayer("Player X"));
-    }
 
     @Test
     public void testCheckPlayer() throws Exception {
-        assertTrue(game.checkPlayer("Player 1"));
+        assertTrue(game.checkPlayer(1));
+        assertFalse(game.checkPlayer(Integer.MAX_VALUE));
+        assertFalse(game.checkPlayer(Integer.MIN_VALUE));
+
+        assertTrue(game.checkPlayer(playerNames[0]));
         assertFalse(game.checkPlayer("Some Player"));
+        assertFalse(game.checkPlayer(""));
+    }
+
+    @Test
+    public void testGetPlayer() throws Exception {
+        assertSame(playersArray[0], game.getPlayer(0));
+        assertNull(game.getPlayer(Integer.MAX_VALUE));
+        assertNull(game.getPlayer(Integer.MIN_VALUE));
+
+        assertSame(playersArray[0], game.getPlayer(playerNames[0]));
+        assertNull(game.getPlayer("Player X"));
+        assertNull(game.getPlayer(""));
     }
 
     @Test
     public void testAddPlayer() throws Exception {
         // add 1 Player
-        Player newPlayer = game.addPlayer();
+        Player newPlayer = game.addPlayer(newPlayerName);
         assertSame(newPlayer, game.getPlayer(game.getNumPlayers() - 1));
         // check it's initials are on the game name
-        assertEquals(gameName + "P" + (numPlayers + 1), game.getName());
+        assertEquals(name + newPlayerInitials, game.getName());
         // add Players to the max
         for (int i = game.getNumPlayers(); i < Game.MAX_PLAYERS; i++) {
             assertNotNull(game.addPlayer());
         }
         // try to add one more and fail
         assertNull(game.addPlayer());
-    }
-
-    @Test
-    public void testAddPlayerWithName() throws Exception {
-        game.addPlayer(newPlayerName);
-        assertEquals(gameName + newPlayerInitials, game.getName());
     }
 
     @Test
@@ -176,17 +193,17 @@ public class GameTest {
         assertNotSame(oldPlayer, game.getPlayer(game.getNumPlayers() - 1));
         // check if the last player's initial were removed from the game name
         assertEquals(
-                gameName.substring(0, game.getNumPlayers() * 2),
+                name.substring(0, game.getNumPlayers() * 2),
                 game.getName()
         );
-        // check last player's name to see if it matches the player count
+        // check last player's name to see if it matches
         assertEquals(
-                "Player " + game.getNumPlayers(),
+                playersArray[game.getNumPlayers() - 1].getName(),
                 game.getPlayer(game.getNumPlayers() - 1).getName()
         );
-        // remove Players to the minimum
+        // remove Players, from the beginning, to the minimum
         for (int i = game.getNumPlayers(); i > Game.MIN_PLAYERS; i--) {
-            assertNotNull(game.removePlayer());
+            assertNotNull(game.removePlayer(0));
         }
         // try to remove one more and fail
         assertNull(game.removePlayer());
@@ -194,15 +211,42 @@ public class GameTest {
     }
 
     @Test
-    public void testRenamePlayerByIndex() throws Exception {
-        game.renamePlayer(0, newPlayerName);
-        assertEquals(newPlayerName, game.getPlayer(0).getName());
+    public void testRenamePlayer() throws Exception {
+        int changePlayer = 0;
+
+        assertNotNull(game.renamePlayer(changePlayer, newPlayerName));
+        assertEquals(newPlayerName, game.getPlayer(changePlayer).getName());
+        assertNull(game.renamePlayer(Integer.MAX_VALUE, newPlayerName));
+        assertNull(game.renamePlayer(Integer.MIN_VALUE, newPlayerName));
+
+        assertNotNull(game.renamePlayer(playerNames[1], newPlayerName));
+        assertEquals(newPlayerName, game.getPlayer(newPlayerName).getName());
+        assertNull(game.renamePlayer(playerNames[changePlayer], newPlayerName));
+        assertNull(game.renamePlayer("", newPlayerName));
     }
 
     @Test
-    public void testRenamePlayerByName() throws Exception {
-        game.renamePlayer("Player 1", newPlayerName);
-        assertEquals(newPlayerName, game.getPlayer(newPlayerName).getName());
+    public void testGetScoresText() throws Exception {
+        String result = "";
+        for (Player p : game.getPlayerList()) {
+            result += String.format("%s: %d Points; ", p.getName(), p.getScore());
+        }
+        assertEquals(result, game.getScoresText());
+    }
+
+    // TODO: test tie-scores
+    @Test
+    public void testCheckWinner() throws Exception {
+        // check we have a winner
+        assertTrue(game.checkWinner());
+        // check winner matches player set to win in setup
+        assertSame(playersArray[2], game.getWinner());
+        // reset scores to 0
+        for (int i = 0; i < scores.length; i++) {
+            game.getPlayer(i).setScore(0);
+        }
+        // check there is no winner
+        assertFalse(game.checkWinner());
     }
 
 }
