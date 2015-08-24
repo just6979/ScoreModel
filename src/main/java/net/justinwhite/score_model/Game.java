@@ -70,17 +70,21 @@ public class Game<T extends Player> {
 
     public String toString() {
         return String.format("Game: %s\nUUID: %s\nPlayer count: %d\nPlayers: %s\nPlayerMap: %s",
-                getName(),
-                getID(),
-                getNumPlayers(),
+                name,
+                id,
+                numPlayers,
                 // List<> and Map<> classes handle toString() themselves
-                getPlayerList(),
-                getPlayerMap()
+                playerList,
+                playerMap
         );
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String _name) {
+        name = _name;
     }
 
     public UUID getID() {
@@ -97,10 +101,6 @@ public class Game<T extends Player> {
 
     public Map<String, T> getPlayerMap() {
         return playerMap;
-    }
-
-    public void setName(String _name) {
-        name = _name;
     }
 
     /*
@@ -273,8 +273,7 @@ public class Game<T extends Player> {
         return winner;
     }
 
-    public T setWinner(T _winner) {
+    protected void setWinner(T _winner) {
         winner = _winner;
-        return winner;
     }
 }
