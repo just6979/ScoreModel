@@ -35,6 +35,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class Phase10PlayerTest {
@@ -45,16 +46,31 @@ public class Phase10PlayerTest {
     private Phase10Player player;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         game = new Phase10Game();
-        player = new Phase10Player(game, name);
+        player = new Phase10Player();
+        assertNull(player.getGame());
+        player.setGame(game);
+        player.setName(name);
         player.addScore(score);
         player.completePhase();
     }
 
     @Test
     public void testPhase10Player() throws Exception {
-
+        game = new Phase10Game(2, Phase10Game.PHASES_EVEN);
+        player = new Phase10Player(game);
+        player.setName(name);
+        player.completePhase();
+        assertEquals(2, player.getPhase());
+        player.completePhase();
+        assertEquals(4, player.getPhase());
+        game = new Phase10Game(2, Phase10Game.PHASES_ODD);
+        player = new Phase10Player(game, name);
+        player.completePhase();
+        assertEquals(1, player.getPhase());
+        player.completePhase();
+        assertEquals(3, player.getPhase());
     }
 
     @Test
@@ -69,9 +85,32 @@ public class Phase10PlayerTest {
     }
 
     @Test
-    public void testCompletePhase() throws Exception {
+    public void testGame() {
+        assertEquals(game, player.getGame());
+    }
+
+    @Test
+    public void testName() {
+        assertEquals(name, player.getName());
+    }
+
+    @Test
+    public void testScore() {
+        assertEquals(score, player.getScore());
+        player.addScore(score);
+        assertEquals(score * 2, player.getScore());
+    }
+
+    @Test
+    public void testPhase() throws Exception {
+        for (int i = phase + 1; i <= Phase10Game.MAX_PHASE; i++) {
+            player.completePhase();
+            assertEquals(i, player.getPhase());
+        }
+        assertEquals(game.MAX_PHASE, player.getPhase());
         player.completePhase();
-        assertEquals(phase + 1, player.getPhase());
+        player.completePhase();
+        assertEquals(game.MAX_PHASE, player.getPhase());
     }
 
 }
