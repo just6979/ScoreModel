@@ -134,11 +134,7 @@ public class Game<T extends Player> {
     }
 
     public Boolean checkPlayer(int index) {
-        if (index > 0 && index <= numPlayers) {
-            return playerList.get(index) != null;
-        } else {
-            return false;
-        }
+        return index > 0 && index <= numPlayers && playerList.get(index) != null;
     }
 
     public Boolean checkPlayer(String _name) {
