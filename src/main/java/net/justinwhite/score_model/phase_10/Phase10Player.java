@@ -66,13 +66,12 @@ public class Phase10Player extends Player {
     }
 
     public void completePhase() {
-        phase++;
-        while (!getGame().getActivePhases()[phase]) {
+        do {
             phase++;
-        }
-        if (phase > MAX_PHASE) {
-            phase = MAX_PHASE;
-        }
+            if (phase > MAX_PHASE) {
+                phase = MAX_PHASE;
+            }
+        } while (!getGame().isPhaseActive(phase));
     }
 
     public int getPhase() {

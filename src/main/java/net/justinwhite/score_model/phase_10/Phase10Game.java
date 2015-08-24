@@ -35,6 +35,7 @@ package net.justinwhite.score_model.phase_10;
 import net.justinwhite.score_model.Game;
 
 public class Phase10Game extends Game<Phase10Player> {
+    public static final int MIN_PHASE = 0;
     public static final int MAX_PHASE = 10;
 
     public static final int PHASES_ALL = 0;
@@ -43,11 +44,7 @@ public class Phase10Game extends Game<Phase10Player> {
     public static final int PHASES_FIRST_5 = 3;
     public static final int PHASES_LAST_5 = 4;
 
-    static boolean[] makePhasePreset() {
-        return makePhasePreset(PHASES_ALL);
-    }
-
-    static boolean[] makePhasePreset(int phasePreset) {
+    private static boolean[] makePhasePreset(int phasePreset) {
         boolean[] defaultPhases;
 
         switch (phasePreset) {
@@ -119,7 +116,7 @@ public class Phase10Game extends Game<Phase10Player> {
     }
 
     public boolean isPhaseActive(int _phase) {
-        return _phase > 0 && _phase <= MAX_PHASE && activePhases[_phase];
+        return activePhases[_phase];
     }
 
     public int[] getPhases() {
