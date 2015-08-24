@@ -43,6 +43,16 @@ public class Phase10Game extends Game<Phase10Player> {
     public static final int PHASES_ODD = 2;
     public static final int PHASES_FIRST_5 = 3;
     public static final int PHASES_LAST_5 = 4;
+    private boolean[] activePhases;
+
+    public Phase10Game() {
+        this(0, PHASES_ALL);
+    }
+
+    public Phase10Game(int _numPlayers, int _phasePreset) {
+        super(Phase10Player.class, _numPlayers);
+        activePhases = makePhasePreset(_phasePreset);
+    }
 
     private static boolean[] makePhasePreset(int phasePreset) {
         boolean[] defaultPhases;
@@ -88,31 +98,20 @@ public class Phase10Game extends Game<Phase10Player> {
         return defaultPhases;
     }
 
-    private boolean[] activePhases;
-
-    public Phase10Game() {
-        this(0, PHASES_ALL);
-    }
-
     public Phase10Game(int _numPlayers) {
         this(_numPlayers, PHASES_ALL);
-    }
-
-    public Phase10Game(int _numPlayers, int _phasePreset) {
-        super(Phase10Player.class, _numPlayers);
-        activePhases = makePhasePreset(_phasePreset);
     }
 
     public boolean[] getActivePhases() {
         return activePhases;
     }
 
-    public void setActivePhases(int _phasePreset) {
-        makePhasePreset(_phasePreset);
-    }
-
     public void setActivePhases(boolean[] _activePhases) {
         activePhases = _activePhases;
+    }
+
+    public void setActivePhases(int _phasePreset) {
+        makePhasePreset(_phasePreset);
     }
 
     public boolean isPhaseActive(int _phase) {

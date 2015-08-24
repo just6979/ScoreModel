@@ -39,10 +39,10 @@ public class Game<T extends Player> {
 
     private final UUID id;
     private final Class<T> playerClass;
-    private int numPlayers;
-    private String name;
     private final List<T> playerList;
     private final Map<String, T> playerMap;
+    private int numPlayers;
+    private String name;
     private T winner;
 
     public Game(Class<T> _class) {
@@ -79,31 +79,28 @@ public class Game<T extends Player> {
         );
     }
 
-    public UUID getID() {
-        return id;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setName(String _name) {
-        name = _name;
-    }
-
-    /*
-        Create a game name based on the players' initials
-    */
-    public void buildName() {
-        String _name = "";
-        for (T p : playerList) {
-            _name += p.getInitials();
-        }
-        setName(_name);
+    public UUID getID() {
+        return id;
     }
 
     public int getNumPlayers() {
         return numPlayers;
+    }
+
+    public List<T> getPlayerList() {
+        return playerList;
+    }
+
+    public Map<String, T> getPlayerMap() {
+        return playerMap;
+    }
+
+    public void setName(String _name) {
+        name = _name;
     }
 
     /*
@@ -130,22 +127,6 @@ public class Game<T extends Player> {
         // record new count
         numPlayers = playerList.size();
         return true;
-    }
-
-    public List<T> getPlayerList() {
-        return playerList;
-    }
-
-    public Map<String, T> getPlayerMap() {
-        return playerMap;
-    }
-
-    public T getPlayer(int index) {
-        if (0 <= index && index < playerList.size()) {
-            return playerList.get(index);
-        } else {
-            return null;
-        }
     }
 
     public T getPlayer(String _name) {
@@ -221,6 +202,14 @@ public class Game<T extends Player> {
         return renamePlayer(p.getName(), newName);
     }
 
+    public T getPlayer(int index) {
+        if (0 <= index && index < playerList.size()) {
+            return playerList.get(index);
+        } else {
+            return null;
+        }
+    }
+
     public String renamePlayer(String oldName, String newName) {
         T p = playerMap.remove(oldName);
         if (p != null) {
@@ -230,6 +219,17 @@ public class Game<T extends Player> {
             return newName;
         }
         return null;
+    }
+
+    /*
+        Create a game name based on the players' initials
+    */
+    public void buildName() {
+        String _name = "";
+        for (T p : playerList) {
+            _name += p.getInitials();
+        }
+        setName(_name);
     }
 
     public int[] getScores() {
@@ -250,6 +250,13 @@ public class Game<T extends Player> {
         return out;
     }
 
+    public Boolean hasWinner() {
+        if (winner == null) {
+            findWinner();
+        }
+        return winner != null;
+    }
+
     public void findWinner() {
         int highScore = 0;
         int curScore;
@@ -260,13 +267,6 @@ public class Game<T extends Player> {
                 winner = p;
             }
         }
-    }
-
-    public Boolean hasWinner() {
-        if (winner == null) {
-            findWinner();
-        }
-        return winner != null;
     }
 
     public T getWinner() {
