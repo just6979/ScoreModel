@@ -46,30 +46,36 @@ public class GameTest {
     private final String[] playerNames;
     private final String name;
     private Game<Player> game;
-    private int[] scores = new int[]{0, 0, 0, 0};
-    private String newName = "Foo Game";
+    private int[] scores;
+    private String newName;
 
     {
         numPlayers = 4;
-        initialName = "P1P2P3P4";
+        initialName = "P1P2";
         name = "LKJWTCDB";
         playerNames = new String[]{"Lauren K", "Justin W", "Tim C", "Denise B"};
         playersArray = new Player[numPlayers];
         newPlayerName = "Foo Bar";
         newPlayerInitials = "FB";
+        scores = new int[]{0, 0, 0, 0};
+        newName = "Foo Game";
     }
 
     @Before
     public void setUp() throws Exception {
-        game = new Game<>(Player.class, numPlayers);
+        game = new Game<>(Player.class, numPlayers, newName);
         assertEquals(numPlayers, game.getNumPlayers());
-        assertEquals(initialName, game.getName());
+        assertEquals(newName, game.getName());
         for (int i = 0; i < numPlayers; i++) {
             // populate array for comparisons later
             playersArray[i] = game.getPlayer(i);
             // rename players for comparisons later
             game.renamePlayer(i, playerNames[i]);
         }
+        // don't build name since we set it manually
+        assertEquals(newName, game.getName());
+        // start building a name again
+        game.setName("");
         // check that name is properly rebuilt
         assertEquals(name, game.getName());
         // check that scores start at 0
@@ -86,6 +92,7 @@ public class GameTest {
     @Test
     public void testGame() throws Exception {
         game = new Game<>(Player.class);
+        assertEquals(initialName, game.getName());
         assertEquals(Game.MIN_PLAYERS, game.getNumPlayers());
         game = new Game<>(Player.class, Integer.MIN_VALUE);
         assertEquals(Game.MIN_PLAYERS, game.getNumPlayers());
@@ -104,22 +111,6 @@ public class GameTest {
                 ), game.toString()
         );
 
-    }
-
-    @Test
-    public void testName() throws Exception {
-        game.setName(newName);
-        assertEquals(newName, game.getName());
-        // don't build name since we set it manually
-         game.buildName();
-        assertEquals(newName, game.getName());
-        // still don't build a name
-        game.addPlayer(newPlayerName);
-        assertEquals(newName, game.getName());
-        // start building a name again
-        game.setName("");
-        game.buildName();
-        assertEquals(name + newPlayerInitials, game.getName());
     }
 
     @Test
