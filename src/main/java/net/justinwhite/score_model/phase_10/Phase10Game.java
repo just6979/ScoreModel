@@ -109,12 +109,12 @@ public class Phase10Game extends Game<Phase10Player> {
         return activePhases;
     }
 
-    public void setActivePhases(boolean[] _activePhases) {
-        activePhases = _activePhases;
-    }
-
     public void setActivePhases(int _phasePreset) {
         makePhasePreset(_phasePreset);
+    }
+
+    public void setActivePhases(boolean[] _activePhases) {
+        activePhases = _activePhases;
     }
 
     public boolean isPhaseActive(int _phase) {
