@@ -91,6 +91,7 @@ public class GameTest {
 
     @Test
     public void testGame() throws Exception {
+        System.out.print("Testing " + Version.getVersion());
         game = new Game<>(Player.class);
         assertEquals(initialName, game.getName());
         assertEquals(Game.MIN_PLAYERS, game.getNumPlayers());
