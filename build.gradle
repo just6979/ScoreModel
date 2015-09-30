@@ -6,6 +6,8 @@ def revision = 0
 
 version = "$major.$minor.$revision"
 
+jar.archiveName = name + "." + jar.extension
+
 //noinspection GroovyUnusedAssignment
 sourceCompatibility = 1.7
 //noinspection GroovyUnusedAssignment
