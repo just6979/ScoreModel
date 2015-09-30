@@ -1,7 +1,7 @@
 apply plugin: 'java'
 
 def major = 0
-def minor = 7
+def minor = 8
 def revision = 0
 
 version = "$major.$minor.$revision"
