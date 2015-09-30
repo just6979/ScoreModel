@@ -60,7 +60,7 @@ public class Phase10GameTest {
         assertEquals(initialName, game.getName());
         for (int i = 0; i < numPlayers; i++) {
             playersArray[i] = game.getPlayer(i);
-      //      game.renamePlayer(String.format("Player %d", i + 1), playerNames[i]);
+            game.getPlayer(i).setName(playerNames[i]);
         }
         assertEquals(name, game.getName());
     }
