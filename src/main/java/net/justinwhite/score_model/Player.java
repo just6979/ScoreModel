@@ -45,9 +45,9 @@ public class Player {
     }
 
     public Player(Game<?> _game, String _name) {
-        game = _game;
-        name = _name;
-        score = 0;
+        setGame(_game);
+        setName(_name);
+        setScore(0);
     }
 
     public String toString() {
@@ -64,6 +64,9 @@ public class Player {
 
     public void setName(String _name) {
         name = _name;
+        if (game != null) {
+            game.buildName();
+        }
     }
 
     public int getScore() {
