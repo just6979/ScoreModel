@@ -40,7 +40,6 @@ public class Game<T extends Player> {
     private final UUID id;
     private final Class<T> playerClass;
     private final List<T> playerList;
-    private final Map<String, T> playerMap;
     private int numPlayers;
     private String name;
     private T winner;
@@ -66,7 +65,6 @@ public class Game<T extends Player> {
 
         id = UUID.randomUUID();
         playerList = new ArrayList<>();
-        playerMap = new TreeMap<>();
         winner = null;
 
         setNumPlayers(_numPlayers);
@@ -74,13 +72,12 @@ public class Game<T extends Player> {
     }
 
     public String toString() {
-        return String.format("Game: %s\nUUID: %s\nPlayer count: %d\nPlayers: %s\nPlayerMap: %s",
+        return String.format("Game: %s\nUUID: %s\nPlayer count: %d\nPlayers: %s",
                 name,
                 id,
                 numPlayers,
-                // List<> and Map<> classes handle toString() themselves
-                playerList,
-                playerMap
+                // List<> class handles toString()
+                playerList
         );
     }
 
@@ -110,10 +107,6 @@ public class Game<T extends Player> {
         return playerList;
     }
 
-    public Map<String, T> getPlayerMap() {
-        return playerMap;
-    }
-
     /*
          If increasing, create a blank player
          If decreasing, delete last player added
@@ -140,16 +133,8 @@ public class Game<T extends Player> {
         return true;
     }
 
-    public T getPlayer(String _name) {
-        return playerMap.get(_name);
-    }
-
     public Boolean checkPlayer(int index) {
         return index > 0 && index <= numPlayers && playerList.get(index) != null;
-    }
-
-    public Boolean checkPlayer(String _name) {
-        return playerMap.containsKey(_name);
     }
 
     private T makePlayer(String _name) {
@@ -177,7 +162,6 @@ public class Game<T extends Player> {
             T newPlayer = makePlayer(_name);
 
             playerList.add(newPlayer);
-            playerMap.put(_name, newPlayer);
 
             numPlayers = playerList.size();
             buildName();
@@ -196,23 +180,10 @@ public class Game<T extends Player> {
         if (numPlayers > MIN_PLAYERS) {
             T oldPlayer = playerList.remove(index);
 
-            playerMap.remove(oldPlayer.getName());
-
             numPlayers = playerList.size();
             buildName();
 
             return oldPlayer;
-        } else {
-            return null;
-        }
-    }
-
-    public String renamePlayer(int index, String newName) {
-        T p;
-        if (index >= 0 && index < numPlayers) {
-            p = getPlayer(index);
-            // call rename by name so PlayerMap key is updated
-            return renamePlayer(p.getName(), newName);
         } else {
             return null;
         }
@@ -224,17 +195,6 @@ public class Game<T extends Player> {
         } else {
             return null;
         }
-    }
-
-    public String renamePlayer(String oldName, String newName) {
-        T p = playerMap.remove(oldName);
-        if (p != null) {
-            p.setName(newName);
-            playerMap.put(newName, p);
-            buildName();
-            return newName;
-        }
-        return null;
     }
 
     /*

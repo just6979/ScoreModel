@@ -70,7 +70,7 @@ public class GameTest {
             // populate array for comparisons later
             playersArray[i] = game.getPlayer(i);
             // rename players for comparisons later
-            game.renamePlayer(i, playerNames[i]);
+            game.getPlayer(i).setName(playerNames[i]);
         }
         // don't build name since we set it manually
         assertEquals(newName, game.getName());
@@ -103,12 +103,11 @@ public class GameTest {
 
     @Test
     public void testToString() throws Exception {
-        assertEquals(String.format("Game: %s\nUUID: %s\nPlayer count: %d\nPlayers: %s\nPlayerMap: %s",
+        assertEquals(String.format("Game: %s\nUUID: %s\nPlayer count: %d\nPlayers: %s",
                         game.getName(),
                         game.getID(),
                         game.getNumPlayers(),
-                        game.getPlayerList(),
-                        game.getPlayerMap()
+                        game.getPlayerList()
                 ), game.toString()
         );
 
@@ -151,10 +150,6 @@ public class GameTest {
         assertTrue(game.checkPlayer(1));
         assertFalse(game.checkPlayer(Integer.MAX_VALUE));
         assertFalse(game.checkPlayer(Integer.MIN_VALUE));
-
-        assertTrue(game.checkPlayer(playerNames[0]));
-        assertFalse(game.checkPlayer("Some Player"));
-        assertFalse(game.checkPlayer(""));
     }
 
     @Test
@@ -162,10 +157,6 @@ public class GameTest {
         assertSame(playersArray[0], game.getPlayer(0));
         assertNull(game.getPlayer(Integer.MAX_VALUE));
         assertNull(game.getPlayer(Integer.MIN_VALUE));
-
-        assertSame(playersArray[0], game.getPlayer(playerNames[0]));
-        assertNull(game.getPlayer("Player X"));
-        assertNull(game.getPlayer(""));
     }
 
     @Test
@@ -210,21 +201,6 @@ public class GameTest {
         // try to remove one more and fail
         assertNull(game.removePlayer());
 
-    }
-
-    @Test
-    public void testRenamePlayer() throws Exception {
-        int changePlayer = 0;
-
-        assertNotNull(game.renamePlayer(changePlayer, newPlayerName));
-        assertEquals(newPlayerName, game.getPlayer(changePlayer).getName());
-        assertNull(game.renamePlayer(Integer.MAX_VALUE, newPlayerName));
-        assertNull(game.renamePlayer(Integer.MIN_VALUE, newPlayerName));
-
-        assertNotNull(game.renamePlayer(playerNames[1], newPlayerName));
-        assertEquals(newPlayerName, game.getPlayer(newPlayerName).getName());
-        assertNull(game.renamePlayer(playerNames[changePlayer], newPlayerName));
-        assertNull(game.renamePlayer("", newPlayerName));
     }
 
     @Test
