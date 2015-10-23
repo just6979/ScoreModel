@@ -85,6 +85,7 @@ public class Game<T extends Player> {
         return name;
     }
 
+    // set the game name. If passed empty string or null, use buildName() to create name based on player names
     public void setName(String _name) {
         if (_name == null || _name.equals("")) {
             hasName = false;
@@ -107,10 +108,7 @@ public class Game<T extends Player> {
         return playerList;
     }
 
-    /*
-         If increasing, create a blank player
-         If decreasing, delete last player added
-    */
+    // If increasing count, create a new blank player; if decreasing, delete last player
     public boolean setNumPlayers(int newNumPlayers) {
         // make sure requested count is within limits
         if (newNumPlayers < MIN_PLAYERS || newNumPlayers > MAX_PLAYERS) {
@@ -133,10 +131,12 @@ public class Game<T extends Player> {
         return true;
     }
 
+    // check if there is a player at the given index
     public Boolean checkPlayer(int index) {
         return index > 0 && index <= numPlayers && playerList.get(index) != null;
     }
 
+    // make a new Player [or subclass of player] using newInstance() and set it up for use
     private T makePlayer(String _name) {
         T newPlayer;
         // to make a new Player [or subclass], use the class's instance factory
@@ -153,10 +153,12 @@ public class Game<T extends Player> {
         return newPlayer;
     }
 
+    // add a new player named "Player <X+1>"
     public T addPlayer() {
         return addPlayer("Player " + (numPlayers + 1));
     }
 
+    // add a new player using _name
     public T addPlayer(String _name) {
         if (numPlayers < MAX_PLAYERS) {
             T newPlayer = makePlayer(_name);
@@ -172,10 +174,12 @@ public class Game<T extends Player> {
         }
     }
 
+    // remove and return last player if no index specified
     public T removePlayer() {
         return removePlayer(numPlayers - 1);
     }
 
+    // remove and return player specified by index. return null if index out of bounds
     public T removePlayer(int index) {
         if (numPlayers > MIN_PLAYERS) {
             T oldPlayer = playerList.remove(index);
@@ -189,6 +193,7 @@ public class Game<T extends Player> {
         }
     }
 
+    // return player specified by index or null if index out of bounds
     public T getPlayer(int index) {
         if (0 <= index && index < playerList.size()) {
             return playerList.get(index);
@@ -197,9 +202,7 @@ public class Game<T extends Player> {
         }
     }
 
-    /*
-        Create a game name based on the players' initials
-    */
+    // Create a game name based on the players' initials
     public void buildName() {
         if (!hasName) {
             String newName = "";
@@ -210,6 +213,7 @@ public class Game<T extends Player> {
         }
     }
 
+    // return an array of raw scores
     public int[] getScores() {
         int[] scores = new int[playerList.size()];
         int i = 0;
@@ -219,6 +223,7 @@ public class Game<T extends Player> {
         return scores;
     }
 
+    // return String of "Player1: Score1; Player2: Score2; etc"
     public String getScoresText() {
         String out = "";
         for (T p : playerList) {
