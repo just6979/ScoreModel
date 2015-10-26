@@ -34,7 +34,7 @@ package net.justinwhite.score_model;
 public class Version {
     public static final String name = "ScoreModel";
     public static final int major = 0;
-    public static final int minor = 8;
+    public static final int minor = 9;
     public static final int revision = 0;
     public static final String version = String.format("%d.%d.%d", major, minor, revision);
 
