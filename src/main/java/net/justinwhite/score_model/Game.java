@@ -46,6 +46,12 @@ public class Game<T extends Player> {
     private T winner;
     private boolean hasName = false;
 
+    public static String buildName() {
+        String format = "YYYY-MM-dd HH:mm";
+        SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
+        return sdf.format(new Date());
+    }
+
     public Game(Class<T> _class) {
         this(_class, MIN_PLAYERS, null);
     }
@@ -89,8 +95,7 @@ public class Game<T extends Player> {
     // set the game name. If passed empty string or null, use buildName() to create name based current DateTime
     public void setName(String _name) {
         if (_name == null || _name.equals("")) {
-            hasName = false;
-            buildName();
+            name = buildName();
         } else {
             name = _name;
             hasName = true;
@@ -162,12 +167,8 @@ public class Game<T extends Player> {
     public T addPlayer(String _name) {
         if (numPlayers < MAX_PLAYERS) {
             T newPlayer = makePlayer(_name);
-
             playerList.add(newPlayer);
-
             numPlayers = playerList.size();
-            buildName();
-
             return newPlayer;
         } else {
             return null;
@@ -183,10 +184,7 @@ public class Game<T extends Player> {
     public T removePlayer(int index) {
         if (numPlayers > MIN_PLAYERS) {
             T oldPlayer = playerList.remove(index);
-
             numPlayers = playerList.size();
-            buildName();
-
             return oldPlayer;
         } else {
             return null;
@@ -199,15 +197,6 @@ public class Game<T extends Player> {
             return playerList.get(index);
         } else {
             return null;
-        }
-    }
-
-    // Create a game name based on the players' initials
-    public void buildName() {
-        if (!hasName) {
-            String format = "YYYY-MM-dd HH:mm";
-            SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
-            name = sdf.format(new Date());
         }
     }
 
