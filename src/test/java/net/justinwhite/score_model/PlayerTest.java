@@ -49,7 +49,7 @@ public class PlayerTest {
     @Before
     public void setUp() throws Exception {
         game = new Game<>(Player.class);
-        player = new Player(game, name);
+        player = new Player(name);
         player.setScore(score);
     }
 
@@ -59,13 +59,9 @@ public class PlayerTest {
         player = null;
         player = new Player();
         game = new Game<>(Player.class);
-        assertNull(player.getGame());
-        player.setGame(game);
-        assertSame(game, player.getGame());
         assertEquals("Player X", player.getName());
         player = null;
-        player = new Player(game);
-        assertSame(game, player.getGame());
+        player = new Player();
         assertEquals("Player X", player.getName());
     }
 
@@ -77,11 +73,6 @@ public class PlayerTest {
                         score
                 ), player.toString()
         );
-    }
-
-    @Test
-    public void testGetGame() throws Exception {
-        assertSame(game, player.getGame());
     }
 
     @Test

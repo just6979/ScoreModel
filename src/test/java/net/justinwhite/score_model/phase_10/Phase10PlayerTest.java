@@ -49,7 +49,6 @@ public class Phase10PlayerTest {
     public void setUp() throws Exception {
         game = new Phase10Game();
         player = new Phase10Player();
-        assertNull(player.getGame());
         player.setGame(game);
         player.setName(name);
         player.addScore(score);
@@ -82,11 +81,6 @@ public class Phase10PlayerTest {
                         phase
                 ), player.toString()
         );
-    }
-
-    @Test
-    public void testGame() {
-        assertEquals(game, player.getGame());
     }
 
     @Test

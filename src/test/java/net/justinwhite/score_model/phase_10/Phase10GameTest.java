@@ -39,17 +39,13 @@ import static org.junit.Assert.assertEquals;
 @SuppressWarnings("FieldCanBeLocal")
 public class Phase10GameTest {
     private final int numPlayers;
-    private final String name;
     private final String[] playerNames;
     private final Phase10Player[] playersArray;
 
     private Phase10Game game;
-    private String initialName;
 
     {
         numPlayers = 4;
-        initialName = "P1P2P3P4";
-        name = "LKJWTCDB";
         playerNames = new String[]{"Lauren K", "Justin W", "Tim C", "Denise B"};
         playersArray = new Phase10Player[numPlayers];
     }
@@ -57,12 +53,10 @@ public class Phase10GameTest {
     @Before
     public void setUp() throws Exception {
         game = new Phase10Game(numPlayers);
-        assertEquals(initialName, game.getName());
         for (int i = 0; i < numPlayers; i++) {
             playersArray[i] = game.getPlayer(i);
             game.getPlayer(i).setName(playerNames[i]);
         }
-        assertEquals(name, game.getName());
     }
 
     @Test
