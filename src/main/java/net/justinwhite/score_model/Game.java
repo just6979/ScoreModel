@@ -31,6 +31,7 @@
 
 package net.justinwhite.score_model;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Game<T extends Player> {
@@ -85,7 +86,7 @@ public class Game<T extends Player> {
         return name;
     }
 
-    // set the game name. If passed empty string or null, use buildName() to create name based on player names
+    // set the game name. If passed empty string or null, use buildName() to create name based current DateTime
     public void setName(String _name) {
         if (_name == null || _name.equals("")) {
             hasName = false;
@@ -148,7 +149,6 @@ public class Game<T extends Player> {
             return null;
         }
         // successful instantiation, continue setting up the Player [or subclass]
-        newPlayer.setGame(this);
         newPlayer.setName(_name);
         return newPlayer;
     }
@@ -205,11 +205,9 @@ public class Game<T extends Player> {
     // Create a game name based on the players' initials
     public void buildName() {
         if (!hasName) {
-            String newName = "";
-            for (T p : playerList) {
-                newName += p.getInitials();
-            }
-            name = newName;
+            String format = "YYYY-MM-dd HH:mm";
+            SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
+            name = sdf.format(new Date());
         }
     }
 

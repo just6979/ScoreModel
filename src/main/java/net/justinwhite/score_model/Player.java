@@ -32,20 +32,14 @@
 package net.justinwhite.score_model;
 
 public class Player {
-    private Game<?> game;
     private String name;
     private int score;
 
     public Player() {
-        this(null);
+        this("Player X");
     }
 
-    public Player(Game<?> _game) {
-        this(_game, "Player X");
-    }
-
-    public Player(Game<?> _game, String _name) {
-        setGame(_game);
+    public Player(String _name) {
         setName(_name);
         setScore(0);
     }
@@ -64,9 +58,6 @@ public class Player {
 
     public void setName(String _name) {
         name = _name;
-        if (game != null) {
-            game.buildName();
-        }
     }
 
     public int getScore() {
@@ -75,14 +66,6 @@ public class Player {
 
     public void setScore(int _score) {
         score = _score;
-    }
-
-    public Game<?> getGame() {
-        return game;
-    }
-
-    public void setGame(Game<?> _game) {
-        game = _game;
     }
 
     public String getInitials() {
