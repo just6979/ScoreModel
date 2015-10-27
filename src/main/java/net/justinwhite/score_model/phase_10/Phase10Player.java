@@ -35,12 +35,12 @@ import net.justinwhite.score_model.Player;
 import net.justinwhite.score_model.phase_10.Phase10Game.PhaseSet;
 
 public class Phase10Player extends Player {
-    public enum PhaseState {
+    public enum Phase {
         INACTIVE, ACTIVE, COMPLETED
     }
 
-    private PhaseState[] phases;
-    private int curPhase;
+    private Phase[] phases;
+    private int currentPhase;
 
     public Phase10Player() {
         this("Player X");
@@ -56,9 +56,9 @@ public class Phase10Player extends Player {
 
     public Phase10Player(String _name, boolean[] _phases) {
         super(_name);
-        phases = new PhaseState[Phase10Game.MAX_PHASE + 1];
+        phases = new Phase[Phase10Game.MAX_PHASE + 1];
         setPhases(_phases);
-        curPhase = 0;
+        currentPhase = 0;
     }
 
     @Override
@@ -66,25 +66,29 @@ public class Phase10Player extends Player {
         return String.format(
                 "%s; Phase %d",
                 super.toString(),
-                getCurPhase()
+                currentPhaseNumber()
         );
     }
 
-    public int getCurPhase() {
-        return curPhase;
+    public int currentPhaseNumber() {
+        return currentPhase;
     }
 
-    public void completePhase() {
-        if (phases[curPhase] == PhaseState.ACTIVE) {
-            phases[curPhase] = PhaseState.COMPLETED;
+    public Phase[] getPhases() {
+        return phases;
+    }
+
+    public void completeCurrentPhase() {
+        if (phases[currentPhase] == Phase.ACTIVE) {
+            phases[currentPhase] = Phase.COMPLETED;
         }
         do {
-            curPhase++;
-            if (curPhase > Phase10Game.MAX_PHASE) {
-                curPhase = Phase10Game.MAX_PHASE;
+            currentPhase++;
+            if (currentPhase > Phase10Game.MAX_PHASE) {
+                currentPhase = Phase10Game.MAX_PHASE;
                 break;
             }
-        } while (phases[curPhase] != PhaseState.ACTIVE);
+        } while (phases[currentPhase] != Phase.ACTIVE);
     }
 
     public void addScore(int _score) {
@@ -94,9 +98,9 @@ public class Phase10Player extends Player {
     public void setPhases(boolean[] _phases) {
         for (int i = 0; i <= Phase10Game.MAX_PHASE; i++) {
             if (_phases[i]) {
-                phases[i] = PhaseState.ACTIVE;
+                phases[i] = Phase.ACTIVE;
             } else {
-                phases[i] = PhaseState.INACTIVE;
+                phases[i] = Phase.INACTIVE;
             }
         }
     }

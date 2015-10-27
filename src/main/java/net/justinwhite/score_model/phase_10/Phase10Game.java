@@ -124,7 +124,7 @@ public class Phase10Game extends Game<Phase10Player> {
         int[] phases = new int[getNumPlayers()];
         int count = 0;
         for (Phase10Player p : getPlayerList()) {
-            phases[count++] = p.getCurPhase();
+            phases[count++] = p.currentPhaseNumber();
         }
         return phases;
     }
@@ -133,8 +133,8 @@ public class Phase10Game extends Game<Phase10Player> {
         String out = "";
         for (Phase10Player p : getPlayerList()) {
             out += String.format("%s: %4d Points", p.getName(), p.getScore());
-            if (p.getCurPhase() > 0) {
-                out += String.format(", Phase #%d completed\n", p.getCurPhase());
+            if (p.currentPhaseNumber() > 0) {
+                out += String.format(", Phase #%d completed\n", p.currentPhaseNumber());
             } else {
                 out += "\n";
             }
@@ -147,7 +147,7 @@ public class Phase10Game extends Game<Phase10Player> {
         // TODO: scores _might_ be the same sometimes. What is the 2nd tie-breaker?
         int lowScore = Integer.MAX_VALUE;
         for (Phase10Player p : getPlayerList()) {
-            if (p.getCurPhase() == MAX_PHASE) {
+            if (p.currentPhaseNumber() == MAX_PHASE) {
                 int curScore = p.getScore();
                 if (curScore < lowScore) {
                     lowScore = p.getScore();
