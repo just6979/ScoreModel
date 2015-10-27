@@ -32,7 +32,7 @@
 package net.justinwhite.score_model.phase_10;
 
 import net.justinwhite.score_model.Player;
-import net.justinwhite.score_model.phase_10.Phase10Game.*;
+import net.justinwhite.score_model.phase_10.Phase10Game.PhaseSet;
 
 public class Phase10Player extends Player {
     public enum PhaseState {
@@ -50,7 +50,7 @@ public class Phase10Player extends Player {
         this(_name, PhaseSet.ALL);
     }
 
-   public Phase10Player(String _name, PhaseSet phasePreset) {
+    public Phase10Player(String _name, PhaseSet phasePreset) {
         this(_name, Phase10Game.getPhasePreset(phasePreset));
     }
 
@@ -75,10 +75,14 @@ public class Phase10Player extends Player {
     }
 
     public void completePhase() {
+        if (phases[curPhase] == PhaseState.ACTIVE) {
+            phases[curPhase] = PhaseState.COMPLETED;
+        }
         do {
             curPhase++;
             if (curPhase > Phase10Game.MAX_PHASE) {
                 curPhase = Phase10Game.MAX_PHASE;
+                break;
             }
         } while (phases[curPhase] != PhaseState.ACTIVE);
     }
