@@ -56,12 +56,12 @@ public class Phase10PlayerTest {
 
     @Test
     public void testPhase10Player() throws Exception {
-        player = new Phase10Player(name, Phase10Game.PHASES_EVEN);
+        player = new Phase10Player(name, Phase10Game.PhaseSet.EVEN);
         player.completePhase();
         assertEquals(2, player.getPhase());
         player.completePhase();
         assertEquals(4, player.getPhase());
-        player = new Phase10Player(name, Phase10Game.PHASES_ODD);
+        player = new Phase10Player(name, Phase10Game.PhaseSet.ODD);
         player.completePhase();
         assertEquals(1, player.getPhase());
         player.completePhase();

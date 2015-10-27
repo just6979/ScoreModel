@@ -38,18 +38,16 @@ public class Phase10Game extends Game<Phase10Player> {
     public static final int MIN_PHASE = 0;
     public static final int MAX_PHASE = 10;
 
-    public static final int PHASES_ALL = 0;
-    public static final int PHASES_EVEN = 1;
-    public static final int PHASES_ODD = 2;
-    public static final int PHASES_FIRST_5 = 3;
-    public static final int PHASES_LAST_5 = 4;
+    public enum PhaseSet {
+        ALL, EVEN, ODD, FIRST_5, LAST_5
+    }
     private boolean[] activePhases;
 
-    public static boolean[] getPhasePreset(int phasePreset) {
+    public static boolean[] getPhasePreset(PhaseSet phasePreset) {
         boolean[] defaultPhases;
 
         switch (phasePreset) {
-            case PHASES_EVEN:
+            case EVEN:
                 defaultPhases = new boolean[]{false,
                         false, true,
                         false, true,
@@ -58,7 +56,7 @@ public class Phase10Game extends Game<Phase10Player> {
                         false, true
                 };
                 break;
-            case PHASES_ODD:
+            case ODD:
                 defaultPhases = new boolean[]{false,
                         true, false,
                         true, false,
@@ -67,19 +65,19 @@ public class Phase10Game extends Game<Phase10Player> {
                         true, false
                 };
                 break;
-            case PHASES_FIRST_5:
+            case FIRST_5:
                 defaultPhases = new boolean[]{false,
                         true, true, true, true, true,
                         false, false, false, false, false
                 };
                 break;
-            case PHASES_LAST_5:
+            case LAST_5:
                 defaultPhases = new boolean[]{false,
                         false, false, false, false, false,
                         true, true, true, true, true
                 };
                 break;
-            case PHASES_ALL:
+            case ALL:
             default:
                 defaultPhases = new boolean[]{false,
                         true, true, true, true, true,
@@ -90,18 +88,18 @@ public class Phase10Game extends Game<Phase10Player> {
     }
 
     public Phase10Game() {
-        this(0, PHASES_ALL, null);
+        this(0, PhaseSet.ALL, null);
     }
 
     public Phase10Game(int _numPlayers) {
-        this(_numPlayers, PHASES_ALL, null);
+        this(_numPlayers, PhaseSet.ALL, null);
     }
 
-    public Phase10Game(int _numPlayers, int _phasePreset) {
+    public Phase10Game(int _numPlayers, PhaseSet _phasePreset) {
         this(_numPlayers, _phasePreset, null);
     }
 
-    public Phase10Game(int _numPlayers, int _phasePreset, String _name) {
+    public Phase10Game(int _numPlayers, PhaseSet _phasePreset, String _name) {
         super(Phase10Player.class, _numPlayers, _name);
         activePhases = getPhasePreset(_phasePreset);
     }
@@ -110,7 +108,7 @@ public class Phase10Game extends Game<Phase10Player> {
         return activePhases;
     }
 
-    public void setActivePhases(int _phasePreset) {
+    public void setActivePhases(PhaseSet _phasePreset) {
         getPhasePreset(_phasePreset);
     }
 

@@ -32,6 +32,7 @@
 package net.justinwhite.score_model.phase_10;
 
 import net.justinwhite.score_model.Player;
+import net.justinwhite.score_model.phase_10.Phase10Game.*;
 
 public class Phase10Player extends Player {
     private Phase[] phases;
@@ -42,10 +43,10 @@ public class Phase10Player extends Player {
     }
 
     public Phase10Player(String _name) {
-        this(_name, Phase10Game.PHASES_ALL);
+        this(_name, PhaseSet.ALL);
     }
 
-   public Phase10Player(String _name, int phasePreset) {
+   public Phase10Player(String _name, PhaseSet phasePreset) {
         this(_name, Phase10Game.getPhasePreset(phasePreset));
     }
 
