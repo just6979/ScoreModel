@@ -39,7 +39,7 @@ public class Phase10Player extends Player {
         INACTIVE, ACTIVE, COMPLETED
     }
 
-    private Phase[] phases;
+    private final Phase[] phases;
     private int currentPhase;
 
     public Phase10Player() {

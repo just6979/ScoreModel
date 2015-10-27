@@ -44,7 +44,6 @@ public class Game<T extends Player> {
     private int numPlayers;
     private String name;
     private T winner;
-    private boolean hasName = false;
 
     public static String buildName() {
         String format = "YYYY-MM-dd HH:mm";
@@ -98,7 +97,6 @@ public class Game<T extends Player> {
             name = buildName();
         } else {
             name = _name;
-            hasName = true;
         }
     }
 
