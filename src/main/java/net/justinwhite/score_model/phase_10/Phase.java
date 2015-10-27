@@ -32,17 +32,17 @@
 package net.justinwhite.score_model.phase_10;
 
 public class Phase {
-    public static final int INACTIVE = 0;
-    public static final int ACTIVE = 1;
-    public static final int COMPLETED = 2;
-
-    private int status;
-
-    Phase() {
-        setStatus(ACTIVE);
+    public enum PhaseState {
+        INACTIVE, ACTIVE, COMPLETED
     }
 
-    Phase (int _status) {
+    private PhaseState status;
+
+    Phase() {
+        setStatus(PhaseState.ACTIVE);
+    }
+
+    Phase (PhaseState _status) {
         setStatus(_status);
     }
 
@@ -50,28 +50,32 @@ public class Phase {
         setStatus(_active);
     }
 
-    public int getStatus() {
+    public PhaseState getStatus() {
         return status;
     }
 
-    public void setStatus(int _status) {
+    public void setStatus(PhaseState _status) {
         status = _status;
     }
 
     public void setStatus(boolean _active) {
         if (_active) {
-            setStatus(ACTIVE);
+            setStatus(PhaseState.ACTIVE);
         } else {
-            setStatus(INACTIVE);
+            setStatus(PhaseState.INACTIVE);
         }
     }
 
     public boolean isActive() {
-        return status == ACTIVE;
+        return status == PhaseState.ACTIVE;
+    }
+
+    public boolean isInactive() {
+        return status == PhaseState.INACTIVE;
     }
 
     public boolean isCompleted() {
-        return status == COMPLETED;
+        return status == PhaseState.COMPLETED;
     }
 
 }
