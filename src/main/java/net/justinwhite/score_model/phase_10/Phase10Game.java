@@ -45,7 +45,7 @@ public class Phase10Game extends Game<Phase10Player> {
     public static final int PHASES_LAST_5 = 4;
     private boolean[] activePhases;
 
-    public static boolean[] makePhasePreset(int phasePreset) {
+    public static boolean[] getPhasePreset(int phasePreset) {
         boolean[] defaultPhases;
 
         switch (phasePreset) {
@@ -103,7 +103,7 @@ public class Phase10Game extends Game<Phase10Player> {
 
     public Phase10Game(int _numPlayers, int _phasePreset, String _name) {
         super(Phase10Player.class, _numPlayers, _name);
-        activePhases = makePhasePreset(_phasePreset);
+        activePhases = getPhasePreset(_phasePreset);
     }
 
     public boolean[] getActivePhases() {
@@ -111,7 +111,7 @@ public class Phase10Game extends Game<Phase10Player> {
     }
 
     public void setActivePhases(int _phasePreset) {
-        makePhasePreset(_phasePreset);
+        getPhasePreset(_phasePreset);
     }
 
     public void setActivePhases(boolean[] _activePhases) {

@@ -46,7 +46,7 @@ public class Phase10Player extends Player {
     }
 
    public Phase10Player(String _name, int phasePreset) {
-        this(_name, Phase10Game.makePhasePreset(phasePreset));
+        this(_name, Phase10Game.getPhasePreset(phasePreset));
     }
 
     public Phase10Player(String _name, boolean[] _phases) {
