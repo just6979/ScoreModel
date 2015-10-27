@@ -62,7 +62,7 @@ public class Phase10Game extends Game<Phase10Player> {
         activePhases = makePhasePreset(_phasePreset);
     }
 
-    private static boolean[] makePhasePreset(int phasePreset) {
+    public static boolean[] makePhasePreset(int phasePreset) {
         boolean[] defaultPhases;
 
         switch (phasePreset) {

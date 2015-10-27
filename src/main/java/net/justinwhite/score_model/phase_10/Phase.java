@@ -31,60 +31,47 @@
 
 package net.justinwhite.score_model.phase_10;
 
-import net.justinwhite.score_model.Player;
+public class Phase {
+    public static final int INACTIVE = 0;
+    public static final int ACTIVE = 1;
+    public static final int COMPLETED = 2;
 
-public class Phase10Player extends Player {
-    private Phase[] phases;
-    private int phase;
+    private int status;
 
-    public Phase10Player() {
-        this("Player X");
+    Phase() {
+        setStatus(ACTIVE);
     }
 
-    public Phase10Player(String _name) {
-        this(_name, Phase10Game.PHASES_ALL);
+    Phase (int _status) {
+        setStatus(_status);
     }
 
-   public Phase10Player(String _name, int phasePreset) {
-        this(_name, Phase10Game.makePhasePreset(phasePreset));
+    Phase(boolean _active) {
+        setStatus(_active);
     }
 
-    public Phase10Player(String _name, boolean[] _phases) {
-        super(_name);
-        phases = new Phase[Phase10Game.MAX_PHASE + 1];
-        setPhases(_phases);
-        phase = 0;
+    public int getStatus() {
+        return status;
     }
 
-    @Override
-    public String toString() {
-        return String.format(
-                "%s; Phase %d",
-                super.toString(),
-                getPhase()
-        );
+    public void setStatus(int _status) {
+        status = _status;
     }
 
-    public int getPhase() {
-        return phase;
-    }
-
-    public void completePhase() {
-        do {
-            phase++;
-            if (phase > Phase10Game.MAX_PHASE) {
-                phase = Phase10Game.MAX_PHASE;
-            }
-        } while (!phases[phase].isActive());
-    }
-
-    public void addScore(int _score) {
-        setScore(getScore() + _score);
-    }
-
-    public void setPhases(boolean[] _phases) {
-        for (int i = 0; i <= Phase10Game.MAX_PHASE; i++) {
-            phases[i] = new Phase(_phases[i]);
+    public void setStatus(boolean _active) {
+        if (_active) {
+            setStatus(ACTIVE);
+        } else {
+            setStatus(INACTIVE);
         }
     }
+
+    public boolean isActive() {
+        return status == ACTIVE;
+    }
+
+    public boolean isCompleted() {
+        return status == COMPLETED;
+    }
+
 }

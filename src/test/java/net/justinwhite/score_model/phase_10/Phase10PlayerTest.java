@@ -48,8 +48,7 @@ public class Phase10PlayerTest {
     @Before
     public void setUp() throws Exception {
         game = new Phase10Game();
-        player = new Phase10Player();
-        player.setGame(game);
+        player = new Phase10Player(name);
         player.setName(name);
         player.addScore(score);
         player.completePhase();
@@ -57,15 +56,12 @@ public class Phase10PlayerTest {
 
     @Test
     public void testPhase10Player() throws Exception {
-        game = new Phase10Game(2, Phase10Game.PHASES_EVEN);
-        player = new Phase10Player(game);
-        player.setName(name);
+        player = new Phase10Player(name, Phase10Game.PHASES_EVEN);
         player.completePhase();
         assertEquals(2, player.getPhase());
         player.completePhase();
         assertEquals(4, player.getPhase());
-        game = new Phase10Game(2, Phase10Game.PHASES_ODD);
-        player = new Phase10Player(game, name);
+        player = new Phase10Player(name, Phase10Game.PHASES_ODD);
         player.completePhase();
         assertEquals(1, player.getPhase());
         player.completePhase();
