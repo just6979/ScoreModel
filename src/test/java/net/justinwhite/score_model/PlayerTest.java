@@ -75,11 +75,4 @@ public class PlayerTest {
         );
     }
 
-    @Test
-    public void testGetInitials() throws Exception {
-        assertEquals(initials, player.getInitials());
-        player.setName(newName);
-        assertEquals(newInitials, player.getInitials());
-    }
-
 }

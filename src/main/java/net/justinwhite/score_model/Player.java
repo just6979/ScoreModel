@@ -68,14 +68,4 @@ public class Player {
         score = _score;
     }
 
-    public String getInitials() {
-        // assume name is "First" or "First Last", return "F_" or "FL"
-        String names[] = name.split(" ");
-        if (names.length > 1) {
-            return names[0].substring(0, 1) + names[1].substring(0, 1);
-        } else {
-            return name.substring(0, 1) + "_";
-        }
-    }
-
 }
