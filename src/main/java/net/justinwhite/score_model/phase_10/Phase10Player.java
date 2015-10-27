@@ -35,7 +35,11 @@ import net.justinwhite.score_model.Player;
 import net.justinwhite.score_model.phase_10.Phase10Game.*;
 
 public class Phase10Player extends Player {
-    private Phase[] phases;
+    public enum PhaseState {
+        INACTIVE, ACTIVE, COMPLETED
+    }
+
+    private PhaseState[] phases;
     private int phase;
 
     public Phase10Player() {
@@ -52,7 +56,7 @@ public class Phase10Player extends Player {
 
     public Phase10Player(String _name, boolean[] _phases) {
         super(_name);
-        phases = new Phase[Phase10Game.MAX_PHASE + 1];
+        phases = new PhaseState[Phase10Game.MAX_PHASE + 1];
         setPhases(_phases);
         phase = 0;
     }
@@ -76,7 +80,7 @@ public class Phase10Player extends Player {
             if (phase > Phase10Game.MAX_PHASE) {
                 phase = Phase10Game.MAX_PHASE;
             }
-        } while (!phases[phase].isActive());
+        } while (phases[phase] != PhaseState.ACTIVE);
     }
 
     public void addScore(int _score) {
@@ -85,7 +89,11 @@ public class Phase10Player extends Player {
 
     public void setPhases(boolean[] _phases) {
         for (int i = 0; i <= Phase10Game.MAX_PHASE; i++) {
-            phases[i] = new Phase(_phases[i]);
+            if (_phases[i]) {
+                phases[i] = PhaseState.ACTIVE;
+            } else {
+                phases[i] = PhaseState.INACTIVE;
+            }
         }
     }
 }
