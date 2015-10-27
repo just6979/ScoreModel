@@ -58,14 +58,14 @@ public class Phase10PlayerTest {
     public void testPhase10Player() throws Exception {
         player = new Phase10Player(name, Phase10Game.PhaseSet.EVEN);
         player.completePhase();
-        assertEquals(2, player.getPhase());
+        assertEquals(2, player.getCurPhase());
         player.completePhase();
-        assertEquals(4, player.getPhase());
+        assertEquals(4, player.getCurPhase());
         player = new Phase10Player(name, Phase10Game.PhaseSet.ODD);
         player.completePhase();
-        assertEquals(1, player.getPhase());
+        assertEquals(1, player.getCurPhase());
         player.completePhase();
-        assertEquals(3, player.getPhase());
+        assertEquals(3, player.getCurPhase());
     }
 
     @Test
@@ -95,12 +95,12 @@ public class Phase10PlayerTest {
     public void testPhase() throws Exception {
         for (int i = phase + 1; i <= Phase10Game.MAX_PHASE; i++) {
             player.completePhase();
-            assertEquals(i, player.getPhase());
+            assertEquals(i, player.getCurPhase());
         }
-        assertEquals(game.MAX_PHASE, player.getPhase());
+        assertEquals(game.MAX_PHASE, player.getCurPhase());
         player.completePhase();
         player.completePhase();
-        assertEquals(game.MAX_PHASE, player.getPhase());
+        assertEquals(game.MAX_PHASE, player.getCurPhase());
     }
 
 }

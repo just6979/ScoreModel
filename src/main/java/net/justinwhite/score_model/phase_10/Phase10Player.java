@@ -40,7 +40,7 @@ public class Phase10Player extends Player {
     }
 
     private PhaseState[] phases;
-    private int phase;
+    private int curPhase;
 
     public Phase10Player() {
         this("Player X");
@@ -58,7 +58,7 @@ public class Phase10Player extends Player {
         super(_name);
         phases = new PhaseState[Phase10Game.MAX_PHASE + 1];
         setPhases(_phases);
-        phase = 0;
+        curPhase = 0;
     }
 
     @Override
@@ -66,21 +66,21 @@ public class Phase10Player extends Player {
         return String.format(
                 "%s; Phase %d",
                 super.toString(),
-                getPhase()
+                getCurPhase()
         );
     }
 
-    public int getPhase() {
-        return phase;
+    public int getCurPhase() {
+        return curPhase;
     }
 
     public void completePhase() {
         do {
-            phase++;
-            if (phase > Phase10Game.MAX_PHASE) {
-                phase = Phase10Game.MAX_PHASE;
+            curPhase++;
+            if (curPhase > Phase10Game.MAX_PHASE) {
+                curPhase = Phase10Game.MAX_PHASE;
             }
-        } while (phases[phase] != PhaseState.ACTIVE);
+        } while (phases[curPhase] != PhaseState.ACTIVE);
     }
 
     public void addScore(int _score) {
