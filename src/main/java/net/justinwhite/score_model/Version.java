@@ -31,15 +31,38 @@
 
 package net.justinwhite.score_model;
 
+@SuppressWarnings("unused")
 public class Version {
-    public static final String name = "ScoreModel";
-    public static final int major = 0;
-    public static final int minor = 10;
-    public static final int revision = 0;
-    public static final String version = String.format("%d.%d.%d", major, minor, revision);
+    private static final String name;
+    private static final int major;
+    private static final int minor;
+    private static final int revision;
+
+    static {
+        name = "ScoreModel";
+        major = 0;
+        minor = 10;
+        revision = 0;
+    }
+
+    public static String getName() {
+        return name;
+    }
+
+    public static int getMajor() {
+        return major;
+    }
+
+    public static int getMinor() {
+        return minor;
+    }
+
+    public static int getRevision() {
+        return revision;
+    }
 
     public static String getVersion() {
-        return String.format("%s v%s", name, version);
+        return String.format("%s %d.%d.%d", name, major, minor, revision);
     }
 
     public static void printVersion() {
