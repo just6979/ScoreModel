@@ -147,7 +147,7 @@ public class Phase10Game extends Game<Phase10Player> {
         // TODO: scores _might_ be the same sometimes. What is the 2nd tie-breaker?
         Integer lowScore = Integer.MAX_VALUE;
         for (Phase10Player p : getPlayerList()) {
-            if (p.currentPhaseNumber() == MAX_PHASE) {
+            if (p.currentPhaseNumber().equals(MAX_PHASE)) {
                 Integer curScore = p.getScore();
                 if (curScore < lowScore) {
                     lowScore = p.getScore();
