@@ -42,16 +42,11 @@ public class Phase10PlayerTest {
     private final String name = "Test Phase10Player";
     private final Integer score = 11;
     private final Integer phase = 1;
-    private Phase10Game game;
     private Phase10Player player;
 
     @Before
     public void setUp() throws Exception {
-        game = new Phase10Game();
         player = new Phase10Player(name);
-        player.setName(name);
-        player.addScore(score);
-        player.completeCurrentPhase();
     }
 
     @Test
@@ -71,6 +66,8 @@ public class Phase10PlayerTest {
 
     @Test
     public void testToString() throws Exception {
+        player.addScore(score);
+        player.completeCurrentPhase();
         assertEquals(String.format(
                 "Name '%s'; Score %s; Phase %d",
                 name,
@@ -81,19 +78,23 @@ public class Phase10PlayerTest {
     }
 
     @Test
-    public void testName() {
-        assertEquals(name, player.getName());
+    public void testSetPhases() throws Exception {
+        player.setPhases(Phase10Game.getPhasePreset(Phase10Game.PhaseSet.ALL));
+        player.completeCurrentPhase();
+        assertEquals(Integer.valueOf(1), player.currentPhaseNumber());
     }
 
     @Test
-    public void testScore() {
+    public void testAddScore() throws Exception {
+        player.addScore(score);
         assertEquals(score, player.getScore());
         player.addScore(score);
         assertEquals(Integer.valueOf(score * 2), player.getScore());
     }
 
     @Test
-    public void testPhase() throws Exception {
+    public void testCompleteCurrentPhase() throws Exception {
+        player.completeCurrentPhase();
         for (Integer i = phase + 1; i <= Phase10Game.MAX_PHASE; i++) {
             player.completeCurrentPhase();
             assertEquals(i, player.currentPhaseNumber());
@@ -103,5 +104,4 @@ public class Phase10PlayerTest {
         player.completeCurrentPhase();
         assertEquals(Phase10Game.MAX_PHASE, player.currentPhaseNumber());
     }
-
 }
