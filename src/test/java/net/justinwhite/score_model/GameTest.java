@@ -193,7 +193,7 @@ public class GameTest {
 
     @Test
     public void testGetScores() throws Exception {
-        assertEquals(scores, game.getScores().toArray());
+        assertArrayEquals(scores, game.getScores().toArray());
     }
 
     @Test
