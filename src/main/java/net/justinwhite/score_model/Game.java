@@ -199,11 +199,10 @@ public class Game<T extends Player> {
     }
 
     // return an array of raw scores
-    public Integer[] getScores() {
-        Integer[] scores = new Integer[playerList.size()];
-        Integer i = 0;
+    public List<Integer> getScores() {
+        List<Integer> scores = new ArrayList<>(playerList.size());
         for (Player p : playerList) {
-            scores[i++] = p.getScore();
+            scores.add(p.getScore());
         }
         return scores;
     }
