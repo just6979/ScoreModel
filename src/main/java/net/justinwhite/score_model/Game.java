@@ -216,17 +216,11 @@ public class Game<T extends Player> {
         return out;
     }
 
-    // TODO: handle tie scores
+    // tie-breaker is which ever player was added to the game first
     public Boolean checkWinner() {
-        Integer highScore = 0;
-        Integer curScore;
-        for (T curPlayer : playerList) {
-            curScore = curPlayer.getScore();
-            if (curScore > highScore) {
-                highScore = curScore;
-                winner = curPlayer;
-            }
-        }
+        List<T> _players = new ArrayList<>(playerList);
+        Collections.sort(_players);
+        winner = _players.get(0);
         return winner != null;
     }
 

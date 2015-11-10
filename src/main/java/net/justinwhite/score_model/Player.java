@@ -31,7 +31,8 @@
 
 package net.justinwhite.score_model;
 
-public class Player {
+public class Player
+implements Comparable<Player>{
     private String name;
     private Integer score;
 
@@ -68,4 +69,9 @@ public class Player {
         score = _score;
     }
 
+    @Override
+    public int compareTo(Player o) {
+        // higher is better
+        return o.getScore().compareTo(score);
+    }
 }
