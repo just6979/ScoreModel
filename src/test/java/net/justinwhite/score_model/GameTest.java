@@ -77,12 +77,15 @@ public class GameTest {
     @Test
     public void testConstructors() throws Exception {
         System.out.print("Testing " + Version.getVersion());
+        String name = "Test Game";
         game = new Game<>(Player.class);
         assertEquals(Game.MIN_PLAYERS, game.getNumPlayers());
         game = new Game<>(Player.class, Integer.MIN_VALUE);
         assertEquals(Game.MIN_PLAYERS, game.getNumPlayers());
         game = new Game<>(Player.class, Integer.MAX_VALUE);
         assertEquals(Game.MAX_PLAYERS, game.getNumPlayers());
+        game = new Game<>(Player.class, numPlayers, name);
+        assertEquals(name, game.getName());
     }
 
     @Test
@@ -190,7 +193,7 @@ public class GameTest {
 
     @Test
     public void testGetScores() throws Exception {
-
+        assertEquals(scores, game.getScores().toArray());
     }
 
     @Test
@@ -206,20 +209,14 @@ public class GameTest {
     @Test
     public void testCheckWinner() throws Exception {
         // check we have a winner
-        assertTrue(game.checkWinner());
-        // check winner matches player set to win in setup
-        assertSame(playersArray[2], game.getWinner());
-        // reset scores to 0
-        for (Integer i = 0; i < scores.length; i++) {
-            game.getPlayer(i).setScore(0);
-        }
-        // check there is no winner
+        // note: we always have a winner...
         assertTrue(game.checkWinner());
     }
 
     @Test
     public void testGetWinner() throws Exception {
-
+        // check winner matches player set to win in setup
+        assertSame(playersArray[2], game.getWinner());
     }
 
 }
