@@ -31,6 +31,7 @@
 
 package net.justinwhite.score_model.phase_10;
 
+import net.justinwhite.score_model.Version;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -54,7 +55,8 @@ public class Phase10PlayerTest {
     }
 
     @Test
-    public void testPhase10Player() throws Exception {
+    public void testConstructors() throws Exception {
+        System.out.println("Testing: " + Version.getVersion() + ": Phase10Player");
         player = new Phase10Player(name, Phase10Game.PhaseSet.EVEN);
         player.completeCurrentPhase();
         assertEquals(Integer.valueOf(2), player.currentPhaseNumber());

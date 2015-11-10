@@ -51,6 +51,7 @@ public class PlayerTest {
     // test all the remaining constructors
     @Test
     public void testConstructors() throws Exception {
+        System.out.println("Testing: " + Version.getVersion() + ": Player");
         player = null;
         player = new Player();
         assertEquals("Player X", player.getName());

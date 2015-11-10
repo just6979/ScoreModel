@@ -31,6 +31,7 @@
 
 package net.justinwhite.score_model.phase_10;
 
+import net.justinwhite.score_model.Version;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -55,6 +56,11 @@ public class Phase10GameTest {
             playersArray[i] = game.getPlayer(i);
             game.getPlayer(i).setName(playerNames[i]);
         }
+    }
+
+    @Test
+    public void testConstructors() throws Exception {
+        System.out.println("Testing: " + Version.getVersion() + ": Phase10Game");
     }
 
     @Test
