@@ -41,6 +41,7 @@ public class Phase10Game extends Game<Phase10Player> {
     public enum PhaseSet {
         ALL, EVEN, ODD, FIRST_5, LAST_5
     }
+
     private Boolean[] activePhases;
 
     public static Boolean[] getPhasePreset(PhaseSet phasePreset) {

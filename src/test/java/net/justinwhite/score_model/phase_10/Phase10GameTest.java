@@ -34,8 +34,6 @@ package net.justinwhite.score_model.phase_10;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-
 @SuppressWarnings("FieldCanBeLocal")
 public class Phase10GameTest {
     private final Integer numPlayers;

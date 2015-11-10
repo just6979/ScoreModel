@@ -34,31 +34,25 @@ package net.justinwhite.score_model;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class PlayerTest {
     private final String name = "First Last";
-    private final String initials = "FL";
     private final Integer score = 88;
-    private final String newName = "OnlyFirst";
-    private final String newInitials = "O_";
-    private Game<Player> game;
     private Player player;
 
     @Before
     public void setUp() throws Exception {
-        game = new Game<>(Player.class);
         player = new Player(name);
         player.setScore(score);
     }
 
     // test all the remaining constructors
     @Test
-    public void testPlayer() throws Exception {
+    public void testConstructors() throws Exception {
         player = null;
         player = new Player();
-        game = new Game<>(Player.class);
         assertEquals("Player X", player.getName());
         player = null;
         player = new Player();
@@ -68,9 +62,9 @@ public class PlayerTest {
     @Test
     public void testToString() throws Exception {
         assertEquals(String.format(
-                        "Name '%s'; Score %s",
-                        name,
-                        score
+                "Name '%s'; Score %s",
+                name,
+                score
                 ), player.toString()
         );
     }

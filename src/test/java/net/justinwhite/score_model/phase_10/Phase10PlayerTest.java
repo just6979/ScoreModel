@@ -35,7 +35,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class Phase10PlayerTest {
@@ -71,10 +70,10 @@ public class Phase10PlayerTest {
     @Test
     public void testToString() throws Exception {
         assertEquals(String.format(
-                        "Name '%s'; Score %s; Phase %d",
-                        name,
-                        score,
-                        phase
+                "Name '%s'; Score %s; Phase %d",
+                name,
+                score,
+                phase
                 ), player.toString()
         );
     }
@@ -97,10 +96,10 @@ public class Phase10PlayerTest {
             player.completeCurrentPhase();
             assertEquals(i, player.currentPhaseNumber());
         }
-        assertEquals(game.MAX_PHASE, player.currentPhaseNumber());
+        assertEquals(Phase10Game.MAX_PHASE, player.currentPhaseNumber());
         player.completeCurrentPhase();
         player.completeCurrentPhase();
-        assertEquals(game.MAX_PHASE, player.currentPhaseNumber());
+        assertEquals(Phase10Game.MAX_PHASE, player.currentPhaseNumber());
     }
 
 }
