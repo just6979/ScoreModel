@@ -225,7 +225,11 @@ public class Game<T extends Player> {
     }
 
     public T getWinner() {
-        return winner;
+        if (checkWinner()) {
+            return winner;
+        } else {
+            return null;
+        }
     }
 
 }
