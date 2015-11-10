@@ -35,6 +35,7 @@ import net.justinwhite.score_model.Version;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 @SuppressWarnings("FieldCanBeLocal")
@@ -46,26 +47,20 @@ public class Phase10PlayerTest {
 
     @Before
     public void setUp() throws Exception {
-        player = new Phase10Player(name);
+        player = new Phase10Player();
     }
 
     @Test
     public void testConstructors() throws Exception {
         System.out.println("Testing: " + Version.getVersion() + ": Phase10Player");
+        assertArrayEquals(Phase10Game.getPhasePreset(Phase10Game.PhaseSet.ALL), player.getPhases());
         player = new Phase10Player(name, Phase10Game.PhaseSet.EVEN);
-        player.completeCurrentPhase();
-        assertEquals(Integer.valueOf(2), player.currentPhaseNumber());
-        player.completeCurrentPhase();
-        assertEquals(Integer.valueOf(4), player.currentPhaseNumber());
-        player = new Phase10Player(name, Phase10Game.PhaseSet.ODD);
-        player.completeCurrentPhase();
-        assertEquals(Integer.valueOf(1), player.currentPhaseNumber());
-        player.completeCurrentPhase();
-        assertEquals(Integer.valueOf(3), player.currentPhaseNumber());
+        assertArrayEquals(Phase10Game.getPhasePreset(Phase10Game.PhaseSet.EVEN), player.getPhases());
     }
 
     @Test
     public void testToString() throws Exception {
+        player.setName(name);
         player.addScore(score);
         player.completeCurrentPhase();
         assertEquals(String.format(
@@ -79,9 +74,15 @@ public class Phase10PlayerTest {
 
     @Test
     public void testSetPhases() throws Exception {
-        player.setPhases(Phase10Game.getPhasePreset(Phase10Game.PhaseSet.ALL));
+        player.setActivePhases(Phase10Game.getPhasePreset(Phase10Game.PhaseSet.ALL));
         player.completeCurrentPhase();
-        assertEquals(Integer.valueOf(1), player.currentPhaseNumber());
+        assertEquals(Integer.valueOf(1), player.getCurrentPhase());
+        player.setActivePhases(Phase10Game.getPhasePreset(Phase10Game.PhaseSet.ODD));
+        player.resetCurrentPhase();
+        player.completeCurrentPhase();
+        assertEquals(Integer.valueOf(1), player.getCurrentPhase());
+        player.completeCurrentPhase();
+        assertEquals(Integer.valueOf(3), player.getCurrentPhase());
     }
 
     @Test
@@ -97,11 +98,11 @@ public class Phase10PlayerTest {
         player.completeCurrentPhase();
         for (Integer i = phase + 1; i <= Phase10Game.MAX_PHASE; i++) {
             player.completeCurrentPhase();
-            assertEquals(i, player.currentPhaseNumber());
+            assertEquals(i, player.getCurrentPhase());
         }
-        assertEquals(Phase10Game.MAX_PHASE, player.currentPhaseNumber());
+        assertEquals(Phase10Game.MAX_PHASE, player.getCurrentPhase());
         player.completeCurrentPhase();
         player.completeCurrentPhase();
-        assertEquals(Phase10Game.MAX_PHASE, player.currentPhaseNumber());
+        assertEquals(Phase10Game.MAX_PHASE, player.getCurrentPhase());
     }
 }
