@@ -38,7 +38,7 @@ import static org.junit.Assert.assertEquals;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class Phase10GameTest {
-    private final int numPlayers;
+    private final Integer numPlayers;
     private final String[] playerNames;
     private final Phase10Player[] playersArray;
 

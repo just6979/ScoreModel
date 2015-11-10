@@ -40,8 +40,8 @@ import static org.junit.Assert.assertNull;
 @SuppressWarnings("FieldCanBeLocal")
 public class Phase10PlayerTest {
     private final String name = "Test Phase10Player";
-    private final int score = 11;
-    private final int phase = 1;
+    private final Integer score = 11;
+    private final Integer phase = 1;
     private Phase10Game game;
     private Phase10Player player;
 
@@ -58,14 +58,14 @@ public class Phase10PlayerTest {
     public void testPhase10Player() throws Exception {
         player = new Phase10Player(name, Phase10Game.PhaseSet.EVEN);
         player.completeCurrentPhase();
-        assertEquals(2, player.currentPhaseNumber());
+        assertEquals(Integer.valueOf(2), player.currentPhaseNumber());
         player.completeCurrentPhase();
-        assertEquals(4, player.currentPhaseNumber());
+        assertEquals(Integer.valueOf(4), player.currentPhaseNumber());
         player = new Phase10Player(name, Phase10Game.PhaseSet.ODD);
         player.completeCurrentPhase();
-        assertEquals(1, player.currentPhaseNumber());
+        assertEquals(Integer.valueOf(1), player.currentPhaseNumber());
         player.completeCurrentPhase();
-        assertEquals(3, player.currentPhaseNumber());
+        assertEquals(Integer.valueOf(3), player.currentPhaseNumber());
     }
 
     @Test
@@ -88,12 +88,12 @@ public class Phase10PlayerTest {
     public void testScore() {
         assertEquals(score, player.getScore());
         player.addScore(score);
-        assertEquals(score * 2, player.getScore());
+        assertEquals(Integer.valueOf(score * 2), player.getScore());
     }
 
     @Test
     public void testPhase() throws Exception {
-        for (int i = phase + 1; i <= Phase10Game.MAX_PHASE; i++) {
+        for (Integer i = phase + 1; i <= Phase10Game.MAX_PHASE; i++) {
             player.completeCurrentPhase();
             assertEquals(i, player.currentPhaseNumber());
         }

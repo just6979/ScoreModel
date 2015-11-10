@@ -40,7 +40,7 @@ import static org.junit.Assert.*;
 public class PlayerTest {
     private final String name = "First Last";
     private final String initials = "FL";
-    private final int score = 88;
+    private final Integer score = 88;
     private final String newName = "OnlyFirst";
     private final String newInitials = "O_";
     private Game<Player> game;

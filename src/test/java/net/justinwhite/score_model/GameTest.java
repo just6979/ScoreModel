@@ -38,26 +38,26 @@ import static org.junit.Assert.*;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class GameTest {
-    private final int numPlayers;
+    private final Integer numPlayers;
     private final Player[] playersArray;
     private final String newPlayerName;
     private final String[] playerNames;
     private Game<Player> game;
-    private int[] scores;
+    private Integer[] scores;
 
     {
         numPlayers = 4;
         playerNames = new String[]{"Lauren K", "Justin W", "Tim C", "Denise B"};
         playersArray = new Player[numPlayers];
         newPlayerName = "Foo Bar";
-        scores = new int[]{0, 0, 0, 0};
+        scores = new Integer[]{0, 0, 0, 0};
     }
 
     @Before
     public void setUp() throws Exception {
         game = new Game<>(Player.class, numPlayers);
         assertEquals(numPlayers, game.getNumPlayers());
-        for (int i = 0; i < numPlayers; i++) {
+        for (Integer i = 0; i < numPlayers; i++) {
             // populate array for comparisons later
             playersArray[i] = game.getPlayer(i);
             // rename players for comparisons later
@@ -66,8 +66,8 @@ public class GameTest {
         // check that scores start at 0
         assertArrayEquals(scores, game.getScores());
         // set scores for later tests
-        scores = new int[]{50, 100, 200, 150};
-        for (int i = 0; i < scores.length; i++) {
+        scores = new Integer[]{50, 100, 200, 150};
+        for (Integer i = 0; i < scores.length; i++) {
             game.getPlayer(i).setScore(scores[i]);
         }
         // check the scores were set correctly
@@ -102,7 +102,7 @@ public class GameTest {
         // fail if too many players
         assertFalse(game.setNumPlayers(Integer.MAX_VALUE));
         // increase player count by 1
-        int newNumPlayers = numPlayers + 1;
+        Integer newNumPlayers = numPlayers + 1;
         // check decrease was successful
         assertTrue(game.setNumPlayers(newNumPlayers));
         // and player count matches
@@ -116,7 +116,7 @@ public class GameTest {
         // fail if too few players
         assertFalse(game.setNumPlayers(0));
         //decrease player count by 1
-        int newNumPlayers = numPlayers - 1;
+        Integer newNumPlayers = numPlayers - 1;
         // check increase was successful and player count matches
         assertTrue(game.setNumPlayers(newNumPlayers));
         assertEquals(newNumPlayers, game.getNumPlayers());
@@ -145,7 +145,7 @@ public class GameTest {
         Player newPlayer = game.addPlayer(newPlayerName);
         assertSame(newPlayer, game.getPlayer(game.getNumPlayers() - 1));
         // add Players to the max
-        for (int i = game.getNumPlayers(); i < Game.MAX_PLAYERS; i++) {
+        for (Integer i = game.getNumPlayers(); i < Game.MAX_PLAYERS; i++) {
             assertNotNull(game.addPlayer());
         }
         // try to add one more and fail
@@ -168,7 +168,7 @@ public class GameTest {
                 game.getPlayer(game.getNumPlayers() - 1).getName()
         );
         // remove Players, from the beginning, to the minimum
-        for (int i = game.getNumPlayers(); i > Game.MIN_PLAYERS; i--) {
+        for (Integer i = game.getNumPlayers(); i > Game.MIN_PLAYERS; i--) {
             assertNotNull(game.removePlayer(0));
         }
         // try to remove one more and fail
@@ -193,11 +193,11 @@ public class GameTest {
         // check winner matches player set to win in setup
         assertSame(playersArray[2], game.getWinner());
         // reset scores to 0
-        for (int i = 0; i < scores.length; i++) {
+        for (Integer i = 0; i < scores.length; i++) {
             game.getPlayer(i).setScore(0);
         }
         // check there is no winner
-        assertFalse(game.checkWinner());
+        assertTrue(game.checkWinner());
     }
 
 }
