@@ -37,61 +37,7 @@ import net.justinwhite.score_model.Game;
 public class Phase10Game extends Game<Phase10Player> {
     public static final Integer MIN_PHASE = 0;
     public static final Integer MAX_PHASE = 10;
-
-    public enum Phase {
-        INACTIVE, ACTIVE, COMPLETED
-    }
-
-    public enum PhaseSet {
-        ALL, EVEN, ODD, FIRST_5, LAST_5;
-
-    }
-
-    private Boolean[] activePhases;
-
-    public static Boolean[] getPhasePreset(PhaseSet phasePreset) {
-        Boolean[] defaultPhases;
-
-        switch (phasePreset) {
-            case EVEN:
-                defaultPhases = new Boolean[]{false,
-                        false, true,
-                        false, true,
-                        false, true,
-                        false, true,
-                        false, true
-                };
-                break;
-            case ODD:
-                defaultPhases = new Boolean[]{false,
-                        true, false,
-                        true, false,
-                        true, false,
-                        true, false,
-                        true, false
-                };
-                break;
-            case FIRST_5:
-                defaultPhases = new Boolean[]{false,
-                        true, true, true, true, true,
-                        false, false, false, false, false
-                };
-                break;
-            case LAST_5:
-                defaultPhases = new Boolean[]{false,
-                        false, false, false, false, false,
-                        true, true, true, true, true
-                };
-                break;
-            case ALL:
-            default:
-                defaultPhases = new Boolean[]{false,
-                        true, true, true, true, true,
-                        true, true, true, true, true};
-                break;
-        }
-        return defaultPhases;
-    }
+    private Phase[] activePhases;
 
     public Phase10Game() {
         this(0, PhaseSet.ALL, null);
@@ -110,7 +56,51 @@ public class Phase10Game extends Game<Phase10Player> {
         activePhases = getPhasePreset(_phasePreset);
     }
 
-    public Boolean[] getActivePhases() {
+    public static Phase[] getPhasePreset(PhaseSet phasePreset) {
+        Phase[] defaultPhases;
+
+        switch (phasePreset) {
+            case EVEN:
+                defaultPhases = new Phase[]{Phase.UNUSED,
+                        Phase.INACTIVE, Phase.ACTIVE,
+                        Phase.INACTIVE, Phase.ACTIVE,
+                        Phase.INACTIVE, Phase.ACTIVE,
+                        Phase.INACTIVE, Phase.ACTIVE,
+                        Phase.INACTIVE, Phase.ACTIVE
+                };
+                break;
+            case ODD:
+                defaultPhases = new Phase[]{Phase.UNUSED,
+                        Phase.ACTIVE, Phase.INACTIVE,
+                        Phase.ACTIVE, Phase.INACTIVE,
+                        Phase.ACTIVE, Phase.INACTIVE,
+                        Phase.ACTIVE, Phase.INACTIVE,
+                        Phase.ACTIVE, Phase.INACTIVE
+                };
+                break;
+            case FIRST_5:
+                defaultPhases = new Phase[]{Phase.UNUSED,
+                        Phase.ACTIVE, Phase.ACTIVE, Phase.ACTIVE, Phase.ACTIVE, Phase.ACTIVE,
+                        Phase.INACTIVE, Phase.INACTIVE, Phase.INACTIVE, Phase.INACTIVE, Phase.INACTIVE
+                };
+                break;
+            case LAST_5:
+                defaultPhases = new Phase[]{Phase.UNUSED,
+                        Phase.INACTIVE, Phase.INACTIVE, Phase.INACTIVE, Phase.INACTIVE, Phase.INACTIVE,
+                        Phase.ACTIVE, Phase.ACTIVE, Phase.ACTIVE, Phase.ACTIVE, Phase.ACTIVE
+                };
+                break;
+            case ALL:
+            default:
+                defaultPhases = new Phase[]{Phase.UNUSED,
+                        Phase.ACTIVE, Phase.ACTIVE, Phase.ACTIVE, Phase.ACTIVE, Phase.ACTIVE,
+                        Phase.ACTIVE, Phase.ACTIVE, Phase.ACTIVE, Phase.ACTIVE, Phase.ACTIVE};
+                break;
+        }
+        return defaultPhases;
+    }
+
+    public Phase[] getActivePhases() {
         return activePhases;
     }
 
@@ -118,12 +108,12 @@ public class Phase10Game extends Game<Phase10Player> {
         getPhasePreset(_phasePreset);
     }
 
-    public void setActivePhases(Boolean[] _activePhases) {
+    public void setActivePhases(Phase[] _activePhases) {
         activePhases = _activePhases;
     }
 
     public Boolean isPhaseActive(Integer _phase) {
-        return activePhases[_phase];
+        return activePhases[_phase] == Phase.ACTIVE;
     }
 
     public Integer[] getPhases() {
@@ -163,4 +153,13 @@ public class Phase10Game extends Game<Phase10Player> {
         }
         return getWinner() != null;
     }
+
+    public enum Phase {
+        UNUSED, INACTIVE, ACTIVE, COMPLETED
+    }
+
+    public enum PhaseSet {
+        ALL, EVEN, ODD, FIRST_5, LAST_5
+    }
+
 }

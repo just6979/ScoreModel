@@ -52,7 +52,7 @@ public class Phase10Player extends Player {
         this(_name, getPhasePreset(phasePreset));
     }
 
-    public Phase10Player(String _name, Boolean[] _phases) {
+    public Phase10Player(String _name, Phase[] _phases) {
         super(_name);
         phases = new Phase[MAX_PHASE + 1];
         setActivePhases(_phases);
@@ -66,6 +66,10 @@ public class Phase10Player extends Player {
                 super.toString(),
                 getCurrentPhase()
         );
+    }
+
+    public void setActivePhases(Phase[] _phases) {
+        System.arraycopy(_phases, 0, phases, 0, _phases.length);
     }
 
     public void setActivePhases(Boolean[] _phases) {
