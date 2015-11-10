@@ -64,18 +64,18 @@ public class GameTest {
             game.getPlayer(i).setName(playerNames[i]);
         }
         // check that scores start at 0
-        assertArrayEquals(scores, game.getScores());
+        assertArrayEquals(scores, game.getScores().toArray());
         // set scores for later tests
         scores = new Integer[]{50, 100, 200, 150};
         for (Integer i = 0; i < scores.length; i++) {
             game.getPlayer(i).setScore(scores[i]);
         }
         // check the scores were set correctly
-        assertArrayEquals(scores, game.getScores());
+        assertArrayEquals(scores, game.getScores().toArray());
     }
 
     @Test
-    public void testGame() throws Exception {
+    public void testConstructors() throws Exception {
         System.out.print("Testing " + Version.getVersion());
         game = new Game<>(Player.class);
         assertEquals(Game.MIN_PLAYERS, game.getNumPlayers());
@@ -88,13 +88,24 @@ public class GameTest {
     @Test
     public void testToString() throws Exception {
         assertEquals(String.format("Game: %s\nUUID: %s\nPlayer count: %d\nPlayers: %s",
-                        game.getName(),
-                        game.getID(),
-                        game.getNumPlayers(),
-                        game.getPlayerList()
+                game.getName(),
+                game.getID(),
+                game.getNumPlayers(),
+                game.getPlayerList()
                 ), game.toString()
         );
 
+    }
+
+    @Test
+    public void testSetName() throws Exception {
+        String tempName = "Foo Game";
+        String builtName = Game.buildName();
+        assertEquals(builtName, game.getName());
+        game.setName(tempName);
+        assertEquals(tempName, game.getName());
+        game.setName("");
+        assertEquals(builtName, game.getName());
     }
 
     @Test
@@ -111,6 +122,7 @@ public class GameTest {
         assertEquals("Player " + newNumPlayers, game.getPlayer(game.getNumPlayers() - 1).getName());
     }
 
+
     @Test
     public void testSetNumPlayersDown() throws Exception {
         // fail if too few players
@@ -124,10 +136,10 @@ public class GameTest {
         assertSame(playersArray[newNumPlayers - 1], game.getPlayer(game.getNumPlayers() - 1));
     }
 
-
     @Test
     public void testCheckPlayer() throws Exception {
         assertTrue(game.checkPlayer(1));
+        assertFalse(game.checkPlayer(-1));
         assertFalse(game.checkPlayer(Integer.MAX_VALUE));
         assertFalse(game.checkPlayer(Integer.MIN_VALUE));
     }
@@ -177,6 +189,11 @@ public class GameTest {
     }
 
     @Test
+    public void testGetScores() throws Exception {
+
+    }
+
+    @Test
     public void testGetScoresText() throws Exception {
         String result = "";
         for (Player p : game.getPlayerList()) {
@@ -198,6 +215,11 @@ public class GameTest {
         }
         // check there is no winner
         assertTrue(game.checkWinner());
+    }
+
+    @Test
+    public void testGetWinner() throws Exception {
+
     }
 
 }
