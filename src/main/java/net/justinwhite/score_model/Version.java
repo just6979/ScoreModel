@@ -41,8 +41,8 @@ public class Version {
     static {
         name = "ScoreModel";
         major = 0;
-        minor = 10;
-        revision = 1;
+        minor = 11;
+        revision = 0;
     }
 
     public static String getName() {
