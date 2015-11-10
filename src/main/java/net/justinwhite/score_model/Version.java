@@ -34,9 +34,9 @@ package net.justinwhite.score_model;
 @SuppressWarnings("unused")
 public class Version {
     private static final String name;
-    private static final int major;
-    private static final int minor;
-    private static final int revision;
+    private static final Integer major;
+    private static final Integer minor;
+    private static final Integer revision;
 
     static {
         name = "ScoreModel";
@@ -49,15 +49,15 @@ public class Version {
         return name;
     }
 
-    public static int getMajor() {
+    public static Integer getMajor() {
         return major;
     }
 
-    public static int getMinor() {
+    public static Integer getMinor() {
         return minor;
     }
 
-    public static int getRevision() {
+    public static Integer getRevision() {
         return revision;
     }
 

@@ -35,15 +35,15 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Game<T extends Player> {
-    public static final int MIN_PLAYERS = 2;
-    public static final int MAX_PLAYERS = 8;
+    public static final Integer MIN_PLAYERS = 2;
+    public static final Integer MAX_PLAYERS = 8;
 
     private final UUID id;
     private final Class<T> playerClass;
     private final List<T> playerList;
-    private int numPlayers;
+    private Integer numPlayers = 0;
     private String name;
-    private T winner;
+    protected T winner;
 
     public static String buildName() {
         String format = "YYYY-MM-dd HH:mm";
@@ -55,11 +55,11 @@ public class Game<T extends Player> {
         this(_class, MIN_PLAYERS, null);
     }
 
-    public Game(Class<T> _class, int _numPlayers) {
+    public Game(Class<T> _class, Integer _numPlayers) {
         this(_class, _numPlayers, null);
     }
 
-    public Game(Class<T> _class, int _numPlayers, String _name) {
+    public Game(Class<T> _class, Integer _numPlayers, String _name) {
         playerClass = _class;
 
         // bounds check number of players
@@ -104,7 +104,7 @@ public class Game<T extends Player> {
         return id;
     }
 
-    public int getNumPlayers() {
+    public Integer getNumPlayers() {
         return numPlayers;
     }
 
@@ -113,20 +113,20 @@ public class Game<T extends Player> {
     }
 
     // If increasing count, create a new blank player; if decreasing, delete last player
-    public boolean setNumPlayers(int newNumPlayers) {
+    public Boolean setNumPlayers(Integer newNumPlayers) {
         // make sure requested count is within limits
         if (newNumPlayers < MIN_PLAYERS || newNumPlayers > MAX_PLAYERS) {
             return false;
         }
         // increasing count, add players
         if (newNumPlayers > numPlayers) {
-            for (int i = numPlayers; i < newNumPlayers; i++) {
+            for (Integer i = numPlayers; i < newNumPlayers; i++) {
                 addPlayer();
             }
         }
         // decreasing count, remove players
         if (numPlayers > newNumPlayers) {
-            for (int i = numPlayers; i > newNumPlayers; i--) {
+            for (Integer i = numPlayers; i > newNumPlayers; i--) {
                 removePlayer();
             }
         }
@@ -136,7 +136,7 @@ public class Game<T extends Player> {
     }
 
     // check if there is a player at the given index
-    public Boolean checkPlayer(int index) {
+    public Boolean checkPlayer(Integer index) {
         return index > 0 && index <= numPlayers && playerList.get(index) != null;
     }
 
@@ -179,9 +179,9 @@ public class Game<T extends Player> {
     }
 
     // remove and return player specified by index. return null if index out of bounds
-    public T removePlayer(int index) {
+    public T removePlayer(Integer index) {
         if (numPlayers > MIN_PLAYERS) {
-            T oldPlayer = playerList.remove(index);
+            T oldPlayer = playerList.remove(index.intValue());
             numPlayers = playerList.size();
             return oldPlayer;
         } else {
@@ -190,7 +190,7 @@ public class Game<T extends Player> {
     }
 
     // return player specified by index or null if index out of bounds
-    public T getPlayer(int index) {
+    public T getPlayer(Integer index) {
         if (0 <= index && index < playerList.size()) {
             return playerList.get(index);
         } else {
@@ -199,9 +199,9 @@ public class Game<T extends Player> {
     }
 
     // return an array of raw scores
-    public int[] getScores() {
-        int[] scores = new int[playerList.size()];
-        int i = 0;
+    public Integer[] getScores() {
+        Integer[] scores = new Integer[playerList.size()];
+        Integer i = 0;
         for (Player p : playerList) {
             scores[i++] = p.getScore();
         }
@@ -218,10 +218,9 @@ public class Game<T extends Player> {
     }
 
     // TODO: handle tie scores
-    public boolean checkWinner() {
-        winner = null;
-        int highScore = 0;
-        int curScore;
+    public Boolean checkWinner() {
+        Integer highScore = 0;
+        Integer curScore;
         for (T curPlayer : playerList) {
             curScore = curPlayer.getScore();
             if (curScore > highScore) {

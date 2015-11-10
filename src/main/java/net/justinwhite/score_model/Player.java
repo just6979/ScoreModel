@@ -33,7 +33,7 @@ package net.justinwhite.score_model;
 
 public class Player {
     private String name;
-    private int score;
+    private Integer score;
 
     public Player() {
         this("Player X");
@@ -60,11 +60,11 @@ public class Player {
         name = _name;
     }
 
-    public int getScore() {
+    public Integer getScore() {
         return score;
     }
 
-    public void setScore(int _score) {
+    public void setScore(Integer _score) {
         score = _score;
     }
 

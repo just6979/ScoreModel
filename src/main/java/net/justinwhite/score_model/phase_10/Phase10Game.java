@@ -35,20 +35,20 @@ package net.justinwhite.score_model.phase_10;
 import net.justinwhite.score_model.Game;
 
 public class Phase10Game extends Game<Phase10Player> {
-    public static final int MIN_PHASE = 0;
-    public static final int MAX_PHASE = 10;
+    public static final Integer MIN_PHASE = 0;
+    public static final Integer MAX_PHASE = 10;
 
     public enum PhaseSet {
         ALL, EVEN, ODD, FIRST_5, LAST_5
     }
-    private boolean[] activePhases;
+    private Boolean[] activePhases;
 
-    public static boolean[] getPhasePreset(PhaseSet phasePreset) {
-        boolean[] defaultPhases;
+    public static Boolean[] getPhasePreset(PhaseSet phasePreset) {
+        Boolean[] defaultPhases;
 
         switch (phasePreset) {
             case EVEN:
-                defaultPhases = new boolean[]{false,
+                defaultPhases = new Boolean[]{false,
                         false, true,
                         false, true,
                         false, true,
@@ -57,7 +57,7 @@ public class Phase10Game extends Game<Phase10Player> {
                 };
                 break;
             case ODD:
-                defaultPhases = new boolean[]{false,
+                defaultPhases = new Boolean[]{false,
                         true, false,
                         true, false,
                         true, false,
@@ -66,20 +66,20 @@ public class Phase10Game extends Game<Phase10Player> {
                 };
                 break;
             case FIRST_5:
-                defaultPhases = new boolean[]{false,
+                defaultPhases = new Boolean[]{false,
                         true, true, true, true, true,
                         false, false, false, false, false
                 };
                 break;
             case LAST_5:
-                defaultPhases = new boolean[]{false,
+                defaultPhases = new Boolean[]{false,
                         false, false, false, false, false,
                         true, true, true, true, true
                 };
                 break;
             case ALL:
             default:
-                defaultPhases = new boolean[]{false,
+                defaultPhases = new Boolean[]{false,
                         true, true, true, true, true,
                         true, true, true, true, true};
                 break;
@@ -91,20 +91,20 @@ public class Phase10Game extends Game<Phase10Player> {
         this(0, PhaseSet.ALL, null);
     }
 
-    public Phase10Game(int _numPlayers) {
+    public Phase10Game(Integer _numPlayers) {
         this(_numPlayers, PhaseSet.ALL, null);
     }
 
-    public Phase10Game(int _numPlayers, PhaseSet _phasePreset) {
+    public Phase10Game(Integer _numPlayers, PhaseSet _phasePreset) {
         this(_numPlayers, _phasePreset, null);
     }
 
-    public Phase10Game(int _numPlayers, PhaseSet _phasePreset, String _name) {
+    public Phase10Game(Integer _numPlayers, PhaseSet _phasePreset, String _name) {
         super(Phase10Player.class, _numPlayers, _name);
         activePhases = getPhasePreset(_phasePreset);
     }
 
-    public boolean[] getActivePhases() {
+    public Boolean[] getActivePhases() {
         return activePhases;
     }
 
@@ -112,17 +112,17 @@ public class Phase10Game extends Game<Phase10Player> {
         getPhasePreset(_phasePreset);
     }
 
-    public void setActivePhases(boolean[] _activePhases) {
+    public void setActivePhases(Boolean[] _activePhases) {
         activePhases = _activePhases;
     }
 
-    public boolean isPhaseActive(int _phase) {
+    public Boolean isPhaseActive(Integer _phase) {
         return activePhases[_phase];
     }
 
-    public int[] getPhases() {
-        int[] phases = new int[getNumPlayers()];
-        int count = 0;
+    public Integer[] getPhases() {
+        Integer[] phases = new Integer[getNumPlayers()];
+        Integer count = 0;
         for (Phase10Player p : getPlayerList()) {
             phases[count++] = p.currentPhaseNumber();
         }
@@ -143,12 +143,12 @@ public class Phase10Game extends Game<Phase10Player> {
     }
 
     @Override
-    public boolean checkWinner() {
+    public Boolean checkWinner() {
         // TODO: scores _might_ be the same sometimes. What is the 2nd tie-breaker?
-        int lowScore = Integer.MAX_VALUE;
+        Integer lowScore = Integer.MAX_VALUE;
         for (Phase10Player p : getPlayerList()) {
             if (p.currentPhaseNumber() == MAX_PHASE) {
-                int curScore = p.getScore();
+                Integer curScore = p.getScore();
                 if (curScore < lowScore) {
                     lowScore = p.getScore();
                     setWinner(p);

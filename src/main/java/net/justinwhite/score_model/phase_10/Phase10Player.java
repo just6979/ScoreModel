@@ -40,7 +40,7 @@ public class Phase10Player extends Player {
     }
 
     private final Phase[] phases;
-    private int currentPhase;
+    private Integer currentPhase;
 
     public Phase10Player() {
         this("Player X");
@@ -54,7 +54,7 @@ public class Phase10Player extends Player {
         this(_name, Phase10Game.getPhasePreset(phasePreset));
     }
 
-    public Phase10Player(String _name, boolean[] _phases) {
+    public Phase10Player(String _name, Boolean[] _phases) {
         super(_name);
         phases = new Phase[Phase10Game.MAX_PHASE + 1];
         setPhases(_phases);
@@ -70,7 +70,7 @@ public class Phase10Player extends Player {
         );
     }
 
-    public int currentPhaseNumber() {
+    public Integer currentPhaseNumber() {
         return currentPhase;
     }
 
@@ -91,12 +91,12 @@ public class Phase10Player extends Player {
         } while (phases[currentPhase] != Phase.ACTIVE);
     }
 
-    public void addScore(int _score) {
+    public void addScore(Integer _score) {
         setScore(getScore() + _score);
     }
 
-    public void setPhases(boolean[] _phases) {
-        for (int i = 0; i <= Phase10Game.MAX_PHASE; i++) {
+    public void setPhases(Boolean[] _phases) {
+        for (Integer i = 0; i <= Phase10Game.MAX_PHASE; i++) {
             if (_phases[i]) {
                 phases[i] = Phase.ACTIVE;
             } else {
