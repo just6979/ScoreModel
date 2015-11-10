@@ -70,6 +70,16 @@ public class Phase10Player extends Player {
         );
     }
 
+    public void setPhases(Boolean[] _phases) {
+        for (Integer i = 0; i <= Phase10Game.MAX_PHASE; i++) {
+            if (_phases[i]) {
+                phases[i] = Phase.ACTIVE;
+            } else {
+                phases[i] = Phase.INACTIVE;
+            }
+        }
+    }
+
     public Integer currentPhaseNumber() {
         return currentPhase;
     }
@@ -93,15 +103,5 @@ public class Phase10Player extends Player {
 
     public void addScore(Integer _score) {
         setScore(getScore() + _score);
-    }
-
-    public void setPhases(Boolean[] _phases) {
-        for (Integer i = 0; i <= Phase10Game.MAX_PHASE; i++) {
-            if (_phases[i]) {
-                phases[i] = Phase.ACTIVE;
-            } else {
-                phases[i] = Phase.INACTIVE;
-            }
-        }
     }
 }
