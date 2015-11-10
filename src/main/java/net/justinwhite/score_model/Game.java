@@ -235,7 +235,4 @@ public class Game<T extends Player> {
         return winner;
     }
 
-    protected void setWinner(T _winner) {
-        winner = _winner;
-    }
 }

@@ -151,7 +151,7 @@ public class Phase10Game extends Game<Phase10Player> {
                 Integer curScore = p.getScore();
                 if (curScore < lowScore) {
                     lowScore = p.getScore();
-                    setWinner(p);
+                    winner = p;
                 }
             }
         }
