@@ -32,12 +32,10 @@
 package net.justinwhite.score_model.phase_10;
 
 import net.justinwhite.score_model.Player;
-import net.justinwhite.score_model.phase_10.Phase10Game.PhaseSet;
+
+import static net.justinwhite.score_model.phase_10.Phase10Game.*;
 
 public class Phase10Player extends Player {
-    public enum Phase {
-        INACTIVE, ACTIVE, COMPLETED
-    }
 
     private final Phase[] phases;
     private Integer currentPhase;
@@ -51,13 +49,13 @@ public class Phase10Player extends Player {
     }
 
     public Phase10Player(String _name, PhaseSet phasePreset) {
-        this(_name, Phase10Game.getPhasePreset(phasePreset));
+        this(_name, getPhasePreset(phasePreset));
     }
 
     public Phase10Player(String _name, Boolean[] _phases) {
         super(_name);
-        phases = new Phase[Phase10Game.MAX_PHASE + 1];
-        setPhases(_phases);
+        phases = new Phase[MAX_PHASE + 1];
+        setActivePhases(_phases);
         currentPhase = 0;
     }
 
@@ -66,12 +64,12 @@ public class Phase10Player extends Player {
         return String.format(
                 "%s; Phase %d",
                 super.toString(),
-                currentPhaseNumber()
+                getCurrentPhase()
         );
     }
 
-    public void setPhases(Boolean[] _phases) {
-        for (Integer i = 0; i <= Phase10Game.MAX_PHASE; i++) {
+    public void setActivePhases(Boolean[] _phases) {
+        for (Integer i = 0; i <= MAX_PHASE; i++) {
             if (_phases[i]) {
                 phases[i] = Phase.ACTIVE;
             } else {
@@ -80,8 +78,12 @@ public class Phase10Player extends Player {
         }
     }
 
-    public Integer currentPhaseNumber() {
+    public Integer getCurrentPhase() {
         return currentPhase;
+    }
+
+    public void resetCurrentPhase() {
+        currentPhase = 0;
     }
 
     public Phase[] getPhases() {
@@ -94,8 +96,8 @@ public class Phase10Player extends Player {
         }
         do {
             currentPhase++;
-            if (currentPhase > Phase10Game.MAX_PHASE) {
-                currentPhase = Phase10Game.MAX_PHASE;
+            if (currentPhase > MAX_PHASE) {
+                currentPhase = MAX_PHASE;
                 break;
             }
         } while (phases[currentPhase] != Phase.ACTIVE);

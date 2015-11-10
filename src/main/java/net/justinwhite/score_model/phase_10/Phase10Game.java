@@ -38,8 +38,13 @@ public class Phase10Game extends Game<Phase10Player> {
     public static final Integer MIN_PHASE = 0;
     public static final Integer MAX_PHASE = 10;
 
+    public enum Phase {
+        INACTIVE, ACTIVE, COMPLETED
+    }
+
     public enum PhaseSet {
-        ALL, EVEN, ODD, FIRST_5, LAST_5
+        ALL, EVEN, ODD, FIRST_5, LAST_5;
+
     }
 
     private Boolean[] activePhases;
@@ -125,7 +130,7 @@ public class Phase10Game extends Game<Phase10Player> {
         Integer[] phases = new Integer[getNumPlayers()];
         Integer count = 0;
         for (Phase10Player p : getPlayerList()) {
-            phases[count++] = p.currentPhaseNumber();
+            phases[count++] = p.getCurrentPhase();
         }
         return phases;
     }
@@ -134,8 +139,8 @@ public class Phase10Game extends Game<Phase10Player> {
         String out = "";
         for (Phase10Player p : getPlayerList()) {
             out += String.format("%s: %4d Points", p.getName(), p.getScore());
-            if (p.currentPhaseNumber() > 0) {
-                out += String.format(", Phase #%d completed\n", p.currentPhaseNumber());
+            if (p.getCurrentPhase() > 0) {
+                out += String.format(", Phase #%d completed\n", p.getCurrentPhase());
             } else {
                 out += "\n";
             }
@@ -148,7 +153,7 @@ public class Phase10Game extends Game<Phase10Player> {
         // TODO: scores _might_ be the same sometimes. What is the 2nd tie-breaker?
         Integer lowScore = Integer.MAX_VALUE;
         for (Phase10Player p : getPlayerList()) {
-            if (p.currentPhaseNumber().equals(MAX_PHASE)) {
+            if (p.getCurrentPhase().equals(MAX_PHASE)) {
                 Integer curScore = p.getScore();
                 if (curScore < lowScore) {
                     lowScore = p.getScore();
@@ -158,5 +163,4 @@ public class Phase10Game extends Game<Phase10Player> {
         }
         return getWinner() != null;
     }
-
 }
