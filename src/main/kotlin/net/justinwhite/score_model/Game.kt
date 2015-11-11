@@ -34,8 +34,16 @@ package net.justinwhite.score_model
 import java.text.SimpleDateFormat
 import java.util.*
 
-open class Game<T : Player>
-constructor(private val playerClass: Class<T>, newNumPlayers: Int, _name: String?) {
+open class Game<T : Player>(private val playerClass: Class<T>, newNumPlayers: Int, _name: String?) {
+
+    constructor(_playerClass: Class<T>, _numPlayers: Int)
+    : this(_playerClass, _numPlayers, "")
+
+    constructor(_playerClass: Class<T>, _name: String)
+    : this(_playerClass, MIN_PLAYERS, _name)
+
+    constructor(_playerClass: Class<T>)
+    : this(_playerClass, MIN_PLAYERS, "")
 
     val ID: UUID = UUID.randomUUID()
 
@@ -93,14 +101,6 @@ constructor(private val playerClass: Class<T>, newNumPlayers: Int, _name: String
         numPlayers = newNumPlayers
     }
 
-    constructor(_playerClass: Class<T>, _numPlayers: Int)
-    : this(_playerClass, _numPlayers, "")
-
-    constructor(_playerClass: Class<T>, _name: String)
-    : this(_playerClass, MIN_PLAYERS, _name)
-
-    constructor(_playerClass: Class<T>)
-    : this(_playerClass, MIN_PLAYERS, "")
 
     override fun toString(): String {
         return "Game: %s\nUUID: %s\nPlayer count: %d\nPlayers: %s".format(name, ID, numPlayers, // List<> class handles toString()
