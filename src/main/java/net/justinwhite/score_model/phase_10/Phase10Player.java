@@ -32,6 +32,7 @@
 package net.justinwhite.score_model.phase_10;
 
 import net.justinwhite.score_model.Player;
+import org.jetbrains.annotations.NotNull;
 
 import static net.justinwhite.score_model.phase_10.Phase10Game.*;
 
@@ -59,6 +60,7 @@ public class Phase10Player extends Player {
         currentPhase = 0;
     }
 
+    @NotNull
     @Override
     public String toString() {
         return String.format(

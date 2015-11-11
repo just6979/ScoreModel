@@ -79,7 +79,7 @@ public class GameTest {
     public void testConstructors() throws Exception {
         System.out.println("Testing: " + VersionKt.getVersion() + ": Game");
         String name = "Test Game";
-        game = new Game<Player>(Player.class);
+        game = new Game<>(Player.class);
         assertEquals(Game.MIN_PLAYERS, game.getNumPlayers());
         game = new Game<>(Player.class, Integer.MIN_VALUE);
         assertEquals(Game.MIN_PLAYERS, game.getNumPlayers());
