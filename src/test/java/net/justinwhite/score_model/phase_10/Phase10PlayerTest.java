@@ -31,7 +31,7 @@
 
 package net.justinwhite.score_model.phase_10;
 
-import net.justinwhite.score_model.Version;
+import net.justinwhite.score_model.VersionKt;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -52,7 +52,7 @@ public class Phase10PlayerTest {
 
     @Test
     public void testConstructors() throws Exception {
-        System.out.println("Testing: " + Version.getVersion() + ": Phase10Player");
+        System.out.println("Testing: " + VersionKt.getVersion() + ": Phase10Player");
         assertArrayEquals(Phase10Game.getPhasePreset(Phase10Game.PhaseSet.ALL), player.getPhases());
         player = new Phase10Player(name, Phase10Game.PhaseSet.EVEN);
         assertArrayEquals(Phase10Game.getPhasePreset(Phase10Game.PhaseSet.EVEN), player.getPhases());

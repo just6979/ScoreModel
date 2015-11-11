@@ -76,7 +76,7 @@ public class GameTest {
 
     @Test
     public void testConstructors() throws Exception {
-        System.out.println("Testing: " + Version.getVersion() + ": Game");
+        System.out.println("Testing: " + VersionKt.getVersion() + ": Game");
         String name = "Test Game";
         game = new Game<>(Player.class);
         assertEquals(Game.MIN_PLAYERS, game.getNumPlayers());

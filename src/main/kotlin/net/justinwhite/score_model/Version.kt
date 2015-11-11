@@ -29,43 +29,16 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.justinwhite.score_model;
+package net.justinwhite.score_model
 
-@SuppressWarnings("unused")
-public class Version {
-    private static final String name;
-    private static final Integer major;
-    private static final Integer minor;
-    private static final Integer revision;
+val name: String = "ScoreModel"
+val major: Int = 0
+val minor: Int = 11
+val revision: Int = 1
 
-    static {
-        name = "ScoreModel";
-        major = 0;
-        minor = 11;
-        revision = 0;
-    }
+val version: String
+    get() = "%s %d.%d.%d".format(name, major, minor, revision)
 
-    public static String getName() {
-        return name;
-    }
-
-    public static Integer getMajor() {
-        return major;
-    }
-
-    public static Integer getMinor() {
-        return minor;
-    }
-
-    public static Integer getRevision() {
-        return revision;
-    }
-
-    public static String getVersion() {
-        return String.format("%s %d.%d.%d", name, major, minor, revision);
-    }
-
-    public static void printVersion() {
-        System.out.print(getVersion());
-    }
+fun printVersion() {
+    print(version)
 }

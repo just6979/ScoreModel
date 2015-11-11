@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'kotlin'
 
 def major = 0
 def minor = 8
@@ -19,6 +20,7 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 
 jar {
@@ -29,4 +31,16 @@ jar {
                 "Implementation-Version": version
         )
     }
+}
+buildscript {
+    ext.kotlin_version = '1.0.0-beta-1103'
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
 }
