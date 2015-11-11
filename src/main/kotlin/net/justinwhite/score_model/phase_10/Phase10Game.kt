@@ -39,14 +39,21 @@ constructor(
         _phasePreset: Phase10Game.PhaseSet = Phase10Game.PhaseSet.ALL,
         _name: String? = null
 ) : Game<Phase10Player>(Phase10Player::class.java, _numPlayers, _name) {
-    var activePhases: Array<Phase>? = null
-
-    init {
-        activePhases = getPhasePreset(_phasePreset)
-    }
+    var activePhases: Array<Phase> = getPhasePreset(_phasePreset)
 
     fun setActivePhases(_phasePreset: PhaseSet) {
         getPhasePreset(_phasePreset)
+    }
+
+    fun setActivePhases(_phases: Array<Boolean>) {
+        activePhases = Array(MAX_PHASE, { i -> Phase.ACTIVE })
+        for (i in 0..Phase10Game.MAX_PHASE) {
+            if (_phases[i]) {
+                activePhases[i] = Phase.ACTIVE
+            } else {
+                activePhases[i] = Phase.INACTIVE
+            }
+        }
     }
 
     fun isPhaseActive(_phase: Int): Boolean? {
