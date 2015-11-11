@@ -88,9 +88,9 @@ public class Phase10PlayerTest {
     @Test
     public void testAddScore() throws Exception {
         player.addScore(score);
-        assertEquals(score, player.getScore());
+        assertEquals(Integer.valueOf(score), Integer.valueOf(player.getScore()));
         player.addScore(score);
-        assertEquals(Integer.valueOf(score * 2), player.getScore());
+        assertEquals(Integer.valueOf(score * 2), Integer.valueOf(player.getScore()));
     }
 
     @Test

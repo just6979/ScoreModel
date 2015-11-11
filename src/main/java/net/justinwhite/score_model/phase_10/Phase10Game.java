@@ -104,12 +104,12 @@ public class Phase10Game extends Game<Phase10Player> {
         return activePhases;
     }
 
-    public void setActivePhases(PhaseSet _phasePreset) {
-        getPhasePreset(_phasePreset);
-    }
-
     public void setActivePhases(Phase[] _activePhases) {
         activePhases = _activePhases;
+    }
+
+    public void setActivePhases(PhaseSet _phasePreset) {
+        getPhasePreset(_phasePreset);
     }
 
     public Boolean isPhaseActive(Integer _phase) {
@@ -147,7 +147,7 @@ public class Phase10Game extends Game<Phase10Player> {
                 Integer curScore = p.getScore();
                 if (curScore < lowScore) {
                     lowScore = p.getScore();
-                    winner = p;
+                    setWinner(p);
                 }
             }
         }
