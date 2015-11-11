@@ -57,7 +57,7 @@ constructor(
     }
 
     fun isPhaseActive(_phase: Int): Boolean? {
-        return activePhases!![_phase] == Phase.ACTIVE
+        return activePhases[_phase] == Phase.ACTIVE
     }
 
     val phases: Array<Phase>
