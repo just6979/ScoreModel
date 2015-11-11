@@ -35,12 +35,41 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 open class Game<T : Player>
-constructor(private val playerClass: Class<T>, var _numPlayers: Int = Game.MIN_PLAYERS, _name: String?) {
+constructor(private val playerClass: Class<T>, newNumPlayers: Int = Game.MIN_PLAYERS, _name: String?) {
 
-    val ID: UUID
-    private val playerList: MutableList<T>
-    private var numPlayers: Int = 0
-    // set the game name. If passed empty string or null, use buildName() to create name based current DateTime
+    val ID: UUID = UUID.randomUUID()
+
+    val playerList: MutableList<T> = ArrayList()
+
+    private var _numPlayers: Int = 0
+    var numPlayers: Int
+        set(value) {
+            var newNumPlayers: Int
+            // bounds check number of players
+            if (value < MIN_PLAYERS) {
+                newNumPlayers = MIN_PLAYERS
+            } else if (value > MAX_PLAYERS) {
+                newNumPlayers = MAX_PLAYERS
+            } else {
+                newNumPlayers = value
+            }
+            // increasing count, add players
+            if (newNumPlayers > numPlayers) {
+                for (i in numPlayers..newNumPlayers - 1) {
+                    addPlayer()
+                }
+            }
+            // decreasing count, remove players
+            if (numPlayers > newNumPlayers) {
+                for (i in numPlayers downTo newNumPlayers + 1) {
+                    removePlayer()
+                }
+            }
+            // record new count
+            _numPlayers = playerList.size
+        }
+        get() = _numPlayers
+
     var name = _name
         set(value) {
             field = if (value == null || value == "") {
@@ -49,6 +78,7 @@ constructor(private val playerClass: Class<T>, var _numPlayers: Int = Game.MIN_P
                 value
             }
         }
+
     private var _winner: T? = null
     open public var winner: T?
         get() {
@@ -60,16 +90,7 @@ constructor(private val playerClass: Class<T>, var _numPlayers: Int = Game.MIN_P
         }
 
     init {
-        ID = UUID.randomUUID()
-        // bounds check number of players
-        if (_numPlayers < MIN_PLAYERS) {
-            _numPlayers = MIN_PLAYERS
-        } else if (_numPlayers > MAX_PLAYERS) {
-            _numPlayers = MAX_PLAYERS
-        }
-
-        playerList = ArrayList<T>()
-        setNumPlayers(_numPlayers)
+        numPlayers = newNumPlayers
     }
 
     constructor(_playerClass: Class<T>, _numPlayers: Int = Game.MIN_PLAYERS)
@@ -83,40 +104,9 @@ constructor(private val playerClass: Class<T>, var _numPlayers: Int = Game.MIN_P
                 playerList)
     }
 
-    fun getNumPlayers(): Int? {
-        return numPlayers
-    }
-
-    fun getPlayerList(): List<T> {
-        return playerList
-    }
-
-    // If increasing count, create a new blank player; if decreasing, delete last player
-    fun setNumPlayers(newNumPlayers: Int): Boolean? {
-        // make sure requested count is within limits
-        if (newNumPlayers < MIN_PLAYERS || newNumPlayers > MAX_PLAYERS) {
-            return false
-        }
-        // increasing count, add players
-        if (newNumPlayers > numPlayers) {
-            for (i in numPlayers..newNumPlayers - 1) {
-                addPlayer()
-            }
-        }
-        // decreasing count, remove players
-        if (numPlayers > newNumPlayers) {
-            for (i in numPlayers downTo newNumPlayers + 1) {
-                removePlayer()
-            }
-        }
-        // record new count
-        numPlayers = playerList.size
-        return true
-    }
-
     // check if there is a player at the given index
-    fun checkPlayer(index: Int): Boolean? {
-        return index > 0 && index <= numPlayers && playerList[index] != null
+    fun checkPlayer(index: Int): Boolean {
+        return index > 0 && index <= numPlayers
     }
 
     // make a new Player [or subclass of player] using newInstance() and set it up for use
@@ -141,10 +131,10 @@ constructor(private val playerClass: Class<T>, var _numPlayers: Int = Game.MIN_P
 
     // add a new player using _name
     @JvmOverloads fun addPlayer(_name: String = "Player " + (numPlayers + 1)): T? {
-        if (numPlayers < MAX_PLAYERS) {
+        if (_numPlayers < MAX_PLAYERS) {
             val newPlayer = makePlayer(_name)
             playerList.add(newPlayer as T)
-            numPlayers = playerList.size
+            _numPlayers = playerList.size
             return newPlayer
         } else {
             return null
@@ -153,9 +143,9 @@ constructor(private val playerClass: Class<T>, var _numPlayers: Int = Game.MIN_P
 
     // remove and return player specified by index. return null if index out of bounds
     @JvmOverloads fun removePlayer(index: Int? = numPlayers - 1): T? {
-        if (numPlayers > MIN_PLAYERS) {
-            val oldPlayer = playerList.removeAt(index!!.toInt())
-            numPlayers = playerList.size
+        if (_numPlayers > MIN_PLAYERS) {
+            val oldPlayer = playerList.removeAt(index!!)
+            _numPlayers = playerList.size
             return oldPlayer
         } else {
             return null
@@ -172,27 +162,25 @@ constructor(private val playerClass: Class<T>, var _numPlayers: Int = Game.MIN_P
     }
 
     // return an array of raw scores
-    val scores: List<Int>
-        get() {
-            val scores = ArrayList<Int>(playerList.size)
-            for (p in playerList) {
-                scores.add(p.score)
-            }
-            return scores
+    fun getScores(): List<Int> {
+        val scores = ArrayList<Int>(playerList.size)
+        for (p in playerList) {
+            scores.add(p.score)
         }
+        return scores
+    }
 
     // return String of "Player1: Score1; Player2: Score2; etc"
-    val scoresText: String
-        get() {
-            var out = ""
-            for (p in playerList) {
-                out += "%s: %d Points; ".format(p.name, p.score)
-            }
-            return out
+    fun getScoresText(): String {
+        var out = ""
+        for (p in playerList) {
+            out += "%s: %d Points; ".format(p.name, p.score)
         }
+        return out
+    }
 
     // tie-breaker is which ever player was added to the game first
-    open fun checkWinner(): Boolean? {
+    open fun checkWinner(): Boolean {
         val _players = ArrayList(playerList)
         Collections.sort(_players)
         _winner = _players[0]
@@ -200,8 +188,8 @@ constructor(private val playerClass: Class<T>, var _numPlayers: Int = Game.MIN_P
     }
 
     companion object {
-        val MIN_PLAYERS = 2
-        val MAX_PLAYERS = 8
+        const val MIN_PLAYERS = 2
+        const val MAX_PLAYERS = 8
 
         fun buildName(): String {
             val format = "YYYY-MM-dd HH:mm"
@@ -209,6 +197,4 @@ constructor(private val playerClass: Class<T>, var _numPlayers: Int = Game.MIN_P
             return sdf.format(Date())
         }
     }
-
-}// add a new player named "Player <X+1>"
-// remove and return last player if no index specified
+}
