@@ -50,7 +50,7 @@ public class Phase10GameTest {
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         game = new Phase10Game(numPlayers);
         for (int i = 0; i < numPlayers; i++) {
             playersArray[i] = game.getPlayer(i);

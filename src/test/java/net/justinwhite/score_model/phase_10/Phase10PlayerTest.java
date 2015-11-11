@@ -46,7 +46,7 @@ public class Phase10PlayerTest {
     private Phase10Player player;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         player = new Phase10Player();
     }
 

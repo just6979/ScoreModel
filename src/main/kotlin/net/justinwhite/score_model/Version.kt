@@ -38,7 +38,3 @@ val revision: Int = 1
 
 val version: String
     get() = "%s %d.%d.%d".format(name, major, minor, revision)
-
-fun printVersion() {
-    print(version)
-}

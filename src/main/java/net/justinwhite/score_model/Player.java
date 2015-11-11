@@ -31,6 +31,8 @@
 
 package net.justinwhite.score_model;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Player
 implements Comparable<Player>{
     private String name;
@@ -70,7 +72,7 @@ implements Comparable<Player>{
     }
 
     @Override
-    public int compareTo(Player o) {
+    public int compareTo(@NotNull Player o) {
         // higher is better
         return o.getScore().compareTo(score);
     }

@@ -54,7 +54,7 @@ public class GameTest {
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         game = new Game<>(Player.class, numPlayers);
         assertEquals(numPlayers, game.getNumPlayers());
         for (Integer i = 0; i < numPlayers; i++) {
