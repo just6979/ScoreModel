@@ -137,17 +137,26 @@ public class GameTest {
 
     @Test
     public void testCheckPlayer() throws Exception {
+        // remember we use zero indexed arrays. not 1 indexed
+        // we should have a Player 1 & 2
+        assertTrue(game.checkPlayer(0));
         assertTrue(game.checkPlayer(1));
+        // Player -1 should not exist
         assertFalse(game.checkPlayer(-1));
+        // nor should Player N + 1
+        assertFalse(game.checkPlayer(numPlayers));
+        // nor should other out of bounds player numbers.
         assertFalse(game.checkPlayer(Integer.MAX_VALUE));
         assertFalse(game.checkPlayer(Integer.MIN_VALUE));
     }
 
     @Test
     public void testGetPlayer() throws Exception {
-        assertSame(playersArray[0], game.getPlayer(0));
-        assertNull(game.getPlayer(Integer.MAX_VALUE));
-        assertNull(game.getPlayer(Integer.MIN_VALUE));
+        assertSame(playersArray[1], game.getPlayer(1));
+        // out of bounds index low gives first player
+        assertSame(playersArray[0], game.getPlayer(Integer.MIN_VALUE));
+        // out of bounds index high gives last player
+        assertSame(playersArray[numPlayers - 1], game.getPlayer(Integer.MAX_VALUE));
     }
 
     @Test

@@ -106,7 +106,7 @@ constructor(private val playerClass: Class<T>, newNumPlayers: Int = Game.MIN_PLA
 
     // check if there is a player at the given index
     fun checkPlayer(index: Int): Boolean {
-        return index > 0 && index <= numPlayers
+        return index >= 0 && index < numPlayers
     }
 
     // make a new Player [or subclass of player] using newInstance() and set it up for use
@@ -156,7 +156,7 @@ constructor(private val playerClass: Class<T>, newNumPlayers: Int = Game.MIN_PLA
     fun getPlayer(_index: Int): T {
         var index = when {
             _index < 0 -> 0
-            _index > playerList.size -> playerList.size
+            _index >= numPlayers -> numPlayers - 1
             else -> _index
         }
         return playerList[index]
