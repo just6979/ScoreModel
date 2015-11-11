@@ -32,9 +32,12 @@
 package net.justinwhite.score_model.phase_10;
 
 import net.justinwhite.score_model.Player;
+import net.justinwhite.score_model.phase_10.Phase10Game.Phase;
+import net.justinwhite.score_model.phase_10.Phase10Game.PhaseSet;
 import org.jetbrains.annotations.NotNull;
 
-import static net.justinwhite.score_model.phase_10.Phase10Game.*;
+import static net.justinwhite.score_model.phase_10.Phase10Game.Companion;
+import static net.justinwhite.score_model.phase_10.Phase10Game.MAX_PHASE;
 
 public class Phase10Player extends Player {
 
@@ -50,7 +53,7 @@ public class Phase10Player extends Player {
     }
 
     public Phase10Player(String _name, PhaseSet phasePreset) {
-        this(_name, getPhasePreset(phasePreset));
+        this(_name, Companion.getPhasePreset(phasePreset));
     }
 
     public Phase10Player(String _name, Phase[] _phases) {
