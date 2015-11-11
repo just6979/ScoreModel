@@ -196,7 +196,7 @@ constructor(private val playerClass: Class<T>, newNumPlayers: Int, _name: String
         const val MAX_PLAYERS = 8
 
         fun buildName(): String {
-            val format = "YYYY-MM-dd HH:mm"
+            val format = "yyyy-MM-dd HH:mm"
             val sdf = SimpleDateFormat(format, Locale.US)
             return sdf.format(Date())
         }
