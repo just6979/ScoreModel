@@ -63,7 +63,7 @@ constructor(
     val phases: Array<Phase>
         get() {
             val phases = getPhasePreset()
-            var count: Int = 0
+            var count: Int = MIN_PHASE
             for (p in playerList) {
                 phases[count++] = p.phases[p.currentPhase]
             }
