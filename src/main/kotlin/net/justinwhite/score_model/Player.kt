@@ -29,51 +29,18 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.justinwhite.score_model;
+package net.justinwhite.score_model
 
-import org.jetbrains.annotations.NotNull;
+open class Player @JvmOverloads constructor(_name: String = "Player X") : Comparable<Player> {
+    var name: String = _name
+    var score: Int = 0
 
-public class Player
-implements Comparable<Player>{
-    private String name;
-    private Integer score;
-
-    public Player() {
-        this("Player X");
+    override fun toString(): String {
+        return "Name '%s'; Score %s".format(name, score)
     }
 
-    public Player(String _name) {
-        setName(_name);
-        setScore(0);
-    }
-
-    public String toString() {
-        return String.format(
-                "Name '%s'; Score %s",
-                getName(),
-                getScore()
-        );
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String _name) {
-        name = _name;
-    }
-
-    public Integer getScore() {
-        return score;
-    }
-
-    public void setScore(Integer _score) {
-        score = _score;
-    }
-
-    @Override
-    public int compareTo(@NotNull Player o) {
+    override fun compareTo(other: Player): Int {
         // higher is better
-        return o.getScore().compareTo(score);
+        return other.score.compareTo(score)
     }
 }
