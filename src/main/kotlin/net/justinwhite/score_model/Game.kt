@@ -35,7 +35,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 open class Game<T : Player>
-constructor(private val playerClass: Class<T>, newNumPlayers: Int = Game.MIN_PLAYERS, _name: String?) {
+constructor(private val playerClass: Class<T>, newNumPlayers: Int, _name: String?) {
 
     val ID: UUID = UUID.randomUUID()
 
@@ -93,11 +93,14 @@ constructor(private val playerClass: Class<T>, newNumPlayers: Int = Game.MIN_PLA
         numPlayers = newNumPlayers
     }
 
-    constructor(_playerClass: Class<T>, _numPlayers: Int = Game.MIN_PLAYERS)
+    constructor(_playerClass: Class<T>, _numPlayers: Int)
     : this(_playerClass, _numPlayers, "")
 
+    constructor(_playerClass: Class<T>, _name: String)
+    : this(_playerClass, MIN_PLAYERS, _name)
+
     constructor(_playerClass: Class<T>)
-    : this(_playerClass, 0, "")
+    : this(_playerClass, MIN_PLAYERS, "")
 
     override fun toString(): String {
         return "Game: %s\nUUID: %s\nPlayer count: %d\nPlayers: %s".format(name, ID, numPlayers, // List<> class handles toString()
