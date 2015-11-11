@@ -152,13 +152,14 @@ constructor(private val playerClass: Class<T>, newNumPlayers: Int = Game.MIN_PLA
         }
     }
 
-    // return player specified by index or null if index out of bounds
-    fun getPlayer(index: Int): T? {
-        if (0 <= index && index < playerList.size) {
-            return playerList[index]
-        } else {
-            return null
+    // return player specified by index; first or last if index out of bounds
+    fun getPlayer(_index: Int): T {
+        var index = when {
+            _index < 0 -> 0
+            _index > playerList.size -> playerList.size
+            else -> _index
         }
+        return playerList[index]
     }
 
     // return an array of raw scores
