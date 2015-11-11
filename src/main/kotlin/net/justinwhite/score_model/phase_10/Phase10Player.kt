@@ -36,7 +36,7 @@ import net.justinwhite.score_model.phase_10.Phase10Game.*
 
 class Phase10Player(_name: String, _phases: Array<Phase>) : Player(_name) {
 
-    val phases: Array<Phase>
+    val phases: Array<Phase> = Phase10Game.getPhasePreset()
     var currentPhase: Int = 0
         private set
 
@@ -44,9 +44,7 @@ class Phase10Player(_name: String, _phases: Array<Phase>) : Player(_name) {
     }
 
     init {
-        phases = Phase10Game.getPhasePreset()
         setActivePhases(_phases)
-        currentPhase = 0
     }
 
     override fun toString(): String {

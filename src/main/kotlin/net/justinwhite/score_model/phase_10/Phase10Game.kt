@@ -33,7 +33,12 @@ package net.justinwhite.score_model.phase_10
 
 import net.justinwhite.score_model.Game
 
-class Phase10Game @JvmOverloads constructor(_numPlayers: Int = 0, _phasePreset: Phase10Game.PhaseSet = Phase10Game.PhaseSet.ALL, _name: String? = null) : Game<Phase10Player>(Phase10Player::class.java, _numPlayers, _name) {
+class Phase10Game @JvmOverloads
+constructor(
+        _numPlayers: Int = 0,
+        _phasePreset: Phase10Game.PhaseSet = Phase10Game.PhaseSet.ALL,
+        _name: String? = null
+) : Game<Phase10Player>(Phase10Player::class.java, _numPlayers, _name) {
     var activePhases: Array<Phase>? = null
 
     init {
