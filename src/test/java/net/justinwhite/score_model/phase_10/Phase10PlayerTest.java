@@ -76,13 +76,13 @@ public class Phase10PlayerTest {
     public void testSetPhases() throws Exception {
         player.setActivePhases(Phase10Game.Companion.getPhasePreset(Phase10Game.PhaseSet.ALL));
         player.completeCurrentPhase();
-        assertEquals(Integer.valueOf(1), player.getCurrentPhase());
+        assertEquals(1, player.getCurrentPhase());
         player.setActivePhases(Phase10Game.Companion.getPhasePreset(Phase10Game.PhaseSet.ODD));
         player.resetCurrentPhase();
         player.completeCurrentPhase();
-        assertEquals(Integer.valueOf(1), player.getCurrentPhase());
+        assertEquals(1, player.getCurrentPhase());
         player.completeCurrentPhase();
-        assertEquals(Integer.valueOf(3), player.getCurrentPhase());
+        assertEquals(3, player.getCurrentPhase());
     }
 
     @Test
@@ -96,13 +96,13 @@ public class Phase10PlayerTest {
     @Test
     public void testCompleteCurrentPhase() throws Exception {
         player.completeCurrentPhase();
-        for (Integer i = phase + 1; i <= Phase10Game.MAX_PHASE; i++) {
+        for (int i = phase + 1; i <= Phase10Game.MAX_PHASE; i++) {
             player.completeCurrentPhase();
             assertEquals(i, player.getCurrentPhase());
         }
-        assertEquals(Integer.valueOf(Phase10Game.MAX_PHASE), player.getCurrentPhase());
+        assertEquals(Phase10Game.MAX_PHASE, player.getCurrentPhase());
         player.completeCurrentPhase();
         player.completeCurrentPhase();
-        assertEquals(Integer.valueOf(Phase10Game.MAX_PHASE), player.getCurrentPhase());
+        assertEquals(Phase10Game.MAX_PHASE, player.getCurrentPhase());
     }
 }
