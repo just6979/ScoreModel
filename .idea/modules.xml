@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ScoreModel.iml" filepath="$PROJECT_DIR$/ScoreModel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ScoreModel.iml" filepath="$PROJECT_DIR$/.idea/modules/ScoreModel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ScoreModel_main.iml" filepath="$PROJECT_DIR$/.idea/modules/ScoreModel_main.iml" group="ScoreModel" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ScoreModel_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ScoreModel_test.iml" group="ScoreModel" />
     </modules>
   </component>
 </project>
