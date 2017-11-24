@@ -4,7 +4,7 @@ apply plugin: 'kotlin'
 group 'net.justinwhite'
 
 def major = 0
-def minor = 16
+def minor = 17
 def revision = 0
 
 version = "$major.$minor.$revision"
