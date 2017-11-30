@@ -2,7 +2,7 @@
 <module external.linked.project.id="ScoreModel:test" external.linked.project.path="$MODULE_DIR$/../.." external.root.project.path="$MODULE_DIR$/../.." external.system.id="GRADLE" external.system.module.group="net.justinwhite" external.system.module.type="sourceSet" external.system.module.version="0.18.0" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="kotlin-language" name="Kotlin">
-      <configuration version="3" platform="JVM 1.8" useProjectSettings="false">
+      <configuration version="3" platform="JVM 1.8">
         <compilerSettings />
         <compilerArguments>
           <option name="destination" value="$MODULE_DIR$/../../build/classes/kotlin/test" />
@@ -24,7 +24,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_9">
+  <component name="NewModuleRootManager">
     <output-test url="file://$MODULE_DIR$/../../out/test/classes" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../src/test">
