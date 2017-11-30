@@ -5,12 +5,12 @@ group 'net.justinwhite'
 
 def major = 0
 def minor = 17
-def revision = 0
+def revision = 1
 
 version = "$major.$minor.$revision"
 
 buildscript {
-    ext.kotlin_version = '1.1.60'
+    ext.kotlin_version = '1.2.0'
 
     repositories {
         mavenCentral()
