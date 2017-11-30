@@ -29,9 +29,9 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.justinwhite.score_model;
+package net.justinwhite.scoremodel;
 
-import net.justinwhite.score_model.phase_10.Phase10Game;
+import net.justinwhite.scoremodel.phase10.Phase10Game;
 import org.junit.Before;
 import org.junit.Test;
 

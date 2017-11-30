@@ -29,7 +29,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.justinwhite.score_model
+package net.justinwhite.scoremodel
 
 import java.text.SimpleDateFormat
 import java.util.*

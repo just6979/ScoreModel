@@ -29,45 +29,18 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.justinwhite.score_model;
+package net.justinwhite.scoremodel
 
-import org.junit.Before;
-import org.junit.Test;
+open class Player @JvmOverloads constructor(_name: String = "Player X") : Comparable<Player> {
+    var name: String = _name
+    var score: Int = 0
 
-import static org.junit.Assert.assertEquals;
-
-@SuppressWarnings("FieldCanBeLocal")
-public class PlayerTest {
-    private final String name = "First Last";
-    private final Integer score = 88;
-    private Player player;
-
-    @Before
-    public void setUp() {
-        player = new Player(name);
-        player.setScore(score);
+    override fun toString(): String {
+        return "Name '%s'; Score %s".format(name, score)
     }
 
-    // test all the remaining constructors
-    @Test
-    public void testConstructors() throws Exception {
-        System.out.println("Testing: " + VersionKt.getVersion() + ": Player");
-        player = null;
-        player = new Player();
-        assertEquals("Player X", player.getName());
-        player = null;
-        player = new Player();
-        assertEquals("Player X", player.getName());
+    override fun compareTo(other: Player): Int {
+        // higher is better
+        return other.score.compareTo(score)
     }
-
-    @Test
-    public void testToString() throws Exception {
-        assertEquals(String.format(
-                "Name '%s'; Score %s",
-                name,
-                score
-                ), player.toString()
-        );
-    }
-
 }

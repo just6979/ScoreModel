@@ -29,11 +29,72 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.justinwhite.score_model
+package net.justinwhite.scoremodel.phase10;
 
-val name: String = "ScoreModel"
-val major: Int = 0
-val minor: Int = 17
-val revision: Int = 1
-val version: String
-    get() = "%s %d.%d.%d".format(name, major, minor, revision)
+import net.justinwhite.scoremodel.VersionKt;
+import org.junit.Before;
+import org.junit.Test;
+
+@SuppressWarnings("FieldCanBeLocal")
+public class Phase10GameTest {
+    private final Integer numPlayers;
+    private final String[] playerNames;
+    private final Phase10Player[] playersArray;
+
+    private Phase10Game game;
+
+    {
+        numPlayers = 4;
+        playerNames = new String[]{"Lauren K", "Justin W", "Tim C", "Denise B"};
+        playersArray = new Phase10Player[numPlayers];
+    }
+
+    @Before
+    public void setUp() {
+        game = new Phase10Game(numPlayers);
+        for (int i = 0; i < numPlayers; i++) {
+            playersArray[i] = game.getPlayer(i);
+            game.getPlayer(i).setName(playerNames[i]);
+        }
+    }
+
+    @Test
+    public void testConstructors() throws Exception {
+        System.out.println("Testing: " + VersionKt.getVersion() + ": Phase10Game");
+    }
+
+    @Test
+    public void testMakeDefaultPhases() throws Exception {
+
+    }
+
+    @Test
+    public void testPhase10Game() throws Exception {
+
+    }
+
+    @Test
+    public void testToString() throws Exception {
+
+    }
+
+    @Test
+    public void testGetActivePhases() throws Exception {
+
+    }
+
+    @Test
+    public void testGetPhases() throws Exception {
+
+    }
+
+    @Test
+    public void testGetScoresPhasesText() throws Exception {
+
+    }
+
+    @Test
+    public void testFindWinner() throws Exception {
+
+    }
+}

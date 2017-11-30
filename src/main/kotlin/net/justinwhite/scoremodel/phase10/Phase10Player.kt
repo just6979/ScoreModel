@@ -29,72 +29,60 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.justinwhite.score_model.phase_10;
+package net.justinwhite.scoremodel.phase10
 
-import net.justinwhite.score_model.VersionKt;
-import org.junit.Before;
-import org.junit.Test;
+import net.justinwhite.scoremodel.Player
+import net.justinwhite.scoremodel.phase10.Phase10Game.*
 
-@SuppressWarnings("FieldCanBeLocal")
-public class Phase10GameTest {
-    private final Integer numPlayers;
-    private final String[] playerNames;
-    private final Phase10Player[] playersArray;
+class Phase10Player(_name: String, _phases: Array<Phase>) : Player(_name) {
 
-    private Phase10Game game;
+    val phases: Array<Phase> = Phase10Game.getPhasePreset()
+    var currentPhase: Int = 0
+        private set
 
-    {
-        numPlayers = 4;
-        playerNames = new String[]{"Lauren K", "Justin W", "Tim C", "Denise B"};
-        playersArray = new Phase10Player[numPlayers];
+    @JvmOverloads constructor(_name: String = "Player X", phasePreset: PhaseSet = PhaseSet.ALL) : this(_name, Companion.getPhasePreset(phasePreset)) {
     }
 
-    @Before
-    public void setUp() {
-        game = new Phase10Game(numPlayers);
-        for (int i = 0; i < numPlayers; i++) {
-            playersArray[i] = game.getPlayer(i);
-            game.getPlayer(i).setName(playerNames[i]);
+    init {
+        setActivePhases(_phases)
+    }
+
+    override fun toString(): String {
+        return "%s; Phase %d".format(super.toString(), currentPhase)
+    }
+
+    fun setActivePhases(_phases: Array<Phase>) {
+        System.arraycopy(_phases, 0, phases, 0, _phases.size)
+    }
+
+    fun setActivePhases(_phases: Array<Boolean>) {
+        for (i in 0..Phase10Game.MAX_PHASE) {
+            if (_phases[i]) {
+                phases[i] = Phase.ACTIVE
+            } else {
+                phases[i] = Phase.INACTIVE
+            }
         }
     }
 
-    @Test
-    public void testConstructors() throws Exception {
-        System.out.println("Testing: " + VersionKt.getVersion() + ": Phase10Game");
+    fun resetCurrentPhase() {
+        currentPhase = 0
     }
 
-    @Test
-    public void testMakeDefaultPhases() throws Exception {
-
+    fun completeCurrentPhase() {
+        if (phases[currentPhase] === Phase.ACTIVE) {
+            phases[currentPhase] = Phase.COMPLETED
+        }
+        do {
+            currentPhase++
+            if (currentPhase > Phase10Game.MAX_PHASE) {
+                currentPhase = Phase10Game.MAX_PHASE
+                break
+            }
+        } while (phases[currentPhase] !== Phase.ACTIVE)
     }
 
-    @Test
-    public void testPhase10Game() throws Exception {
-
-    }
-
-    @Test
-    public void testToString() throws Exception {
-
-    }
-
-    @Test
-    public void testGetActivePhases() throws Exception {
-
-    }
-
-    @Test
-    public void testGetPhases() throws Exception {
-
-    }
-
-    @Test
-    public void testGetScoresPhasesText() throws Exception {
-
-    }
-
-    @Test
-    public void testFindWinner() throws Exception {
-
+    fun addScore(_score: Int?) {
+        score += _score!!
     }
 }

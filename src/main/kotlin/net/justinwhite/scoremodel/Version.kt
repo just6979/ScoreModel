@@ -29,60 +29,11 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-package net.justinwhite.score_model.phase_10
+package net.justinwhite.scoremodel
 
-import net.justinwhite.score_model.Player
-import net.justinwhite.score_model.phase_10.Phase10Game.*
-
-class Phase10Player(_name: String, _phases: Array<Phase>) : Player(_name) {
-
-    val phases: Array<Phase> = Phase10Game.getPhasePreset()
-    var currentPhase: Int = 0
-        private set
-
-    @JvmOverloads constructor(_name: String = "Player X", phasePreset: PhaseSet = PhaseSet.ALL) : this(_name, Companion.getPhasePreset(phasePreset)) {
-    }
-
-    init {
-        setActivePhases(_phases)
-    }
-
-    override fun toString(): String {
-        return "%s; Phase %d".format(super.toString(), currentPhase)
-    }
-
-    fun setActivePhases(_phases: Array<Phase>) {
-        System.arraycopy(_phases, 0, phases, 0, _phases.size)
-    }
-
-    fun setActivePhases(_phases: Array<Boolean>) {
-        for (i in 0..Phase10Game.MAX_PHASE) {
-            if (_phases[i]) {
-                phases[i] = Phase.ACTIVE
-            } else {
-                phases[i] = Phase.INACTIVE
-            }
-        }
-    }
-
-    fun resetCurrentPhase() {
-        currentPhase = 0
-    }
-
-    fun completeCurrentPhase() {
-        if (phases[currentPhase] === Phase.ACTIVE) {
-            phases[currentPhase] = Phase.COMPLETED
-        }
-        do {
-            currentPhase++
-            if (currentPhase > Phase10Game.MAX_PHASE) {
-                currentPhase = Phase10Game.MAX_PHASE
-                break
-            }
-        } while (phases[currentPhase] !== Phase.ACTIVE)
-    }
-
-    fun addScore(_score: Int?) {
-        score += _score!!
-    }
-}
+val name: String = "ScoreModel"
+val major: Int = 0
+val minor: Int = 18
+val revision: Int = 0
+val version: String
+    get() = "%s %d.%d.%d".format(name, major, minor, revision)

@@ -2,7 +2,7 @@
   <configuration default="false" name="Phase10PlayerTest" type="JUnit" factoryName="JUnit">
     <extension name="coverage" enabled="false" merge="false" runner="idea">
       <pattern>
-        <option name="PATTERN" value="net.justinwhite.score_model.Player" />
+        <option name="PATTERN" value="net.justinwhite.scoremodel.Player" />
         <option name="ENABLED" value="true" />
       </pattern>
       <pattern>
