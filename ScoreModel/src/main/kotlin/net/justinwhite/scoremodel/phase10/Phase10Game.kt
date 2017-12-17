@@ -45,10 +45,10 @@ constructor(
         getPhasePreset(_phasePreset)
     }
 
-    fun setActivePhases(_phases: Array<Boolean>) {
-        activePhases = Array(MAX_PHASE, { i -> Phase.ACTIVE })
+    fun setActivePhases(_phases: Array<Phase>) {
+        activePhases = Array(MAX_PHASE, { Phase.ACTIVE })
         for (i in 0..Phase10Game.MAX_PHASE) {
-            if (_phases[i]) {
+            if (_phases[i] == Phase.ACTIVE) {
                 activePhases[i] = Phase.ACTIVE
             } else {
                 activePhases[i] = Phase.INACTIVE
