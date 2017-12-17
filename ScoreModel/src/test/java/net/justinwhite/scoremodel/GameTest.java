@@ -93,7 +93,7 @@ public class GameTest {
     public void testToString() throws Exception {
         assertEquals(String.format("Game: %s\nUUID: %s\nPlayer count: %d\nPlayers: %s",
                 game.getName(),
-                game.getID(),
+                game.getId(),
                 game.getNumPlayers(),
                 game.getPlayerList()
                 ), game.toString()

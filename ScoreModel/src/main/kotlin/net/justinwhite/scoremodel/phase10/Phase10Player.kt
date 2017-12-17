@@ -40,8 +40,7 @@ class Phase10Player(_name: String, _phases: Array<Phase>) : Player(_name) {
     var currentPhase: Int = 0
         private set
 
-    @JvmOverloads constructor(_name: String = "Player X", phasePreset: PhaseSet = PhaseSet.ALL) : this(_name, Companion.getPhasePreset(phasePreset)) {
-    }
+    @JvmOverloads constructor(_name: String = "Player X", phasePreset: PhaseSet = PhaseSet.ALL) : this(_name, Companion.getPhasePreset(phasePreset))
 
     init {
         setActivePhases(_phases)

@@ -39,7 +39,7 @@ constructor(
         _phasePreset: Phase10Game.PhaseSet = Phase10Game.PhaseSet.ALL,
         _name: String? = null
 ) : Game<Phase10Player>(Phase10Player::class.java, _numPlayers, _name) {
-    var activePhases: Array<Phase> = getPhasePreset(_phasePreset)
+    private var activePhases: Array<Phase> = getPhasePreset(_phasePreset)
 
     fun setActivePhases(_phasePreset: PhaseSet) {
         getPhasePreset(_phasePreset)
@@ -75,10 +75,10 @@ constructor(
             var out = ""
             for (p in playerList) {
                 out += "%s: %4d Points".format(p.name, p.score)
-                if (p.currentPhase > 0) {
-                    out += ", Phase #%d completed\n".format(p.currentPhase)
+                out += if (p.currentPhase > 0) {
+                    ", Phase #%d completed\n".format(p.currentPhase)
                 } else {
-                    out += "\n"
+                    "\n"
                 }
             }
             return out

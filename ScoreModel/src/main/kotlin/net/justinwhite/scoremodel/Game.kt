@@ -45,25 +45,22 @@ open class Game<T : Player>(private val playerClass: Class<T>, newNumPlayers: In
     constructor(_playerClass: Class<T>)
     : this(_playerClass, MIN_PLAYERS, "")
 
-    val ID: UUID = UUID.randomUUID()
+    val id: UUID = UUID.randomUUID()
 
     val playerList: MutableList<T> = ArrayList()
 
     private var _numPlayers: Int = 0
     var numPlayers: Int
         set(value) {
-            var newNumPlayers: Int
-            // bounds check number of players
-            if (value < MIN_PLAYERS) {
-                newNumPlayers = MIN_PLAYERS
-            } else if (value > MAX_PLAYERS) {
-                newNumPlayers = MAX_PLAYERS
-            } else {
-                newNumPlayers = value
+            val newNumPlayers: Int = when {
+                value < MIN_PLAYERS -> MIN_PLAYERS
+                value > MAX_PLAYERS -> MAX_PLAYERS
+                else -> value
             }
+            // bounds check number of players
             // increasing count, add players
             if (newNumPlayers > numPlayers) {
-                for (i in numPlayers..newNumPlayers - 1) {
+                for (i in numPlayers until newNumPlayers) {
                     addPlayer()
                 }
             }
@@ -88,7 +85,7 @@ open class Game<T : Player>(private val playerClass: Class<T>, newNumPlayers: In
         }
 
     private var _winner: T? = null
-    open public var winner: T?
+    open var winner: T?
         get() {
             checkWinner()
             return _winner
@@ -103,13 +100,13 @@ open class Game<T : Player>(private val playerClass: Class<T>, newNumPlayers: In
 
 
     override fun toString(): String {
-        return "Game: %s\nUUID: %s\nPlayer count: %d\nPlayers: %s".format(name, ID, numPlayers, // List<> class handles toString()
+        return "Game: %s\nUUID: %s\nPlayer count: %d\nPlayers: %s".format(name, id, numPlayers, // List<> class handles toString()
                 playerList)
     }
 
     // check if there is a player at the given index
     fun checkPlayer(index: Int): Boolean {
-        return index >= 0 && index < numPlayers
+        return index in 0..(numPlayers - 1)
     }
 
     // make a new Player [or subclass of player] using newInstance() and set it up for use
@@ -134,30 +131,30 @@ open class Game<T : Player>(private val playerClass: Class<T>, newNumPlayers: In
 
     // add a new player using _name
     @JvmOverloads fun addPlayer(_name: String = "Player " + (numPlayers + 1)): T? {
-        if (_numPlayers < MAX_PLAYERS) {
+        return if (_numPlayers < MAX_PLAYERS) {
             val newPlayer = makePlayer(_name)
             playerList.add(newPlayer as T)
             _numPlayers = playerList.size
-            return newPlayer
+            newPlayer
         } else {
-            return null
+            null
         }
     }
 
     // remove and return player specified by index. return null if index out of bounds
     @JvmOverloads fun removePlayer(index: Int? = numPlayers - 1): T? {
-        if (_numPlayers > MIN_PLAYERS) {
+        return if (_numPlayers > MIN_PLAYERS) {
             val oldPlayer = playerList.removeAt(index!!)
             _numPlayers = playerList.size
-            return oldPlayer
+            oldPlayer
         } else {
-            return null
+            null
         }
     }
 
     // return player specified by index; first or last if index out of bounds
     fun getPlayer(_index: Int): T {
-        var index = when {
+        val index = when {
             _index < 0 -> 0
             _index >= numPlayers -> numPlayers - 1
             else -> _index
@@ -168,9 +165,7 @@ open class Game<T : Player>(private val playerClass: Class<T>, newNumPlayers: In
     // return an array of raw scores
     fun getScores(): List<Int> {
         val scores = ArrayList<Int>(playerList.size)
-        for (p in playerList) {
-            scores.add(p.score)
-        }
+        playerList.mapTo(scores) { it.score }
         return scores
     }
 
@@ -185,9 +180,9 @@ open class Game<T : Player>(private val playerClass: Class<T>, newNumPlayers: In
 
     // tie-breaker is which ever player was added to the game first
     open fun checkWinner(): Boolean {
-        val _players = ArrayList(playerList)
-        Collections.sort(_players)
-        _winner = _players[0]
+        val players = ArrayList(playerList)
+        Collections.sort(players)
+        _winner = players[0]
         return _winner != null
     }
 
