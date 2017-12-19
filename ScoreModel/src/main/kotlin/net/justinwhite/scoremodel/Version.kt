@@ -33,7 +33,7 @@ package net.justinwhite.scoremodel
 
 val name: String = "ScoreModel"
 val major: Int = 0
-val minor: Int = 19
+val minor: Int = 20
 val revision: Int = 0
 val version: String
     get() = "%s %d.%d.%d".format(name, major, minor, revision)
